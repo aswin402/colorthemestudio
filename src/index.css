@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --background: var(--bg-oklch);
+    --foreground: var(--fg-oklch);
+    /* Note: Tailwind V4 reads these CSS Variables natively as part of its theme setup if we map them. For this app, we are manipulating variables directly in the app wrapper based on our Zustand store! */
+  }
+
+  body {
+    background-color: #09090b;
+    color: #ffffff;
+    font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  }
+
+  .app-light {
+    background-color: #f4f4f5;
+    color: #09090b;
+  }
+}
+
+@layer utilities {
+  /* Scrollbar hiding utilities since this app can get tall */
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
