@@ -11,10 +11,10 @@ ColorTheme Studio is a powerful, elegant, and developer-friendly color theme gen
 - **Theme Temperature Adjustment:** Fine-tune your theme's feel by adjusting between natural, warmer, and cooler variations.
 - **Real-Time Preview:** Instantly see how your generated theme looks in both Web (Tailwind component) and Mobile (Flutter component) contexts.
 - **Dark & Light Modes:** Comprehensive support for both light and dark mode versions of your generated themes.
-- **One-Click Code Export:** Easily copy the generated configuration code for:
-  - Tailwind CSS `theme` setup
-  - Native Web CSS Variables
-  - Flutter `ThemeData`
+- **One-Click Code Export:** Easily transition from design to development with a dedicated "Export Setup" page providing:
+  - Full modern Tailwind CSS configurations (`tailwind.config.js`)
+  - Native Web CSS Variables (`:root` definitions)
+  - Complete Flutter themes generated across 9 comprehensive Dart files mirroring professional app setups.
 
 ## 📸 Screenshots
 
@@ -23,6 +23,11 @@ ColorTheme Studio is a powerful, elegant, and developer-friendly color theme gen
 
 ### Flutter Preview
 ![Flutter Preview](screenshots/forFlutter.png)
+
+### Export Setup
+![Export Setup](screenshots/exportSetup.png)
+![Export Setup for tailwind](screenshots/exportSetupTw.png)
+
 
 ## 📖 Documentation
 
