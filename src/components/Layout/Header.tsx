@@ -3,8 +3,8 @@ import { Palette, Sun, Moon } from 'lucide-react';
 interface HeaderProps {
   appMode: 'light' | 'dark';
   setAppMode: (val: 'light' | 'dark') => void;
-  view: 'editor' | 'export';
-  setView: (val: 'editor' | 'export') => void;
+  view: 'editor' | 'components' | 'export';
+  setView: (val: 'editor' | 'components' | 'export') => void;
 }
 
 const Header = ({ appMode, setAppMode, view, setView }: HeaderProps) => {
@@ -15,16 +15,31 @@ const Header = ({ appMode, setAppMode, view, setView }: HeaderProps) => {
         <h1 className="text-xl font-bold tracking-tight">ColorTheme Studio</h1>
       </div>
 
-      <div className="flex items-center gap-4">
+      <div className="flex bg-black/5 dark:bg-white/5 p-1 rounded-lg border border-black/5 dark:border-white/5 w-fit">
         <button
-          onClick={() => setView(view === 'editor' ? 'export' : 'editor')}
-          className="px-4 py-2 text-sm font-medium bg-green-500 hover:bg-green-600 text-white rounded-md transition-colors"
+          onClick={() => setView('editor')}
+          className={`flex justify-center items-center gap-2 px-4 py-1.5 rounded-md text-sm font-medium transition-all ${view === 'editor' ? 'bg-white dark:bg-[#27272a] shadow-sm text-black dark:text-white' : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-300'}`}
         >
-          {view === 'editor' ? 'Export Setup' : 'Back to Editor'}
+          Colors
         </button>
+        <button
+          onClick={() => setView('components')}
+          className={`flex justify-center items-center gap-2 px-4 py-1.5 rounded-md text-sm font-medium transition-all ${view === 'components' ? 'bg-white dark:bg-[#27272a] shadow-sm text-black dark:text-white' : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-300'}`}
+        >
+          Components
+        </button>
+        <button
+          onClick={() => setView('export')}
+          className={`flex justify-center items-center gap-2 px-4 py-1.5 rounded-md text-sm font-medium transition-all ${view === 'export' ? 'bg-white dark:bg-[#27272a] shadow-sm text-black dark:text-white' : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-300'}`}
+        >
+           Export Setup
+        </button>
+      </div>
+
+      <div className="flex items-center gap-4">
 
         <span className="text-[10px] font-bold px-2 py-1 rounded-full bg-zinc-100/50 text-zinc-500 ring-1 ring-inset ring-zinc-500/10 dark:bg-white/5 dark:text-zinc-400 dark:ring-white/10 uppercase tracking-widest">
-          v0.0.2
+          v0.0.3
         </span>
         <button
           onClick={() => setAppMode(appMode === 'light' ? 'dark' : 'light')}

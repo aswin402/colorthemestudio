@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import type { ColorMode, ThemeTemperature, ThemeOutput } from '../types';
+import type { ColorMode, ThemeTemperature, ThemeOutput, ComponentConfig } from '../types';
 import { generateTheme } from '../utils/themeGenerator';
 
 interface ThemeState {
@@ -8,9 +8,11 @@ interface ThemeState {
     temperature: ThemeTemperature;
     mode: ColorMode;
     theme: ThemeOutput;
+    componentConfig: ComponentConfig;
     setBaseColor: (color: string) => void;
     setTemperature: (temp: ThemeTemperature) => void;
     setMode: (mode: ColorMode) => void;
+    setComponentConfig: (config: Partial<ComponentConfig>) => void;
 }
 
 // Default green from prompt
@@ -24,6 +26,21 @@ export const useThemeStore = create<ThemeState>()(
             temperature: DEFAULT_TEMP,
             mode: 'light',
             theme: generateTheme(DEFAULT_COLOR, DEFAULT_TEMP),
+componentConfig: {
+                buttonRadius: 'md',
+                cardRadius: 'lg',
+                inputRadius: 'md',
+                headingFont: 'Poppins',
+                bodyFont: 'Roboto',
+                headingWeight: '700',
+                bodyWeight: '400',
+                fontSizeHeading: 'xl',
+                fontSizeBody: 'base',
+                lineHeight: 'normal',
+                shadow: 'md',
+                density: 'normal',
+                borderWidth: '1',
+            },
 
             setBaseColor: (color: string) =>
                 set((state) => ({
@@ -38,6 +55,11 @@ export const useThemeStore = create<ThemeState>()(
                 })),
 
             setMode: (mode: ColorMode) => set({ mode }),
+
+            setComponentConfig: (config: Partial<ComponentConfig>) => 
+                set((state) => ({
+                    componentConfig: { ...state.componentConfig, ...config }
+                })),
         }),
         {
             name: 'colorthemestudio-storage',

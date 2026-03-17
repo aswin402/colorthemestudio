@@ -1,65 +1,5 @@
-import { useState } from 'react';
-import { useThemeStore } from '../../store/useThemeStore';
-import { Copy, Check } from 'lucide-react';
-
-interface CodeSnippetProps {
-    filename: string;
-    code: string;
-}
-
-const CodeSnippet = ({ filename, code }: CodeSnippetProps) => {
-    const [copied, setCopied] = useState(false);
-
-    const handleCopy = () => {
-        navigator.clipboard.writeText(code);
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
-    };
-
-    return (
-        <div className="relative group flex flex-col bg-zinc-950 p-6 rounded-xl border border-white/10 shadow-sm shrink-0 mt-6">
-            <div className="flex justify-between items-center mb-4">
-                <h3 className="text-white font-medium">{filename}</h3>
-                <button
-                    onClick={handleCopy}
-                    className="p-2 bg-white/10 hover:bg-white/20 text-white rounded-md backdrop-blur-md transition-all shadow-sm flex items-center gap-2 text-sm font-medium"
-                >
-                    {copied ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
-                    {copied ? 'Copied' : 'Copy'}
-                </button>
-            </div>
-            <pre className="overflow-x-auto w-full text-zinc-300 text-sm font-mono leading-relaxed scrollbar-hide pb-4">
-                <code>{code}</code>
-            </pre>
-        </div>
-    );
-};
-
-export const FlutterExport = () => {
-    const { theme, componentConfig } = useThemeStore();
-
-    const getDartColor = (hex: string) => `Color(0xFF${hex.replace('#', '').toUpperCase()})`;
-    
-    const formatGoogleFontMethod = (fontName: string) => {
-        const parts = fontName.split(' ');
-        if (parts.length === 0) return 'poppins';
-        const first = parts[0].toLowerCase();
-        const rest = parts.slice(1).map(p => p.charAt(0).toUpperCase() + p.slice(1).toLowerCase());
-        return [first, ...rest].join('');
-    };
-
-    const getRadiusPixels = (size: string) => {
-        switch (size) {
-            case 'none': return 0;
-            case 'sm': return 4;
-            case 'md': return 8;
-            case 'lg': return 12;
-            case 'full': return 99;
-            default: return 8;
-        }
-    };
-
-    const appColorExtensionDart = `import 'package:flutter/material.dart';
+theme/app_color_extension.dart
+import 'package:flutter/material.dart';
 import 'app_colors.dart';
 
 @immutable
@@ -183,82 +123,87 @@ class AppColorExtension extends ThemeExtension<AppColorExtension> {
       border:                    Color.lerp(border,                    other.border,                    t)!,
     );
   }
-}`;
+}
 
-    const appColorsDart = `import 'package:flutter/material.dart';
+theme/app_colors.dart
+
+import 'package:flutter/material.dart';
 
 abstract final class LightColors {
   //colorscheme==========================================
-  static const primary             = ${getDartColor(theme.light.primary.hexValue)};
-  static const onPrimary           = ${getDartColor(theme.light.primaryForeground.hexValue)};
-  static const primaryContainer    = ${getDartColor(theme.light.primary.hexValue)};
-  static const onPrimaryContainer  = ${getDartColor(theme.light.primaryForeground.hexValue)};
-  static const secondary           = ${getDartColor(theme.light.secondary.hexValue)};
-  static const onSecondary         = ${getDartColor(theme.light.secondaryForeground.hexValue)};
-  static const secondaryContainer  = ${getDartColor(theme.light.secondary.hexValue)};
-  static const onSecondaryContainer= ${getDartColor(theme.light.secondaryForeground.hexValue)};
-  static const surface             = ${getDartColor(theme.light.background.hexValue)};
-  static const onSurface           = ${getDartColor(theme.light.foreground.hexValue)};
-  static const error               = ${getDartColor(theme.light.destructive.hexValue)};
-  static const onError             = ${getDartColor(theme.light.destructiveForeground.hexValue)};
-  static const outline             = ${getDartColor(theme.light.border.hexValue)};
-  static const outlineVariant      = ${getDartColor(theme.light.border.hexValue)};
-  static const surfaceTint         = ${getDartColor(theme.light.primary.hexValue)};
+  static const primary             = Color(0xFF23E885);
+  static const onPrimary           = Color(0xFF000000);
+  static const primaryContainer    = Color(0xFF23E885);
+  static const onPrimaryContainer  = Color(0xFF000000);
+  static const secondary           = Color(0xFFFFFFFF);
+  static const onSecondary         = Color(0xFF18181B);
+  static const secondaryContainer  = Color(0xFFFFFFFF);
+  static const onSecondaryContainer= Color(0xFF18181B);
+  static const surface             = Color(0xFFFFFFFF);
+  static const onSurface           = Color(0xFF09090B);
+  static const error               = Color(0xFFEF4444);
+  static const onError             = Color(0xFFFAFAFA);
+  static const outline             = Color(0xFFFFFFFF);
+  static const outlineVariant      = Color(0xFFFFFFFF);
+  static const surfaceTint         = Color(0xFF23E885);
   
   
   //extension================================================
-  static const card                      = ${getDartColor(theme.light.card.hexValue)};
-  static const cardForeground            = ${getDartColor(theme.light.cardForeground.hexValue)};
-  static const navbar                    = ${getDartColor(theme.light.muted.hexValue)};
-  static const inputBackground           = ${getDartColor(theme.light.background.hexValue)};
-  static const inputBorder               = ${getDartColor(theme.light.border.hexValue)};
-  static const buttonBackground          = ${getDartColor(theme.light.primary.hexValue)};
-  static const buttonForeground          = ${getDartColor(theme.light.primaryForeground.hexValue)};
-  static const secondaryButtonBackground = ${getDartColor(theme.light.secondary.hexValue)};
-  static const secondaryButtonForeground = ${getDartColor(theme.light.secondaryForeground.hexValue)};
-  static const muted                     = ${getDartColor(theme.light.muted.hexValue)};
-  static const mutedForeground           = ${getDartColor(theme.light.mutedForeground.hexValue)};
-  static const border                    = ${getDartColor(theme.light.border.hexValue)};
+  static const card                      = Color(0xFFFFFFFF);
+   static const cardForeground            = Color(0xFF09090B);
+   static const navbar                    = Color(0xFFF4F4F5);
+   static const inputBackground           = Color(0xFFFFFFFF);
+   static const inputBorder               = Color(0xFFE4E4E7);
+   static const buttonBackground          = Color(0xFF23E885);
+   static const buttonForeground          = Color(0xFF000000);
+   static const secondaryButtonBackground = Color(0xFFF4F4F5);
+   static const secondaryButtonForeground = Color(0xFF18181B);
+   static const muted                     = Color(0xFFF4F4F5);
+   static const mutedForeground           = Color(0xFF71717A);
+   static const border                    = Color(0xFFE4E4E7);
 }
 
 abstract final class DarkColors {
   //colorscheme=============================================
-  static const primary             = ${getDartColor(theme.dark.primary.hexValue)};
-  static const onPrimary           = ${getDartColor(theme.dark.primaryForeground.hexValue)};
-  static const primaryContainer    = ${getDartColor(theme.dark.primary.hexValue)};
-  static const onPrimaryContainer  = ${getDartColor(theme.dark.primaryForeground.hexValue)};
-  static const secondary           = ${getDartColor(theme.dark.secondary.hexValue)};
-  static const onSecondary         = ${getDartColor(theme.dark.secondaryForeground.hexValue)};
-  static const secondaryContainer  = ${getDartColor(theme.dark.secondary.hexValue)};
-  static const onSecondaryContainer= ${getDartColor(theme.dark.secondaryForeground.hexValue)};
-  static const surface             = ${getDartColor(theme.dark.background.hexValue)};
-  static const onSurface           = ${getDartColor(theme.dark.foreground.hexValue)};
-  static const error               = ${getDartColor(theme.dark.destructive.hexValue)};
-  static const onError             = ${getDartColor(theme.dark.destructiveForeground.hexValue)};
-  static const outline             = ${getDartColor(theme.dark.border.hexValue)};
-  static const outlineVariant      = ${getDartColor(theme.dark.border.hexValue)};
-  static const surfaceTint         = ${getDartColor(theme.dark.primary.hexValue)};
+  static const primary             = Color(0xFF6CFFA6);
+  static const onPrimary           = Color(0xFF000000);
+  static const primaryContainer    = Color(0xFF6CFFA6);
+  static const onPrimaryContainer  = Color(0xFF000000);
+  static const secondary           = Color(0xFF0F6337);
+  static const onSecondary         = Color(0xFFFAFAFA);
+  static const secondaryContainer  = Color(0xFF0F6337);
+  static const onSecondaryContainer= Color(0xFFFAFAFA);
+  static const surface             = Color(0xFF09090B);
+  static const onSurface           = Color(0xFFFAFAFA);
+  static const error               = Color(0xFF7F1D1D);
+  static const onError             = Color(0xFFFAFAFA);
+  static const outline             = Color(0xFF10341E);
+  static const outlineVariant      = Color(0xFF10341E);
+  static const surfaceTint         = Color(0xFF6CFFA6);
   
 
-  //extension=============================================
-  static const card                      = ${getDartColor(theme.dark.card.hexValue)};
-  static const cardForeground            = ${getDartColor(theme.dark.cardForeground.hexValue)};
-  static const navbar                    = ${getDartColor(theme.dark.muted.hexValue)};
-  static const inputBackground           = ${getDartColor(theme.dark.background.hexValue)};
-  static const inputBorder               = ${getDartColor(theme.dark.border.hexValue)};
-  static const buttonBackground          = ${getDartColor(theme.dark.primary.hexValue)};
-  static const buttonForeground          = ${getDartColor(theme.dark.primaryForeground.hexValue)};
-  static const secondaryButtonBackground = ${getDartColor(theme.dark.secondary.hexValue)};
-  static const secondaryButtonForeground = ${getDartColor(theme.dark.secondaryForeground.hexValue)};
-  static const muted                     = ${getDartColor(theme.dark.muted.hexValue)};
-  static const mutedForeground           = ${getDartColor(theme.dark.mutedForeground.hexValue)};
-  static const border                    = ${getDartColor(theme.dark.border.hexValue)};
-}`;
+  //lightcolors=============================================
+  static const card                      = Color(0xFF111113);
+   static const cardForeground            = Color(0xFFFAFAFA);
+   static const navbar                    = Color(0xFF000000);
+   static const inputBackground           = Color(0xFF18181B);
+   static const inputBorder               = Color(0xFF27272A);
+   static const buttonBackground          = Color(0xFF6CFFA6);
+   static const buttonForeground          = Color(0xFF000000);
+   static const secondaryButtonBackground = Color(0xFF27272A);
+   static const secondaryButtonForeground = Color(0xFFFAFAFA);
+   static const muted                     = Color(0xFF27272A);
+   static const mutedForeground           = Color(0xFFA1A1AA);
+   static const border                    = Color(0xFF27272A);
+}
 
-    const appTextStyleDart = `import 'package:flutter/material.dart';
+theme/app_text_style.dart
+
+import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'app_colors.dart';
+
 
 abstract final class AppTextStyles {
 
@@ -266,40 +211,44 @@ abstract final class AppTextStyles {
   static TextTheme get dark  => _build(DarkColors.onSurface);
 
   static TextTheme _build(Color textColor) => TextTheme(
-    headlineLarge: GoogleFonts.${formatGoogleFontMethod(componentConfig.headingFont)}(
-      fontSize: 32, fontWeight: FontWeight.w${componentConfig.headingWeight}, color: textColor,
+    headlineLarge: GoogleFonts.poppins(
+      fontSize: 32, fontWeight: FontWeight.w700, color: textColor,
     ),
-    headlineMedium: GoogleFonts.${formatGoogleFontMethod(componentConfig.headingFont)}(
-      fontSize: 24, fontWeight: FontWeight.w${componentConfig.headingWeight}, color: textColor,
+    headlineMedium: GoogleFonts.poppins(
+      fontSize: 24, fontWeight: FontWeight.w600, color: textColor,
     ),
-    titleLarge: GoogleFonts.${formatGoogleFontMethod(componentConfig.headingFont)}(
-      fontSize: 20, fontWeight: FontWeight.w${componentConfig.headingWeight}, color: textColor,
+    titleLarge: GoogleFonts.poppins(
+      fontSize: 20, fontWeight: FontWeight.w600, color: textColor,
     ),
-    bodyLarge: GoogleFonts.${formatGoogleFontMethod(componentConfig.bodyFont)}(
-      fontSize: 16, fontWeight: FontWeight.w${componentConfig.bodyWeight}, color: textColor,
+    bodyLarge: GoogleFonts.roboto(
+      fontSize: 16, fontWeight: FontWeight.w400, color: textColor,
     ),
-    bodyMedium: GoogleFonts.${formatGoogleFontMethod(componentConfig.bodyFont)}(
-      fontSize: 14, fontWeight: FontWeight.w${componentConfig.bodyWeight}, color: textColor,
+    bodyMedium: GoogleFonts.roboto(
+      fontSize: 14, fontWeight: FontWeight.w400, color: textColor,
     ),
-    labelLarge: GoogleFonts.${formatGoogleFontMethod(componentConfig.bodyFont)}(
-      fontSize: 14, fontWeight: FontWeight.w${componentConfig.headingWeight}, color: textColor,
+    labelLarge: GoogleFonts.roboto(
+      fontSize: 14, fontWeight: FontWeight.w700, color: textColor,
     ),
   );
-}`;
+}
 
-    const appThemesDart = `import 'package:flutter/material.dart';
+theme/app_themes.dart
+
+import 'package:flutter/material.dart';
 import 'light_theme.dart';
 import 'dark_theme.dart';
 
 class AppTheme {
   static ThemeData get light => lightTheme;
   static ThemeData get dark => darkTheme;
-}`;
+}
 
-    const darkThemeDart = `import 'package:flutter/material.dart';
-import 'app_color_extension.dart';
+theme/dark_theme.dart
+
+import 'package:artgallery_updated_app/core/theme/app_color_extension.dart';
+import 'package:flutter/material.dart';
 import 'app_colors.dart';
-import 'app_text_style.dart';
+import 'app_text_styles.dart';
 import 'components/component_themes.dart';
 
 
@@ -334,12 +283,15 @@ final ThemeData darkTheme = ThemeData(
   cardTheme:               ComponentThemes.dark(_scheme).card,
   bottomNavigationBarTheme: ComponentThemes.dark(_scheme).bottomNav,
   extensions:              const [AppColorExtension.dark],
-);`;
+);
 
-    const lightThemeDart = `import 'package:flutter/material.dart';
-import 'app_color_extension.dart';
+
+theme/light_theme.dart
+
+import 'package:artgallery_updated_app/core/theme/app_color_extension.dart';
+import 'package:flutter/material.dart';
 import 'app_colors.dart';
-import 'app_text_style.dart';
+import 'app_text_styles.dart';
 import 'components/component_themes.dart';
 
 
@@ -374,10 +326,12 @@ final ThemeData lightTheme = ThemeData(
   cardTheme:               ComponentThemes.light(_scheme).card,
   bottomNavigationBarTheme: ComponentThemes.light(_scheme).bottomNav,
   extensions:              const [AppColorExtension.light],
-);`;
+);
 
-    const themeProviderDart = `import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+theme/theme_provider.dart
+
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/legacy.dart';
 
 final themeModeProvider = StateProvider<ThemeMode>((ref) {
   return ThemeMode.system;
@@ -401,9 +355,15 @@ class ThemeNotifier extends StateNotifier<ThemeMode> {
 
 final themeProvider = StateNotifierProvider<ThemeNotifier, ThemeMode>((ref) {
   return ThemeNotifier();
-});`;
+});
 
-    const appBarThemeDart = `import 'package:flutter/material.dart';
+---
+
+COMPONENTS
+
+theme/components/appbar_theme.dart
+
+import 'package:flutter/material.dart';
 
 class AppBarStyles {
   static AppBarTheme build({
@@ -416,9 +376,12 @@ class AppBarStyles {
     centerTitle: false,
     scrolledUnderElevation: 0,
   );
-}`;
+}
 
-    const bottomNavThemeDart = `import 'package:flutter/material.dart';
+
+theme/components/bottom_nav_theme.dart
+
+import 'package:flutter/material.dart';
 
 class BottomNavStyles {
   static BottomNavigationBarThemeData build({
@@ -432,9 +395,11 @@ class BottomNavStyles {
     elevation: 0,
     type: BottomNavigationBarType.fixed,
   );
-}`;
+}
 
-    const buttonThemeDart = `import 'package:flutter/material.dart';
+theme/components/button_theme.dart
+
+import 'package:flutter/material.dart';
 
 class ButtonStyles {
   static ElevatedButtonThemeData elevated({
@@ -446,7 +411,7 @@ class ButtonStyles {
       foregroundColor: foregroundColor,
       elevation: 0,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(${getRadiusPixels(componentConfig.buttonRadius)})),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
     ),
   );
 
@@ -458,7 +423,7 @@ class ButtonStyles {
       foregroundColor: foregroundColor,
       side: BorderSide(color: borderColor),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(${getRadiusPixels(componentConfig.buttonRadius)})),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
     ),
   );
 
@@ -470,9 +435,11 @@ class ButtonStyles {
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
     ),
   );
-}`;
+}
 
-    const cardThemeDart = `import 'package:flutter/material.dart';
+theme/component/card_theme.dart
+
+import 'package:flutter/material.dart';
 
 class CardStyles {
   static CardThemeData build({
@@ -482,14 +449,16 @@ class CardStyles {
     color: backgroundColor,
     elevation: 0,
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(${getRadiusPixels(componentConfig.cardRadius)}),
+      borderRadius: BorderRadius.circular(12),
       side: BorderSide(color: borderColor),
     ),
     margin: EdgeInsets.zero,
   );
-}`;
+}
 
-    const componentThemesDart = `import 'package:flutter/material.dart';
+theme/component/component_themes.dart
+
+import 'package:flutter/material.dart';
 import 'appbar_theme.dart';
 import 'button_theme.dart';
 import 'input_theme.dart';
@@ -502,7 +471,7 @@ class ComponentThemes {
   final OutlinedButtonThemeData   outlinedButton;
   final TextButtonThemeData       textButton;
   final InputDecorationTheme      input;
-  final CardThemeData             card;  
+  final CardThemeData                card;  
   final BottomNavigationBarThemeData bottomNav;
 
   const ComponentThemes({
@@ -576,9 +545,11 @@ class ComponentThemes {
                       unselectedColor: cs.onSurfaceVariant,
                     ),
   );
-}`;
+}
 
-    const inputThemeDart = `import 'package:flutter/material.dart';
+theme/component/input_theme.dart
+
+import 'package:flutter/material.dart';
 
 class InputStyles {
   static InputDecorationTheme build({
@@ -592,38 +563,67 @@ class InputStyles {
     hintStyle: TextStyle(color: hintColor, fontSize: 14),
     contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
     border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(${getRadiusPixels(componentConfig.inputRadius)}),
+      borderRadius: BorderRadius.circular(8),
       borderSide: BorderSide(color: borderColor),
     ),
     enabledBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(${getRadiusPixels(componentConfig.inputRadius)}),
+      borderRadius: BorderRadius.circular(8),
       borderSide: BorderSide(color: borderColor),
     ),
     focusedBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(${getRadiusPixels(componentConfig.inputRadius)}),
+      borderRadius: BorderRadius.circular(8),
       borderSide: BorderSide(color: focusedBorderColor, width: 1.5),
     ),
     errorBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(${getRadiusPixels(componentConfig.inputRadius)}),
+      borderRadius: BorderRadius.circular(8),
       borderSide: BorderSide(color: Colors.red.shade400),
     ),
   );
-}`;
+}
 
-    const contextExtensionDart = `import 'package:flutter/material.dart';
+
+extension/context_extension.dart
+
+import 'package:flutter/material.dart';
+
 import '../theme/app_color_extension.dart';
 
 extension ThemeContext on BuildContext {
   ThemeData get theme => Theme.of(this);
   TextTheme get textTheme => theme.textTheme;
   ColorScheme get cs => theme.colorScheme;
-  AppColorExtension get ac => theme.extension<AppColorExtension>()!;
-}`;
+  AppColorExtension get ac        => theme.extension<AppColorExtension>()!;
+}
 
-    const toggleThemeButtonDart = `import 'package:flutter/material.dart';
+//======================================
+// use
+
+// // Material slots
+// context.cs.primary
+// context.cs.surface
+// context.cs.onSurface
+
+// // Custom tokens
+// context.ac.card
+// context.ac.navbar
+// context.ac.muted
+// context.ac.mutedForeground
+// context.ac.inputBackground
+// context.ac.buttonBackground
+// context.ac.border
+// ```
+
+
+---
+
+toggle_theme_button.dart
+
+import 'package:artgallery_updated_app/core/extension/context_extension.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../extension/context_extension.dart';
-import '../theme/theme_provider.dart';
+
+
+import '../../../core/theme/theme_provider.dart';
 
 class ToggleThemeButton extends ConsumerWidget {
   const ToggleThemeButton({
@@ -644,8 +644,8 @@ class ToggleThemeButton extends ConsumerWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        color: context.ac.card, 
-      ),
+            color: context.ac.card, 
+          ),
       child: IconButton(
         icon: Icon(
           themeMode == ThemeMode.light ? Icons.dark_mode : Icons.light_mode,
@@ -660,13 +660,19 @@ class ToggleThemeButton extends ConsumerWidget {
       ),
     );
   }
-}`;
+}
 
-    const mainDart = `import 'package:flutter/material.dart';
+
+----
+main.dart
+
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'core/router/app_routes.dart';
 import 'core/theme/app_themes.dart';
 import 'core/theme/theme_provider.dart';
+
 
 void main() {
   runApp(
@@ -681,46 +687,17 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final router = ref.watch(routerProvider);
     final themeMode = ref.watch(themeProvider);
 
-    return MaterialApp(
-      title: "ColorTheme Studio App",
+    return MaterialApp.router(
+      title: "Art Gallery",
       debugShowCheckedModeBanner: false,
       themeMode: themeMode,
       darkTheme: AppTheme.dark,
       theme: AppTheme.light,
-      home: Scaffold(
-        appBar: AppBar(title: Text('Generated Theme')),
-        body: Center(child: Text('Setup Successful')),
-      ),
+      routerConfig: router,
     );
   }
-}`;
+}
 
-    const files = [
-        { name: 'theme/app_color_extension.dart', content: appColorExtensionDart },
-        { name: 'theme/app_colors.dart', content: appColorsDart },
-        { name: 'theme/app_text_style.dart', content: appTextStyleDart },
-        { name: 'theme/app_themes.dart', content: appThemesDart },
-        { name: 'theme/dark_theme.dart', content: darkThemeDart },
-        { name: 'theme/light_theme.dart', content: lightThemeDart },
-        { name: 'theme/theme_provider.dart', content: themeProviderDart },
-        { name: 'theme/components/appbar_theme.dart', content: appBarThemeDart },
-        { name: 'theme/components/bottom_nav_theme.dart', content: bottomNavThemeDart },
-        { name: 'theme/components/button_theme.dart', content: buttonThemeDart },
-        { name: 'theme/components/card_theme.dart', content: cardThemeDart },
-        { name: 'theme/components/component_themes.dart', content: componentThemesDart },
-        { name: 'theme/components/input_theme.dart', content: inputThemeDart },
-        { name: 'extension/context_extension.dart', content: contextExtensionDart },
-        { name: 'components/toggle_theme_button.dart', content: toggleThemeButtonDart },
-        { name: 'main.dart', content: mainDart },
-    ];
-
-    return (
-        <div className="flex flex-col gap-4 pb-12">
-            {files.map(file => (
-                <CodeSnippet key={file.name} filename={file.name} code={file.content} />
-            ))}
-        </div>
-    );
-};

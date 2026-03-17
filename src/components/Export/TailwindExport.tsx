@@ -1,21 +1,39 @@
 import { useState } from 'react';
 import { useThemeStore } from '../../store/useThemeStore';
 import { Copy, Check } from 'lucide-react';
+import type { BorderRadiusSize } from '../../types';
 
 export const TailwindExport = () => {
-    const { theme } = useThemeStore();
+    const { theme, componentConfig } = useThemeStore();
     const [copiedCss, setCopiedCss] = useState(false);
     const [copiedConfig, setCopiedConfig] = useState(false);
 
+    const getRadiusRem = (size: BorderRadiusSize) => {
+        switch (size) {
+            case 'none': return '0rem';
+            case 'sm': return '0.125rem';
+            case 'md': return '0.375rem';
+            case 'lg': return '0.5rem';
+            case 'full': return '9999px';
+            default: return '0.375rem';
+        }
+    };
+
     const generateCssVariables = () => {
-        let css = `@tailwind base;\n@tailwind components;\n@tailwind utilities;\n\n`;
+        let css = `@import url('https://fonts.googleapis.com/css2?family=${componentConfig.headingFont.replace(/ /g, '+')}:wght@400;500;600;700&family=${componentConfig.bodyFont.replace(/ /g, '+')}:wght@400;500;600;700&display=swap');\n\n`;
+        css += `@tailwind base;\n@tailwind components;\n@tailwind utilities;\n\n`;
         
         css += `@layer base {\n  :root {\n`;
         Object.entries(theme.light).forEach(([_, token]) => {
-             // Handle border-radius separately if stored, but it's hardcoded here
             css += `    ${token.cssVar}: ${token.oklchValue};\n`;
         });
-        css += `    --radius: 0.5rem;\n`;
+        css += `    --radius-button: ${getRadiusRem(componentConfig.buttonRadius)};\n`;
+        css += `    --radius-card: ${getRadiusRem(componentConfig.cardRadius)};\n`;
+        css += `    --radius-input: ${getRadiusRem(componentConfig.inputRadius)};\n`;
+        css += `    --font-heading: '${componentConfig.headingFont}', sans-serif;\n`;
+        css += `    --font-body: '${componentConfig.bodyFont}', sans-serif;\n`;
+        css += `    --weight-heading: ${componentConfig.headingWeight};\n`;
+        css += `    --weight-body: ${componentConfig.bodyWeight};\n`;
         css += `  }\n\n`;
 
         css += `  .dark {\n`;
@@ -82,10 +100,18 @@ module.exports = {
           foreground: "oklch(var(--card-foreground) / <alpha-value>)",
         },
       },
+      fontFamily: {
+        sans: ['var(--font-body)'],
+        heading: ['var(--font-heading)'],
+      },
+      fontWeight: {
+        heading: 'var(--weight-heading)',
+        body: 'var(--weight-body)',
+      },
       borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        button: 'var(--radius-button)',
+        card: 'var(--radius-card)',
+        input: 'var(--radius-input)',
       },
     },
   },

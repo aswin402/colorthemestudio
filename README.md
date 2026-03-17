@@ -19,15 +19,17 @@ ColorTheme Studio is a powerful, elegant, and developer-friendly color theme gen
 ## 📸 Screenshots
 
 ### Web & Tailwind CSS Preview
+
 ![Tailwind CSS Preview](screenshots/forTailwinds.png)
 
 ### Flutter Preview
+
 ![Flutter Preview](screenshots/forFlutter.png)
 
 ### Export Setup
+
 ![Export Setup](screenshots/exportSetup.png)
 ![Export Setup for tailwind](screenshots/exportSetupTw.png)
-
 
 ## 📖 Documentation
 
@@ -35,7 +37,14 @@ To understand the core project workings and how different pieces fit together, p
 
 - [explain.md](./docs/explain.md) - Detailed explanation of the project capabilities and usage.
 - [architecture.md](./docs/architecture.md) - Deep dive into the component architecture, state management, and file structure.
+- [components.md](./docs/components.md) - New Components customization feature (typography, geometry, live previews).
+- [file-structure.md](./docs/file-structure.md) - Detailed per-file responsibilities.
 - [getting-started.md](./docs/getting-started.md) - How to run and test the project locally.
+
+## 🚀 Recent Developments
+
+- **Components Customization (New Feature):** Dedicated page with `ConfigControls` for typography (50+ fonts, weights, sizes, line-height), layout density, shadows, border widths, radii. `ComponentsLivePreview` shows live buttons, inputs, cards applying theme colors + configs. Store integration via extended `ComponentConfig`.
+- Progress tracked in [TODO.md](./TODO.md).
 
 ## 🔗 Live Demo
 
