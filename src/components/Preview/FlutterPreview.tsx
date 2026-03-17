@@ -1,5 +1,5 @@
 import { useThemeStore } from '../../store/useThemeStore';
-import type { BorderRadiusSize, FontSize, LineHeightType, ShadowSize, DensityType, BorderWidthType, ComponentConfig } from '../../types';
+import type { BorderRadiusSize, FontSize, LineHeightType, ShadowSize, DensityType, BorderWidthType } from '../../types';
 
 export const FlutterPreview = () => {
     const { theme, mode, componentConfig } = useThemeStore();
@@ -71,7 +71,6 @@ export const FlutterPreview = () => {
     const getBorderWidthPx = (width: BorderWidthType) => parseInt(width);
 
     const mainPadding = getDensityPadding(componentConfig.density);
-    const radius = getRadiusPx(componentConfig.buttonRadius);
     const shadow = getShadowStyle(componentConfig.shadow);
     const fontSizeBody = getFontSizePx(componentConfig.fontSizeBody);
     const lineHeight = getLineHeightPx(componentConfig.lineHeight);
@@ -88,10 +87,9 @@ export const FlutterPreview = () => {
                 fontSize: fontSizeBody,
                 lineHeight,
                 fontWeight: componentConfig.bodyWeight,
-                fontDisplay: 'swap',
                 ...shadow 
             }}>
-                <div className="space-y-2" style={{ fontFamily: `"${componentConfig.headingFont}", -apple-system, BlinkMacSystemFont, sans-serif`, fontWeight: componentConfig.headingWeight, fontDisplay: 'swap' }}>
+                <div className="space-y-2" style={{ fontFamily: `"${componentConfig.headingFont}", -apple-system, BlinkMacSystemFont, sans-serif`, fontWeight: componentConfig.headingWeight }}>
                 <h3 className={`${getFontSizePx('lg')} font-bold mb-1`}>Material 3 / Flutter Widgets</h3>
                 <p className="text-sm opacity-60">Live preview with your custom typography, density, radius, shadows.</p>
             </div>
@@ -159,8 +157,7 @@ export const FlutterPreview = () => {
                 ...shadow 
             }}>
                 <h3 style={{ 
-                    fontSize: getFontSizePx('lg'), 
-                    fontWeight: 'bold',
+                    fontSize: getFontSizePx('lg'),
                     marginBottom: '8px',
                     fontFamily: `"${componentConfig.headingFont}", sans-serif`,
                     fontWeight: componentConfig.headingWeight

@@ -1,6 +1,6 @@
 import { useThemeStore } from '../../store/useThemeStore';
 import React from 'react';
-import type { BorderRadiusSize, FontSize, LineHeightType, ShadowSize, DensityType, BorderWidthType, ComponentConfig } from '../../types';
+import type { BorderRadiusSize, FontSize, LineHeightType, ShadowSize, DensityType, BorderWidthType } from '../../types';
 
 export const WebPreview = () => {
     const { theme, mode, componentConfig } = useThemeStore();
@@ -63,7 +63,6 @@ export const WebPreview = () => {
     });
 
     const dynamicPadding = getDensityPadding(componentConfig.density);
-    const dynamicRadius = getRadiusClass(componentConfig.buttonRadius);
     const dynamicShadow = getShadowClass(componentConfig.shadow);
     const dynamicFontSize = getFontSizeClass(componentConfig.fontSizeBody);
     const dynamicLineHeight = getLineHeightClass(componentConfig.lineHeight);
@@ -182,7 +181,7 @@ export const WebPreview = () => {
                         backgroundColor: 'var(--background)',
                         borderColor: 'var(--input)',
                         ...getBorderWidthStyle(componentConfig.borderWidth),
-                        // @ts-ignore
+                        // @ts-expect-error: Tailwind dynamic Custom CSS property
                         '--tw-ring-color': 'var(--ring)'
                     }}
                 >

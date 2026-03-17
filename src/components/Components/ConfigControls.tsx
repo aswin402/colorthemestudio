@@ -1,6 +1,6 @@
 
 import { useThemeStore } from '../../store/useThemeStore';
-import type { BorderRadiusSize, ComponentConfig, FontSize, LineHeightType, ShadowSize, DensityType, BorderWidthType, ThemeTemperature } from '../../types';
+import type { BorderRadiusSize, ComponentConfig, ShadowSize, DensityType, ThemeTemperature } from '../../types';
 import { generateRandomStyles } from '../../utils/randomTheme';
 
 type Preset = {
@@ -25,8 +25,11 @@ const presets: Preset[] = [
   { name: 'Sunny Yellow', baseColor: '#FBBF24', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'Figtree', bodyFont: 'Figtree', shadow: 'xl' } },
 ];
 
+import { useState } from 'react';
+
 export const ConfigControls = () => {
-    const { componentConfig, baseColor, temperature, setBaseColor, setTemperature, setComponentConfig } = useThemeStore();
+    const { componentConfig, setBaseColor, setTemperature, setComponentConfig } = useThemeStore();
+    const [showPresets, setShowPresets] = useState(false);
 
 
 
@@ -307,34 +310,46 @@ const fontOptions = [
               {/* Preset Button */}
               <div className="relative">
                 <button
-                  className="inline-flex items-center gap-2 px-6 py-2.5 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 border border-blue-600/50 group"
-                  title="Select professional preset"
+                  onClick={() => setShowPresets(!showPresets)}
+                  className="inline-flex items-center gap-2 px-6 py-2.5 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 border border-blue-600/50"
+                  title="Toggle professional presets"
                 >
                   Preset Styles
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className={`w-4 h-4 transition-transform ${showPresets ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
                 </button>
-                <div className="absolute right-0 mt-2 w-80 bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-xl shadow-2xl z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 overflow-hidden">
-                  <div className="p-4 border-b border-gray-100 dark:border-zinc-700">
-                    <h4 className="font-semibold text-gray-900 dark:text-white text-sm">Professional Presets</h4>
-                  </div>
-                  <div className="py-2 max-h-80 overflow-y-auto">
-                    {presets.map((preset, index) => (
-                      <button
-                        key={index}
-                        onClick={() => applyPreset(preset)}
-                        className="w-full flex items-center gap-3 p-3 hover:bg-gray-50 dark:hover:bg-zinc-700 transition-colors text-left first:rounded-t-xl last:rounded-b-xl"
-                      >
-                        <div className="w-12 h-12 rounded-lg" style={{backgroundColor: preset.baseColor}} />
-                        <div>
-                        <div className="font-medium text-sm text-gray-900 dark:text-white">{preset.name}</div>
-                          <div className="text-xs text-gray-500 dark:text-gray-400">{preset.componentConfig.headingFont || 'Default'} / {preset.componentConfig.bodyFont || 'Default'}</div>
-                        </div>
-                      </button>
-                    ))}
-                  </div>
-                </div>
+                {showPresets && (
+                  <>
+                    <div 
+                      className="fixed inset-0 z-40" 
+                      onClick={() => setShowPresets(false)}
+                    />
+                    <div className="absolute right-0 mt-2 w-80 bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-xl shadow-2xl z-50 opacity-100 visible transition-all duration-200 overflow-hidden">
+                      <div className="p-4 border-b border-gray-100 dark:border-zinc-700">
+                        <h4 className="font-semibold text-gray-900 dark:text-white text-sm">Professional Presets</h4>
+                      </div>
+                      <div className="py-2 max-h-80 overflow-y-auto">
+                        {presets.map((preset, index) => (
+                          <button
+                            key={index}
+                            onClick={() => {
+                              applyPreset(preset);
+                              setShowPresets(false);
+                            }}
+                            className="w-full flex items-center gap-3 p-3 hover:bg-gray-50 dark:hover:bg-zinc-700 transition-colors text-left first:rounded-t-xl last:rounded-b-xl"
+                          >
+                            <div className="w-12 h-12 rounded-lg" style={{backgroundColor: preset.baseColor}} />
+                            <div>
+                              <div className="font-medium text-sm text-gray-900 dark:text-white">{preset.name}</div>
+                              <div className="text-xs text-gray-500 dark:text-gray-400">{preset.componentConfig.headingFont || 'Default'} / {preset.componentConfig.bodyFont || 'Default'}</div>
+                            </div>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
 

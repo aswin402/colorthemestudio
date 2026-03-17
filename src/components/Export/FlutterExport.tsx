@@ -213,46 +213,46 @@ abstract final class LightColors {
   static const inputBackground           = \`${getDartColor(theme.light.background.hexValue)}\`;
   static const inputBorder               = \`${getDartColor(theme.light.border.hexValue)}\`;
   static const buttonBackground          = \`${getDartColor(theme.light.primary.hexValue)}\`;
-  static const buttonForeground          = ${getDartColor(theme.light.primaryForeground.hexValue)};
-  static const secondaryButtonBackground = ${getDartColor(theme.light.secondary.hexValue)};
-  static const secondaryButtonForeground = ${getDartColor(theme.light.secondaryForeground.hexValue)};
-  static const muted                     = ${getDartColor(theme.light.muted.hexValue)};
-  static const mutedForeground           = ${getDartColor(theme.light.mutedForeground.hexValue)};
-  static const border                    = ${getDartColor(theme.light.border.hexValue)};
+  static const buttonForeground          = \`${getDartColor(theme.light.primaryForeground.hexValue)}\`;
+  static const secondaryButtonBackground = \`${getDartColor(theme.light.secondary.hexValue)}\`;
+  static const secondaryButtonForeground = \`${getDartColor(theme.light.secondaryForeground.hexValue)}\`;
+  static const muted                     = \`${getDartColor(theme.light.muted.hexValue)}\`;
+  static const mutedForeground           = \`${getDartColor(theme.light.mutedForeground.hexValue)}\`;
+  static const border                    = \`${getDartColor(theme.light.border.hexValue)}\`;
 }
 
 abstract final class DarkColors {
   //colorscheme=============================================
-  static const primary             = ${getDartColor(theme.dark.primary.hexValue)};
-  static const onPrimary           = ${getDartColor(theme.dark.primaryForeground.hexValue)};
-  static const primaryContainer    = ${getDartColor(theme.dark.primary.hexValue)};
-  static const onPrimaryContainer  = ${getDartColor(theme.dark.primaryForeground.hexValue)};
-  static const secondary           = ${getDartColor(theme.dark.secondary.hexValue)};
-  static const onSecondary         = ${getDartColor(theme.dark.secondaryForeground.hexValue)};
-  static const secondaryContainer  = ${getDartColor(theme.dark.secondary.hexValue)};
-  static const onSecondaryContainer= ${getDartColor(theme.dark.secondaryForeground.hexValue)};
-  static const surface             = ${getDartColor(theme.dark.background.hexValue)};
-  static const onSurface           = ${getDartColor(theme.dark.foreground.hexValue)};
-  static const error               = ${getDartColor(theme.dark.destructive.hexValue)};
-  static const onError             = ${getDartColor(theme.dark.destructiveForeground.hexValue)};
-  static const outline             = ${getDartColor(theme.dark.border.hexValue)};
-  static const outlineVariant      = ${getDartColor(theme.dark.border.hexValue)};
-  static const surfaceTint         = ${getDartColor(theme.dark.primary.hexValue)};
+  static const primary             = \`${getDartColor(theme.dark.primary.hexValue)}\`;
+  static const onPrimary           = \`${getDartColor(theme.dark.primaryForeground.hexValue)}\`;
+  static const primaryContainer    = \`${getDartColor(theme.dark.primary.hexValue)}\`;
+  static const onPrimaryContainer  = \`${getDartColor(theme.dark.primaryForeground.hexValue)}\`;
+  static const secondary           = \`${getDartColor(theme.dark.secondary.hexValue)}\`;
+  static const onSecondary         = \`${getDartColor(theme.dark.secondaryForeground.hexValue)}\`;
+  static const secondaryContainer  = \`${getDartColor(theme.dark.secondary.hexValue)}\`;
+  static const onSecondaryContainer= \`${getDartColor(theme.dark.secondaryForeground.hexValue)}\`;
+  static const surface             = \`${getDartColor(theme.dark.background.hexValue)}\`;
+  static const onSurface           = \`${getDartColor(theme.dark.foreground.hexValue)}\`;
+  static const error               = \`${getDartColor(theme.dark.destructive.hexValue)}\`;
+  static const onError             = \`${getDartColor(theme.dark.destructiveForeground.hexValue)}\`;
+  static const outline             = \`${getDartColor(theme.dark.border.hexValue)}\`;
+  static const outlineVariant      = \`${getDartColor(theme.dark.border.hexValue)}\`;
+  static const surfaceTint         = \`${getDartColor(theme.dark.primary.hexValue)}\`;
   
 
   //extension=============================================
-  static const card                      = ${getDartColor(theme.dark.card.hexValue)};
-  static const cardForeground            = ${getDartColor(theme.dark.cardForeground.hexValue)};
-  static const navbar                    = ${getDartColor(theme.dark.muted.hexValue)};
-  static const inputBackground           = ${getDartColor(theme.dark.background.hexValue)};
-  static const inputBorder               = ${getDartColor(theme.dark.border.hexValue)};
-  static const buttonBackground          = ${getDartColor(theme.dark.primary.hexValue)};
-  static const buttonForeground          = ${getDartColor(theme.dark.primaryForeground.hexValue)};
-  static const secondaryButtonBackground = ${getDartColor(theme.dark.secondary.hexValue)};
-  static const secondaryButtonForeground = ${getDartColor(theme.dark.secondaryForeground.hexValue)};
-  static const muted                     = ${getDartColor(theme.dark.muted.hexValue)};
-  static const mutedForeground           = ${getDartColor(theme.dark.mutedForeground.hexValue)};
-  static const border                    = ${getDartColor(theme.dark.border.hexValue)};
+  static const card                      = \`${getDartColor(theme.dark.card.hexValue)}\`;
+  static const cardForeground            = \`${getDartColor(theme.dark.cardForeground.hexValue)}\`;
+  static const navbar                    = \`${getDartColor(theme.dark.muted.hexValue)}\`;
+  static const inputBackground           = \`${getDartColor(theme.dark.background.hexValue)}\`;
+  static const inputBorder               = \`${getDartColor(theme.dark.border.hexValue)}\`;
+  static const buttonBackground          = \`${getDartColor(theme.dark.primary.hexValue)}\`;
+  static const buttonForeground          = \`${getDartColor(theme.dark.primaryForeground.hexValue)}\`;
+  static const secondaryButtonBackground = \`${getDartColor(theme.dark.secondary.hexValue)}\`;
+  static const secondaryButtonForeground = \`${getDartColor(theme.dark.secondaryForeground.hexValue)}\`;
+  static const muted                     = \`${getDartColor(theme.dark.muted.hexValue)}\`;
+  static const mutedForeground           = \`${getDartColor(theme.dark.mutedForeground.hexValue)}\`;
+  static const border                    = \`${getDartColor(theme.dark.border.hexValue)}\`;
 }`;
 
     const appTextStyleDart = `import 'package:flutter/material.dart';

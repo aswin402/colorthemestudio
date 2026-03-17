@@ -25,7 +25,7 @@ bun dev  # or npm run dev
 
 1. **Default (Color Picker + Preview + CodeGen):** Pick hex/temp → See previews/snippets update.
 2. **Export Setup (Header tab):** Generate full Tailwind/Flutter configs.
-3. **Components (Header tab):** Customize typography/geometry → Live buttons/inputs/cards.
+3. **Components (Header tab):** Use **Preset Styles** button (click toggle), customize typography/geometry → Live buttons/inputs/cards.
 
 ## Testing New Features
 

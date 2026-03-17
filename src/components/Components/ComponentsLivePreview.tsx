@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useThemeStore } from '../../store/useThemeStore';
-import type { BorderRadiusSize, FontSize, LineHeightType, ShadowSize, DensityType, BorderWidthType, ComponentConfig } from '../../types';
+import type { FontSize } from '../../types';
 import { WebPreview } from '../Preview/WebPreview';
 import { FlutterPreview } from '../Preview/FlutterPreview';
 import { Monitor, Smartphone, Sun, Moon } from 'lucide-react';
@@ -8,17 +8,6 @@ import { Monitor, Smartphone, Sun, Moon } from 'lucide-react';
 export const ComponentsLivePreview = () => {
     const [activeTab, setActiveTab] = useState<'web' | 'flutter'>('web');
     const { mode, componentConfig, setMode: setGlobalMode } = useThemeStore();
-
-    const getRadiusClass = (size: BorderRadiusSize) => {
-        switch (size) {
-            case 'none': return 'rounded-none';
-            case 'sm': return 'rounded-sm';
-            case 'md': return 'rounded-md';
-            case 'lg': return 'rounded-lg';
-            case 'full': return 'rounded-full';
-            default: return 'rounded-md';
-        }
-    };
 
     const getFontSizeClass = (size: FontSize) => {
         const sizes: Record<FontSize, string> = {
@@ -31,39 +20,6 @@ export const ComponentsLivePreview = () => {
         };
         return sizes[size] || 'text-base';
     };
-
-    const getLineHeightClass = (lh: LineHeightType) => {
-        const heights: Record<LineHeightType, string> = {
-            compact: 'leading-tight',
-            normal: 'leading-normal',
-            relaxed: 'leading-relaxed',
-        };
-        return heights[lh] || 'leading-normal';
-    };
-
-    const getShadowClass = (size: ShadowSize) => {
-        const shadows: Record<ShadowSize, string> = {
-            none: 'shadow-none',
-            sm: 'shadow-sm',
-            md: 'shadow-md',
-            lg: 'shadow-lg',
-            xl: 'shadow-xl',
-        };
-        return shadows[size] || 'shadow-md';
-    };
-
-    const getDensityPadding = (density: DensityType) => {
-        const paddings: Record<DensityType, string> = {
-            compact: 'p-2 py-1 px-2',
-            normal: 'p-6 py-2.5 px-4',
-            spacious: 'p-8 py-3 px-6',
-        };
-        return paddings[density] || 'p-6';
-    };
-
-    const getBorderWidthStyle = (width: BorderWidthType) => ({
-        borderWidth: `${parseInt(width)}px`
-    });
 
     return (
         <div className="flex flex-col h-full gap-8">

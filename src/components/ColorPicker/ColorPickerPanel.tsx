@@ -1,7 +1,6 @@
 import { ColorWheel } from './ColorWheel';
 import { TemperatureSelector } from './TemperatureSelector';
 import { ColorCategories } from './ColorCategories';
-import { Dice1 } from 'lucide-react';
 import { useThemeStore } from '../../store/useThemeStore';
 import { generateRandomTheme } from '../../utils/randomTheme';
 

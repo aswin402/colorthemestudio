@@ -1,5 +1,5 @@
 import type { ThemeTemperature, ComponentConfig, BorderRadiusSize, FontSize, LineHeightType, ShadowSize, DensityType, BorderWidthType } from '../types';
-import { useThemeStore } from '../store/useThemeStore'; // Not used here
+
 
 // Generate random hex color (bright, saturated for nice themes)
 export const randomHex = (): string => {

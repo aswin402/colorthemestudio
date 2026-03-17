@@ -21,7 +21,7 @@ Accessible via the Header navigation (third tab after Preview and CodeGen).
 - **Purpose:** Interactive controls updating `componentConfig` in `useThemeStore`.
 - **Quick Actions (above controls):**
   - **Random Styles:** Generates random theme + component config (emerald button).
-  - **Preset Styles:** Dropdown with 12 professional presets (shadcn/DaisyUI-inspired). Hover to open, click to apply.
+- **Preset Styles:** Click to toggle dropdown with 12 professional presets (shadcn/DaisyUI-inspired). Click preset to apply and close.
   - **Add Preset:** Saves current config as custom preset to localStorage (purple button).
 - **Sections:**
   - **Typography:** Heading/Body fonts (50+ options incl. Inter, Roboto, JetBrains Mono), weights (400-800), sizes (xs-2xl), line-height (compact/normal/relaxed).
