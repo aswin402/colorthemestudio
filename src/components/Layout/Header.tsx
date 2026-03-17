@@ -39,7 +39,7 @@ const Header = ({ appMode, setAppMode, view, setView }: HeaderProps) => {
       <div className="flex items-center gap-4">
 
         <span className="text-[10px] font-bold px-2 py-1 rounded-full bg-zinc-100/50 text-zinc-500 ring-1 ring-inset ring-zinc-500/10 dark:bg-white/5 dark:text-zinc-400 dark:ring-white/10 uppercase tracking-widest">
-          v0.0.4
+          v0.0.5
         </span>
         <button
           onClick={() => setAppMode(appMode === 'light' ? 'dark' : 'light')}

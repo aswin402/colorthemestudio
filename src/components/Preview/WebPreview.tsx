@@ -197,6 +197,97 @@ export const WebPreview = () => {
                 </div>
             </div>
 
+            {/* New Components */}
+            <div className={`inline-flex items-center px-2.5 py-0.5 ${getRadiusClass(componentConfig.buttonRadius)} text-xs font-medium ${getShadowClass('sm')}`} style={{
+                backgroundColor: 'var(--muted)',
+                color: 'var(--muted-foreground)',
+            }}>
+                Badge Label
+            </div>
+
+            <div className={`w-12 h-12 flex items-center justify-center text-sm font-semibold ${getRadiusClass('full')} ${getShadowClass('md')}`} style={{
+                backgroundColor: 'var(--secondary)',
+                color: 'var(--secondary-foreground)',
+            }}>
+                AV
+            </div>
+
+            <div className={`w-full bg-[var(--muted)] h-3 ${getRadiusClass(componentConfig.inputRadius)} overflow-hidden ${getShadowClass('sm')}`}>
+                <div className={`h-full bg-[var(--primary)] w-4/5 ${getRadiusClass(componentConfig.inputRadius)} transition-all`} />
+            </div>
+
+            <div className="flex items-center gap-3 p-4 border rounded-lg" style={{
+                backgroundColor: 'var(--card)',
+                borderColor: 'var(--border)',
+                ...getBorderWidthStyle(componentConfig.borderWidth)
+            }}>
+                <label className="flex items-center gap-2 cursor-pointer group" style={{
+                    fontFamily: `"${componentConfig.bodyFont}", sans-serif`,
+                    fontWeight: componentConfig.bodyWeight
+                }}>
+                    <div className={`w-5 h-5 border-2 rounded ${getRadiusClass('sm')} flex items-center justify-center transition-all ${getShadowClass('none')} group-hover:border-[var(--primary)]`} style={{
+                        borderColor: 'var(--border)',
+                    }}>
+                        <div className={`w-2 h-2 ${getRadiusClass('full')} transition-all ${getShadowClass('sm')}`} style={{
+                            backgroundColor: 'transparent',
+                        }} />
+                    </div>
+                    <span className={getFontSizeClass(componentConfig.fontSizeBody)}>Checkbox</span>
+                </label>
+            </div>
+
+            <div className="flex items-center gap-3 p-4 border rounded-lg" style={{
+                backgroundColor: 'var(--card)',
+                borderColor: 'var(--border)',
+                ...getBorderWidthStyle(componentConfig.borderWidth)
+            }}>
+                <label className="relative inline-flex items-center cursor-pointer" style={{
+                    fontFamily: `"${componentConfig.bodyFont}", sans-serif`,
+                    fontWeight: componentConfig.bodyWeight
+                }}>
+                    <input type="checkbox" className="sr-only peer" />
+                    <div className={`w-11 h-6 ${getRadiusClass('full')} peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-[var(--ring)] ${getShadowClass('sm')} peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[var(--primary)]`} style={{
+                        backgroundColor: 'var(--border)',
+                        borderColor: 'var(--border)',
+                        // @ts-expect-error: Tailwind dynamic Custom CSS property
+                        '--tw-ring-color': 'var(--ring)'
+                    }} />
+                    <span className={`ml-3 text-sm font-medium ${getFontSizeClass(componentConfig.fontSizeBody)}`}>Toggle</span>
+                </label>
+            </div>
+
+            {/* Simple Accordion */}
+            <div className={`${getRadiusClass(componentConfig.cardRadius)} border shadow-md overflow-hidden max-w-md`} style={{
+                backgroundColor: 'var(--card)',
+                borderColor: 'var(--border)',
+                ...getBorderWidthStyle(componentConfig.borderWidth)
+            }}>
+                <div className={`p-4 cursor-pointer hover:bg-[var(--muted)] transition-colors flex justify-between items-center ${getDensityPadding('compact')}`} style={{
+                    backgroundColor: 'var(--background)',
+                }}
+                    onClick={() => { /* toggle */ }}
+                >
+                    <span className={`${getFontSizeClass(componentConfig.fontSizeHeading)} font-semibold`} style={{
+                        fontFamily: `"${componentConfig.headingFont}", sans-serif`,
+                        fontWeight: componentConfig.headingWeight
+                    }}>Accordion Item</span>
+                    <svg className={`w-5 h-5 transition-transform`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                </div>
+                <div className={`${getDensityPadding('compact')} ${getShadowClass('none')}`} style={{
+                    backgroundColor: 'var(--popover)',
+                    maxHeight: '200px',
+                    overflow: 'hidden'
+                }}>
+                    <p className={getFontSizeClass(componentConfig.fontSizeBody)} style={{
+                        color: 'var(--popover-foreground)',
+                        fontFamily: `"${componentConfig.bodyFont}", sans-serif`,
+                    }}>Accordion content with custom styles...</p>
+                </div>
+            </div>
+
         </div>
     );
 };
+
