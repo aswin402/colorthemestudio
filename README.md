@@ -43,7 +43,7 @@ To understand the core project workings and how different pieces fit together, p
 
 ## 🚀 Recent Developments
 
-- **Components Customization (New Feature):** Dedicated page with `ConfigControls` for typography (50+ fonts, weights, sizes, line-height), layout density, shadows, border widths, radii. `ComponentsLivePreview` shows live buttons, inputs, cards applying theme colors + configs. Store integration via extended `ComponentConfig`.
+- **Components Customization:** Dedicated page with typography/geometry controls, **Preset Styles** (12 pro presets, click-toggle dropdown), random styles, live previews for buttons/inputs/cards.
 - Progress tracked in [TODO.md](./TODO.md).
 
 ## 🔗 Live Demo

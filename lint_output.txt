@@ -1,0 +1,44 @@
+
+> colorthemestudio@0.0.1 lint
+> eslint .
+
+
+/home/aswin/programming/vscode/myProjects/colorthemestudio/src/components/CodeGenerator/FlutterTheme.tsx
+  51:2  error  Parsing error: Declaration or statement expected
+
+/home/aswin/programming/vscode/myProjects/colorthemestudio/src/components/ColorPicker/ColorPickerPanel.tsx
+  4:10  error  'Dice1' is defined but never used  @typescript-eslint/no-unused-vars
+
+/home/aswin/programming/vscode/myProjects/colorthemestudio/src/components/Components/ComponentsLivePreview.tsx
+   3:101  error  'ComponentConfig' is defined but never used               @typescript-eslint/no-unused-vars
+  12:11   error  'getRadiusClass' is assigned a value but never used       @typescript-eslint/no-unused-vars
+  35:11   error  'getLineHeightClass' is assigned a value but never used   @typescript-eslint/no-unused-vars
+  44:11   error  'getShadowClass' is assigned a value but never used       @typescript-eslint/no-unused-vars
+  55:11   error  'getDensityPadding' is assigned a value but never used    @typescript-eslint/no-unused-vars
+  64:11   error  'getBorderWidthStyle' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/home/aswin/programming/vscode/myProjects/colorthemestudio/src/components/Components/ConfigControls.tsx
+   3:50   error  'FontSize' is defined but never used              @typescript-eslint/no-unused-vars
+   3:60   error  'LineHeightType' is defined but never used        @typescript-eslint/no-unused-vars
+   3:101  error  'BorderWidthType' is defined but never used       @typescript-eslint/no-unused-vars
+  31:30   error  'baseColor' is assigned a value but never used    @typescript-eslint/no-unused-vars
+  31:41   error  'temperature' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/home/aswin/programming/vscode/myProjects/colorthemestudio/src/components/Export/TailwindExport.tsx
+  27:47  error  '_' is defined but never used  @typescript-eslint/no-unused-vars
+  40:46  error  '_' is defined but never used  @typescript-eslint/no-unused-vars
+
+/home/aswin/programming/vscode/myProjects/colorthemestudio/src/components/Preview/FlutterPreview.tsx
+   2:101  error  'ComponentConfig' is defined but never used  @typescript-eslint/no-unused-vars
+  74:11   error  'radius' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/home/aswin/programming/vscode/myProjects/colorthemestudio/src/components/Preview/WebPreview.tsx
+    3:101  error  'ComponentConfig' is defined but never used                                                                          @typescript-eslint/no-unused-vars
+   66:11   error  'dynamicRadius' is assigned a value but never used                                                                   @typescript-eslint/no-unused-vars
+  185:25   error  Use "@ts-expect-error" instead of "@ts-ignore", as "@ts-ignore" will do nothing if the following line is error-free  @typescript-eslint/ban-ts-comment
+
+/home/aswin/programming/vscode/myProjects/colorthemestudio/src/utils/randomTheme.ts
+  2:10  error  'useThemeStore' is defined but never used  @typescript-eslint/no-unused-vars
+
+✖ 21 problems (21 errors, 0 warnings)
+

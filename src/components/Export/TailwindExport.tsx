@@ -24,7 +24,7 @@ export const TailwindExport = () => {
         css += `@tailwind base;\n@tailwind components;\n@tailwind utilities;\n\n`;
         
         css += `@layer base {\n  :root {\n`;
-        Object.entries(theme.light).forEach(([_, token]) => {
+        Object.values(theme.light).forEach((token) => {
             css += `    ${token.cssVar}: ${token.oklchValue};\n`;
         });
         css += `    --radius-button: ${getRadiusRem(componentConfig.buttonRadius)};\n`;
@@ -37,7 +37,7 @@ export const TailwindExport = () => {
         css += `  }\n\n`;
 
         css += `  .dark {\n`;
-        Object.entries(theme.dark).forEach(([_, token]) => {
+        Object.values(theme.dark).forEach((token) => {
             css += `    ${token.cssVar}: ${token.oklchValue};\n`;
         });
         css += `  }\n}\n`;
