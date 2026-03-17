@@ -189,30 +189,30 @@ class AppColorExtension extends ThemeExtension<AppColorExtension> {
 
 abstract final class LightColors {
   //colorscheme==========================================
-  static const primary             = ${getDartColor(theme.light.primary.hexValue)};
-  static const onPrimary           = ${getDartColor(theme.light.primaryForeground.hexValue)};
-  static const primaryContainer    = ${getDartColor(theme.light.primary.hexValue)};
-  static const onPrimaryContainer  = ${getDartColor(theme.light.primaryForeground.hexValue)};
-  static const secondary           = ${getDartColor(theme.light.secondary.hexValue)};
-  static const onSecondary         = ${getDartColor(theme.light.secondaryForeground.hexValue)};
-  static const secondaryContainer  = ${getDartColor(theme.light.secondary.hexValue)};
-  static const onSecondaryContainer= ${getDartColor(theme.light.secondaryForeground.hexValue)};
-  static const surface             = ${getDartColor(theme.light.background.hexValue)};
-  static const onSurface           = ${getDartColor(theme.light.foreground.hexValue)};
-  static const error               = ${getDartColor(theme.light.destructive.hexValue)};
-  static const onError             = ${getDartColor(theme.light.destructiveForeground.hexValue)};
-  static const outline             = ${getDartColor(theme.light.border.hexValue)};
-  static const outlineVariant      = ${getDartColor(theme.light.border.hexValue)};
-  static const surfaceTint         = ${getDartColor(theme.light.primary.hexValue)};
+  static const primary             = \`${getDartColor(theme.light.primary.hexValue)}\`;
+  static const onPrimary           = \`${getDartColor(theme.light.primaryForeground.hexValue)}\`;
+  static const primaryContainer    = \`${getDartColor(theme.light.primary.hexValue)}\`;
+  static const onPrimaryContainer  = \`${getDartColor(theme.light.primaryForeground.hexValue)}\`;
+  static const secondary           = \`${getDartColor(theme.light.secondary.hexValue)}\`;
+  static const onSecondary         = \`${getDartColor(theme.light.secondaryForeground.hexValue)}\`;
+  static const secondaryContainer  = \`${getDartColor(theme.light.secondary.hexValue)}\`;
+  static const onSecondaryContainer= \`${getDartColor(theme.light.secondaryForeground.hexValue)}\`;
+  static const surface             = \`${getDartColor(theme.light.background.hexValue)}\`;
+  static const onSurface           = \`${getDartColor(theme.light.foreground.hexValue)}\`;
+  static const error               = \`${getDartColor(theme.light.destructive.hexValue)}\`;
+  static const onError             = \`${getDartColor(theme.light.destructiveForeground.hexValue)}\`;
+  static const outline             = \`${getDartColor(theme.light.border.hexValue)}\`;
+  static const outlineVariant      = \`${getDartColor(theme.light.border.hexValue)}\`;
+  static const surfaceTint         = \`${getDartColor(theme.light.primary.hexValue)}\`;
   
   
   //extension================================================
-  static const card                      = ${getDartColor(theme.light.card.hexValue)};
-  static const cardForeground            = ${getDartColor(theme.light.cardForeground.hexValue)};
-  static const navbar                    = ${getDartColor(theme.light.muted.hexValue)};
-  static const inputBackground           = ${getDartColor(theme.light.background.hexValue)};
-  static const inputBorder               = ${getDartColor(theme.light.border.hexValue)};
-  static const buttonBackground          = ${getDartColor(theme.light.primary.hexValue)};
+  static const card                      = \`${getDartColor(theme.light.card.hexValue)}\`;
+  static const cardForeground            = \`${getDartColor(theme.light.cardForeground.hexValue)}\`;
+  static const navbar                    = \`${getDartColor(theme.light.muted.hexValue)}\`;
+  static const inputBackground           = \`${getDartColor(theme.light.background.hexValue)}\`;
+  static const inputBorder               = \`${getDartColor(theme.light.border.hexValue)}\`;
+  static const buttonBackground          = \`${getDartColor(theme.light.primary.hexValue)}\`;
   static const buttonForeground          = ${getDartColor(theme.light.primaryForeground.hexValue)};
   static const secondaryButtonBackground = ${getDartColor(theme.light.secondary.hexValue)};
   static const secondaryButtonForeground = ${getDartColor(theme.light.secondaryForeground.hexValue)};
