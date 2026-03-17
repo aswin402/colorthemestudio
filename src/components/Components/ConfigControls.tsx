@@ -13,16 +13,56 @@ type Preset = {
 const presets: Preset[] = [
   { name: 'Shadcn Slate', baseColor: '#475569', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'Inter', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'md', shadow: 'md' } },
   { name: 'Shadcn Zinc', baseColor: '#71717A', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'Inter', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'md', shadow: 'none' } },
-  { name: 'Daisy Emerald', baseColor: '#10B981', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'Poppins', bodyFont: 'Roboto', buttonRadius: 'lg', density: 'spacious' } },
-  { name: 'Daisy Sky', baseColor: '#0EA5E9', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'Roboto', bodyFont: 'Roboto', buttonRadius: 'sm', density: 'compact' } },
-  { name: 'Modern Blue', baseColor: '#3B82F6', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'Manrope', bodyFont: 'Inter', buttonRadius: 'lg' } },
+  { name: 'Modern Blue', baseColor: '#3B82F6', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'Poppins', bodyFont: 'Inter', buttonRadius: 'lg' } },
   { name: 'Warm Orange', baseColor: '#F59E0B', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'Playfair Display', bodyFont: 'Inter', buttonRadius: 'full' } },
-  { name: 'Dark Purple', baseColor: '#8B5CF6', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'JetBrains Mono', bodyFont: 'JetBrains Mono', shadow: 'none' } },
-  { name: 'Neutral Gray', baseColor: '#6B7280', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'Work Sans', bodyFont: 'Work Sans', density: 'normal' } },
+  { name: 'Dark Purple', baseColor: '#8B5CF6', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'Roboto Mono', bodyFont: 'Roboto Mono', shadow: 'none' } },
+  { name: 'Neutral Gray', baseColor: '#6B7280', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'Open Sans', bodyFont: 'Open Sans', density: 'normal' } },
   { name: 'Vibrant Red', baseColor: '#EF4444', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'Oswald', bodyFont: 'Inter', fontSizeHeading: '2xl' } },
-  { name: 'Cool Mint', baseColor: '#06D6A0', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'DM Sans', bodyFont: 'DM Sans', lineHeight: 'compact' } },
-  { name: 'Pro Indigo', baseColor: '#6366F1', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'Geist', bodyFont: 'Geist', buttonRadius: 'lg' } },
-  { name: 'Sunny Yellow', baseColor: '#FBBF24', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'Figtree', bodyFont: 'Figtree', shadow: 'xl' } },
+  { name: 'Cool Mint', baseColor: '#06D6A0', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'Lato', bodyFont: 'Lato', lineHeight: 'compact' } },
+  { name: 'Pro Indigo', baseColor: '#6366F1', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'Raleway', bodyFont: 'Raleway', buttonRadius: 'lg' } },
+  { name: 'Sunny Yellow', baseColor: '#FBBF24', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'Montserrat', bodyFont: 'Montserrat', shadow: 'xl' } },
+  // 10 New Advanced Presets
+  { name: 'Amethyst Haze', baseColor: '#A855F7', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'Lora', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'lg', shadow: 'lg', density: 'spacious' } },
+  { name: 'Kodama Grove', baseColor: '#22C55E', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'Playfair Display', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'sm', shadow: 'md', density: 'normal' } },
+  { name: 'Quantum Rose', baseColor: '#F43F5E', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'Poppins', bodyFont: 'Inter', headingWeight: '700', buttonRadius: 'full', shadow: 'md' } },
+  { name: 'Caffeine', baseColor: '#9A3412', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'Oswald', bodyFont: 'Roboto', headingWeight: '600', buttonRadius: 'none', shadow: 'sm' } },
+  { name: 'Neo Brutalism', baseColor: '#EAB308', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'Space Grotesk', bodyFont: 'system-ui', headingWeight: '800', buttonRadius: 'none', shadow: 'none', borderWidth: '4' } },
+  { name: 'Vintage Paper', baseColor: '#D4A373', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'Playfair Display', bodyFont: 'Lora', headingWeight: '600', buttonRadius: 'md', shadow: 'sm', borderWidth: '1' } },
+  { name: 'Claude', baseColor: '#5E5CE6', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'system-ui', bodyFont: 'system-ui', headingWeight: '500', buttonRadius: 'lg', shadow: 'sm' } },
+  { name: 'Mono / Graphite', baseColor: '#52525B', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'Inter', bodyFont: 'ui-monospace', headingWeight: '600', buttonRadius: 'md', shadow: 'none' } },
+  { name: 'Ocean Breeze', baseColor: '#14B8A6', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'Lato', bodyFont: 'Open Sans', headingWeight: '600', buttonRadius: 'full', shadow: 'md' } },
+  { name: 'Solar Dusk', baseColor: '#F97316', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'Montserrat', bodyFont: 'Inter', headingWeight: '700', buttonRadius: 'lg', density: 'spacious' } },
+  // 10 Additional Advanced Presets (Playful & Thematic)
+  { name: 'Bubblegum', baseColor: '#EC4899', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'Fredoka', bodyFont: 'Comic Neue', headingWeight: '800', buttonRadius: 'full', shadow: 'sm', borderWidth: '2', fontSizeHeading: '2xl', lineHeight: 'compact' } },
+  { name: 'Claymorphism', baseColor: '#D3B89E', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'Satoshi', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'lg', shadow: 'xl', borderWidth: '0', fontSizeHeading: 'xl', lineHeight: 'relaxed' } },
+  { name: 'Pastel Dreams', baseColor: '#C4B5FD', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'Syne', bodyFont: 'Nunito', headingWeight: '400', buttonRadius: 'lg', shadow: 'none', borderWidth: '1', density: 'spacious', lineHeight: 'relaxed', fontSizeHeading: 'xl' } },
+  { name: 'Northern Lights', baseColor: '#0D9488', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'Orbitron', bodyFont: 'Exo 2', headingWeight: '800', buttonRadius: 'md', shadow: 'lg', fontSizeHeading: '2xl', lineHeight: 'compact' } },
+  { name: 'Mocha Mousse', baseColor: '#8C5A3E', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'Playfair Display', bodyFont: 'Merriweather', headingWeight: '600', buttonRadius: 'md', shadow: 'sm', lineHeight: 'relaxed' } },
+  { name: 'Bold Tech', baseColor: '#06B6D4', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'Cabinet Grotesk', bodyFont: 'Inter', headingWeight: '800', buttonRadius: 'sm', shadow: 'sm', borderWidth: '1', fontSizeHeading: '2xl', lineHeight: 'normal' } },
+  { name: 'Retro Arcade', baseColor: '#D946EF', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'Press Start 2P', bodyFont: 'Rubik', headingWeight: '400', buttonRadius: 'sm', shadow: 'none', borderWidth: '4', density: 'compact', lineHeight: 'compact' } },
+  { name: 'Sage Garden', baseColor: '#86EFAC', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'Fraunces', bodyFont: 'DM Sans', headingWeight: '500', buttonRadius: 'lg', shadow: 'md', density: 'normal', lineHeight: 'relaxed' } },
+  { name: 'Darkmatter', baseColor: '#0A0A0A', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'Manrope', bodyFont: 'Karla', headingWeight: '500', buttonRadius: 'md', shadow: 'sm', borderWidth: '0', lineHeight: 'normal' } },
+  { name: 'Tangerine', baseColor: '#EA580C', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'Bebas Neue', bodyFont: 'Montserrat', headingWeight: '800', buttonRadius: 'lg', shadow: 'lg', fontSizeHeading: '2xl' } },
+  
+  // 18 DaisyUI Classic Overhauls
+  { name: 'Daisy Light', baseColor: '#64748B', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'Geist', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'md', shadow: 'sm', borderWidth: '1', lineHeight: 'normal' } },
+  { name: 'Daisy Dark', baseColor: '#64748B', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'Geist', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'md', shadow: 'sm', borderWidth: '1', lineHeight: 'normal' } },
+  { name: 'Daisy Cupcake', baseColor: '#65C3C8', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'Inter', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'full', shadow: 'sm' } },
+  { name: 'Daisy Bumblebee', baseColor: '#EAB308', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'Montserrat', bodyFont: 'Inter', headingWeight: '700', buttonRadius: 'md', shadow: 'sm', density: 'normal' } },
+  { name: 'Daisy Emerald', baseColor: '#10B981', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'Syne', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'md', shadow: 'sm', borderWidth: '0' } },
+  { name: 'Daisy Corporate', baseColor: '#3B82F6', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'Manrope', bodyFont: 'Inter', headingWeight: '700', buttonRadius: 'md', shadow: 'sm', borderWidth: '1', density: 'normal' } },
+  { name: 'Daisy Forest', baseColor: '#1eb854', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'system-ui', bodyFont: 'system-ui', headingWeight: '600', buttonRadius: 'full', shadow: 'sm' } },
+  { name: 'Daisy Lofi', baseColor: '#A1A1AA', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'GT Walsheim', bodyFont: 'Inter', headingWeight: '500', buttonRadius: 'sm', shadow: 'none', borderWidth: '1', density: 'compact' } },
+  { name: 'Daisy Pastel', baseColor: '#C4B5FD', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'Nunito', bodyFont: 'Figtree', headingWeight: '600', buttonRadius: 'lg', shadow: 'none', borderWidth: '1', density: 'spacious' } },
+  { name: 'Daisy Fantasy', baseColor: '#6e0b75', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'Playfair Display', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'md', shadow: 'sm', borderWidth: '0' } },
+  { name: 'Daisy Black', baseColor: '#333333', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'system-ui', bodyFont: 'system-ui', headingWeight: '700', buttonRadius: 'none', shadow: 'md' } },
+  { name: 'Daisy Dracula', baseColor: '#ff79c6', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'Inter', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'md', shadow: 'lg' } },
+  { name: 'Daisy CMYK', baseColor: '#45AEEE', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'system-ui', bodyFont: 'system-ui', headingWeight: '700', buttonRadius: 'md', shadow: 'none' } },
+  { name: 'Daisy Acid', baseColor: '#FF00FF', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'Inter', bodyFont: 'Inter', headingWeight: '800', buttonRadius: 'none', shadow: 'sm' } },
+  { name: 'Daisy Night', baseColor: '#6366F1', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'Manrope', bodyFont: 'Geist', headingWeight: '600', buttonRadius: 'md', shadow: 'sm', borderWidth: '0' } },
+  { name: 'Daisy Winter', baseColor: '#3B82F6', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'Cabinet Grotesk', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'md', shadow: 'none', borderWidth: '1' } },
+  { name: 'Daisy Dim', baseColor: '#0F766E', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'Satoshi', bodyFont: 'Karla', headingWeight: '500', buttonRadius: 'md', shadow: 'sm', borderWidth: '0' } },
+  { name: 'Daisy Sunset', baseColor: '#F97316', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'DM Sans', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'lg', shadow: 'md', density: 'normal' } },
 ];
 
 import { useState } from 'react';
@@ -57,21 +97,19 @@ export const ConfigControls = () => {
     ];
 
 const fontOptions = [
-        // Popular Sans Serif
-        'Inter', 'Roboto', 'Poppins', 'Open Sans', 'Lato', 'Montserrat', 'Nunito', 'Raleway', 'Ubuntu', 'Source Sans Pro',
-        'Work Sans', 'Manrope', 'Space Grotesk', 'IBM Plex Sans', 'DM Sans', 'Fira Sans', 'PT Sans', 'Arimo', 'Heebo', 'Muli',
+        // Extended Google Fonts & Specific UI Fonts matched with App themes
+        'Anton', 'Bebas Neue', 'Bitter', 'Cabinet Grotesk', 'Comic Neue',
+        'DM Sans', 'Exo 2', 'Figtree', 'Fraunces', 'Fredoka', 'Geist', 'GT Walsheim', 
+        'Inter', 'Karla', 'Lato', 'Lora', 'Manrope', 'Merriweather', 
+        'Montserrat', 'Nunito', 'Open Sans', 'Orbitron', 'Oswald', 
+        'Playfair Display', 'Poppins', 'Press Start 2P', 'Rajdhani', 
+        'Raleway', 'Roboto', 'Roboto Slab', 'Rubik', 'Satoshi', 
+        'Space Grotesk', 'Syne', 'Ubuntu', 'VT323',
         
-        // Serif & Display
-        'Playfair Display', 'Lora', 'Merriweather', 'Crimson Text', 'Libre Baskerville', 'Spectral', 'Cardo', 'Crimson Pro',
-        
-        // Monospace & Code
-        'JetBrains Mono', 'Inconsolata', 'Fira Code', 'Source Code Pro', 'Roboto Mono', 'Space Mono', 'Cascadia Code', 'IBM Plex Mono',
-        
-        // Other Popular
-        'Oswald', 'Quicksand', 'Quaternary', 'Notable', 'Syne', 'General Sans', 'Geist', 'Figtree', 'Plus Jakarta Sans', 'Recoleta',
-        
-        // System Fallbacks
-        'system-ui', 'ui-serif', 'ui-monospace', 'SF Pro Display', 'Helvetica Neue', 'Segoe UI', 'Oxygen', 'Cantarell', 'Noto Sans'
+        // System Configs & Mono fallbacks
+        'system-ui', 'ui-sans-serif', 'ui-serif', 'ui-monospace', 
+        'SF Pro Display', 'Helvetica Neue', 'Segoe UI',
+        'Fira Code', 'IBM Plex Mono', 'Inconsolata', 'JetBrains Mono', 'Recursive', 'Source Code Pro', 'Space Mono'
     ];
 
     const weightOptions = [

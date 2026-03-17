@@ -43,7 +43,8 @@ To understand the core project workings and how different pieces fit together, p
 
 ## 🚀 Recent Developments
 
-- **Components Customization:** Dedicated page with typography/geometry controls, **Preset Styles** (12 pro presets, click-toggle dropdown), random styles, live previews for buttons/inputs/cards.
+- **Themes & Typography Engine:** Massively expanded "Components" tab capabilities. Added **48 Built-in Presets** split across Core Foundations, highly specific Thematic/Playful Overhauls (e.g. *Retro Arcade*, *Claymorphism*, *Neo Brutalism*), and 18 perfect replicas of the official *DaisyUI* ecosystem. (See [docs/themes.md](./docs/themes.md)).
+- **Unified Component Export:** "Components Export" section now generates completely clean React (Tailwind) and Flutter code snippets without inline styles. Snippets natively leverage semantic classes (e.g., \`bg-primary rounded-button\`) and the exported Flutter \`AppTheme\` context.
 - Progress tracked in [TODO.md](./TODO.md).
 
 ## 🔗 Live Demo

@@ -11,3 +11,4 @@ ColorTheme Studio is specifically crafted to bridge the gap between initial colo
    - Modern Tailwind Configurations (`tailwind.config.js`) tailored to color variable requirements.
    - Native Web CSS Variables (`:root` definitions for `index.css`).
    - A complete 9-file Flutter architecture boilerplate setup, containing formatted `ThemeData` blocks, color extensions, and components ready to drop into a fresh `MaterialApp`.
+   - **Unified Component Snippets:** In addition to the base setup, the tool provides clean, semantic UI snippets (like buttons and cards) that natively hook into the exported Tailwind or Flutter theme, avoiding messy inline styles.

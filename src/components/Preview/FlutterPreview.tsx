@@ -196,6 +196,73 @@ export const FlutterPreview = () => {
                 </div>
             </div>
 
+            {/* New Flutter Widgets */}
+            <div className={`inline-flex px-3 py-1 text-sm font-semibold mt-6 ${getDensityPadding('compact')}`} style={{
+                backgroundColor: surfaceContainer,
+                color: onSurface,
+                borderRadius: getRadiusPx(componentConfig.buttonRadius),
+                ...shadow
+            }}>
+                Chip/Badge
+            </div>
+
+            <div className="w-14 h-14 mt-4" style={{
+                backgroundColor: secondary,
+                borderRadius: getRadiusPx('full'),
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: onSecondary,
+                fontWeight: 'bold',
+                fontSize: '24px',
+                ...shadow
+            }}>
+                AV
+            </div>
+
+            <div className="w-full h-4 mt-4 bg-[rgba(0,0,0,0.1)] rounded overflow-hidden" style={{
+                borderRadius: getRadiusPx(componentConfig.inputRadius),
+                boxShadow: shadow.boxShadow,
+                backgroundColor: currentTheme.muted.hexValue
+            }}>
+                <div className="h-full bg-blue-500 w-4/5" style={{
+                    backgroundColor: primary
+                }} />
+            </div>
+
+            <div className="flex flex-col gap-2 mt-6 p-4" style={{
+                backgroundColor: surface,
+                borderRadius: getRadiusPx(componentConfig.cardRadius),
+                border: `${borderWidth}px solid ${outline}`,
+                ...shadow
+            }}>
+                <label style={{
+                    fontFamily: `"${componentConfig.headingFont}", sans-serif`,
+                    fontWeight: '500',
+                    fontSize: getFontSizePx('sm'),
+                    marginBottom: '8px'
+                }}>Switch</label>
+                <div style={{
+                    backgroundColor: outline,
+                    borderRadius: getRadiusPx('full'),
+                    width: '52px',
+                    height: '32px',
+                    position: 'relative',
+                    ...shadow
+                }}>
+                    <div style={{
+                        backgroundColor: primary,
+                        borderRadius: '50%',
+                        width: '28px',
+                        height: '28px',
+                        position: 'absolute',
+                        right: '2px',
+                        top: '2px',
+                        transition: 'transform 0.2s'
+                    }} />
+                </div>
+            </div>
+
             {/* Floating Action Button */}
             <div className="absolute bottom-8 right-8 w-14 h-14 flex items-center justify-center cursor-pointer transition-all hover:scale-105 rounded-2xl shadow-xl"
                 style={{ 

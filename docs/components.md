@@ -1,6 +1,21 @@
-# Components Customization Feature
+# Components Page (Enhanced)
 
 ## Overview
+
+**New Features Added:**
+
+- **Live Preview Tab**: Expanded previews now include 12+ basic components (Buttons, Cards, Inputs, Alerts, Badges, Avatars, Progress Bars, Toggles, Checkboxes, Accordions).
+- **Exports Tab**: New React+Tailwind/Flutter code generator with copy buttons for each component. Dynamic snippets using CSS vars and config (radius-md, shadow-lg, fonts).
+
+The Components page provides:
+
+**Live Previews**: Real-time themed previews for Web (Tailwind/CSS vars) and Flutter (Material3).
+
+**Config Controls**: Typography (over 30+ bundled curations like Geist, Satoshi, Press Start 2P), geometry (radius/density), effects (shadows/borders). Features a massive library of 48 instantly-applicable UI permutations/presets.
+
+**Component Exports**: Clean, semantic framework-specific code (React TSX+Tailwind, Flutter Material) that inherently relies on your generated base `Export Setup` rather than using messy inline styles.
+
+All live-updating. Accessible via Header Components tab.
 
 The Components feature provides a dedicated page (`ComponentsPage.tsx`) for customizing and previewing UI components using the generated theme colors combined with independent geometry, typography, and layout configurations. This allows designers to fine-tune component styles (buttons, inputs, cards) in real-time without affecting the core color theme.
 
@@ -29,8 +44,11 @@ Accessible via the Header navigation (third tab after Preview and CodeGen).
   - **Effects:** Shadow (none-xl).
   - **Geometry:** Radius selectors (none/full) for button/card/input.
 - **UI:** Selects, button chips for quick switches; updates store via `setComponentConfig`.
-- **Fonts:** Extensive list covering system, Google Fonts, monospaces.
-- **Presets List:** Shadcn Slate/Zinc, Daisy Emerald/Sky, Modern Blue, Warm Orange, Dark Purple, Neutral Gray, Vibrant Red, Cool Mint, Pro Indigo, Sunny Yellow.
+  Fonts:\*\* Curated list (~40) of common web-safe & Google Fonts (Inter, Roboto, Poppins, JetBrains Mono etc.) for reliable rendering in live preview. Rare fonts removed to fix non-rendering issue.
+- **Config Options:**
+  - `headingFont`, `bodyFont`: Curated array of 30+ Google fonts natively mapped in `index.html` (e.g. *Inter*, *Playfair*, *Syne*, *Geist*, *Comic Neue*, *Orbitron*, *VT323*).
+  - Weights, custom radii (`none` to `full`), layout density, shadow depth, and border width toggles.
+- **Presets Engine:** A powerful dropdown holding 48 distinct configurations precisely mimicking leading UI architectures (e.g. Supabase Bold Tech, Retro Arcade, DaisyUI Night, Lofi). Applying a preset comprehensively reflows the UI structure.
 
 ### `src/components/Components/ComponentsLivePreview.tsx`
 
@@ -45,6 +63,14 @@ Accessible via the Header navigation (third tab after Preview and CodeGen).
   - **Inputs:** Styled with theme.input/ring, config padding/radius.
   - **Cards:** Complex demo with heading/body text, buttons; uses card/cardFg/border.
 - **Helpers:** `getRadiusClass`, `getShadowClass`, etc., mapping config to Tailwind classes/inline.
+
+### `src/components/Components/ComponentsExportSection.tsx`
+
+- **Purpose:** Generates ready-to-copy code snippets for UI components (React/Tailwind and Flutter).
+- **Core Principle:** Designed to operate harmoniously with the `TailwindExport.tsx` and `FlutterExport.tsx` setup boilerplates.
+  - Instead of generating messy inline styles matching the specific configuration pixel-by-pixel, this component outputs clean, semantic classes (e.g., `bg-primary rounded-button`) or base widgets (e.g., `ElevatedButton()`). 
+  - This guarantees the snippets instantly render perfectly when dropped into a codebase that is utilizing the generated Export Setup themes.
+- **Tabbing:** Switch between Flutter and React exports seamlessly.
 
 ## Integration
 
