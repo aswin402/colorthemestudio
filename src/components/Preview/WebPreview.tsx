@@ -89,7 +89,7 @@ export const WebPreview = () => {
     } as React.CSSProperties;
 
     return (
-        <div className={`flex flex-col gap-6 ${dynamicPadding} rounded-md border transition-all ${dynamicShadow}`}
+<div className={`flex flex-col gap-6 ${dynamicPadding} rounded-md border transition-all ${dynamicShadow} min-h-[600px]`}
             style={{ 
                 ...dynamicStyles, 
                 backgroundColor: 'var(--background)', 
@@ -277,7 +277,7 @@ export const WebPreview = () => {
                 </div>
                 <div className={`${getDensityPadding('compact')} ${getShadowClass('none')}`} style={{
                     backgroundColor: 'var(--popover)',
-                    maxHeight: '200px',
+maxHeight: '600px',
                     overflow: 'hidden'
                 }}>
                     <p className={getFontSizeClass(componentConfig.fontSizeBody)} style={{
@@ -290,4 +290,3 @@ export const WebPreview = () => {
         </div>
     );
 };
-

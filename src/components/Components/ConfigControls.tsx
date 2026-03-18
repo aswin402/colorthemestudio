@@ -25,7 +25,7 @@ const presets: Preset[] = [
   { name: 'Amethyst Haze', baseColor: '#A855F7', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'Lora', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'lg', shadow: 'lg', density: 'spacious' } },
   { name: 'Kodama Grove', baseColor: '#22C55E', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'Playfair Display', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'sm', shadow: 'md', density: 'normal' } },
   { name: 'Quantum Rose', baseColor: '#F43F5E', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'Poppins', bodyFont: 'Inter', headingWeight: '700', buttonRadius: 'full', shadow: 'md' } },
-  { name: 'Caffeine', baseColor: '#9A3412', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'Oswald', bodyFont: 'Roboto', headingWeight: '600', buttonRadius: 'none', shadow: 'sm' } },
+{ name: 'Caffeine', baseColor: '#9A3412', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'Oswald', bodyFont: 'Roboto', headingWeight: '600', buttonRadius: 'none', shadow: 'sm', borderWidth: '2' } },
   { name: 'Neo Brutalism', baseColor: '#EAB308', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'Space Grotesk', bodyFont: 'system-ui', headingWeight: '800', buttonRadius: 'none', shadow: 'none', borderWidth: '4' } },
   { name: 'Vintage Paper', baseColor: '#D4A373', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'Playfair Display', bodyFont: 'Lora', headingWeight: '600', buttonRadius: 'md', shadow: 'sm', borderWidth: '1' } },
   { name: 'Claude', baseColor: '#5E5CE6', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'system-ui', bodyFont: 'system-ui', headingWeight: '500', buttonRadius: 'lg', shadow: 'sm' } },
@@ -34,11 +34,11 @@ const presets: Preset[] = [
   { name: 'Solar Dusk', baseColor: '#F97316', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'Montserrat', bodyFont: 'Inter', headingWeight: '700', buttonRadius: 'lg', density: 'spacious' } },
   // 10 Additional Advanced Presets (Playful & Thematic)
   { name: 'Bubblegum', baseColor: '#EC4899', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'Fredoka', bodyFont: 'Comic Neue', headingWeight: '800', buttonRadius: 'full', shadow: 'sm', borderWidth: '2', fontSizeHeading: '2xl', lineHeight: 'compact' } },
-  { name: 'Claymorphism', baseColor: '#D3B89E', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'Satoshi', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'lg', shadow: 'xl', borderWidth: '0', fontSizeHeading: 'xl', lineHeight: 'relaxed' } },
+{ name: 'Claymorphism', baseColor: '#D3B89E', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'Plus Jakarta Sans', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'lg', shadow: 'xl', borderWidth: '0', fontSizeHeading: 'xl', lineHeight: 'relaxed' } },
   { name: 'Pastel Dreams', baseColor: '#C4B5FD', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'Syne', bodyFont: 'Nunito', headingWeight: '400', buttonRadius: 'lg', shadow: 'none', borderWidth: '1', density: 'spacious', lineHeight: 'relaxed', fontSizeHeading: 'xl' } },
   { name: 'Northern Lights', baseColor: '#0D9488', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'Orbitron', bodyFont: 'Exo 2', headingWeight: '800', buttonRadius: 'md', shadow: 'lg', fontSizeHeading: '2xl', lineHeight: 'compact' } },
   { name: 'Mocha Mousse', baseColor: '#8C5A3E', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'Playfair Display', bodyFont: 'Merriweather', headingWeight: '600', buttonRadius: 'md', shadow: 'sm', lineHeight: 'relaxed' } },
-  { name: 'Bold Tech', baseColor: '#06B6D4', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'Cabinet Grotesk', bodyFont: 'Inter', headingWeight: '800', buttonRadius: 'sm', shadow: 'sm', borderWidth: '1', fontSizeHeading: '2xl', lineHeight: 'normal' } },
+{ name: 'Bold Tech', baseColor: '#06B6D4', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'Archivo', bodyFont: 'Inter', headingWeight: '800', buttonRadius: 'sm', shadow: 'sm', borderWidth: '1', fontSizeHeading: '2xl', lineHeight: 'normal' } },
   { name: 'Retro Arcade', baseColor: '#D946EF', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'Press Start 2P', bodyFont: 'Rubik', headingWeight: '400', buttonRadius: 'sm', shadow: 'none', borderWidth: '4', density: 'compact', lineHeight: 'compact' } },
   { name: 'Sage Garden', baseColor: '#86EFAC', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'Fraunces', bodyFont: 'DM Sans', headingWeight: '500', buttonRadius: 'lg', shadow: 'md', density: 'normal', lineHeight: 'relaxed' } },
   { name: 'Darkmatter', baseColor: '#0A0A0A', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'Manrope', bodyFont: 'Karla', headingWeight: '500', buttonRadius: 'md', shadow: 'sm', borderWidth: '0', lineHeight: 'normal' } },
@@ -46,22 +46,22 @@ const presets: Preset[] = [
   
   // 18 DaisyUI Classic Overhauls
   { name: 'Daisy Light', baseColor: '#64748B', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'Geist', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'md', shadow: 'sm', borderWidth: '1', lineHeight: 'normal' } },
-  { name: 'Daisy Dark', baseColor: '#64748B', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'Geist', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'md', shadow: 'sm', borderWidth: '1', lineHeight: 'normal' } },
+{ name: 'Daisy Dark', baseColor: '#1E293B', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'Geist', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'md', shadow: 'lg', borderWidth: '1', lineHeight: 'normal' } },
   { name: 'Daisy Cupcake', baseColor: '#65C3C8', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'Inter', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'full', shadow: 'sm' } },
   { name: 'Daisy Bumblebee', baseColor: '#EAB308', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'Montserrat', bodyFont: 'Inter', headingWeight: '700', buttonRadius: 'md', shadow: 'sm', density: 'normal' } },
   { name: 'Daisy Emerald', baseColor: '#10B981', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'Syne', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'md', shadow: 'sm', borderWidth: '0' } },
   { name: 'Daisy Corporate', baseColor: '#3B82F6', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'Manrope', bodyFont: 'Inter', headingWeight: '700', buttonRadius: 'md', shadow: 'sm', borderWidth: '1', density: 'normal' } },
   { name: 'Daisy Forest', baseColor: '#1eb854', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'system-ui', bodyFont: 'system-ui', headingWeight: '600', buttonRadius: 'full', shadow: 'sm' } },
-  { name: 'Daisy Lofi', baseColor: '#A1A1AA', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'GT Walsheim', bodyFont: 'Inter', headingWeight: '500', buttonRadius: 'sm', shadow: 'none', borderWidth: '1', density: 'compact' } },
+{ name: 'Daisy Lofi', baseColor: '#A1A1AA', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'Nunito Sans', bodyFont: 'Inter', headingWeight: '500', buttonRadius: 'sm', shadow: 'none', borderWidth: '1', density: 'compact' } },
   { name: 'Daisy Pastel', baseColor: '#C4B5FD', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'Nunito', bodyFont: 'Figtree', headingWeight: '600', buttonRadius: 'lg', shadow: 'none', borderWidth: '1', density: 'spacious' } },
-  { name: 'Daisy Fantasy', baseColor: '#6e0b75', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'Playfair Display', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'md', shadow: 'sm', borderWidth: '0' } },
+{ name: 'Daisy Fantasy', baseColor: '#6e0b75', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'Cinzel', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'md', shadow: 'sm', borderWidth: '0' } },
   { name: 'Daisy Black', baseColor: '#333333', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'system-ui', bodyFont: 'system-ui', headingWeight: '700', buttonRadius: 'none', shadow: 'md' } },
-  { name: 'Daisy Dracula', baseColor: '#ff79c6', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'Inter', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'md', shadow: 'lg' } },
-  { name: 'Daisy CMYK', baseColor: '#45AEEE', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'system-ui', bodyFont: 'system-ui', headingWeight: '700', buttonRadius: 'md', shadow: 'none' } },
-  { name: 'Daisy Acid', baseColor: '#FF00FF', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'Inter', bodyFont: 'Inter', headingWeight: '800', buttonRadius: 'none', shadow: 'sm' } },
+{ name: 'Daisy Dracula', baseColor: '#ff79c6', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'Space Grotesk', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'md', shadow: 'lg' } },
+{ name: 'Daisy CMYK', baseColor: '#45AEEE', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'system-ui', bodyFont: 'system-ui', headingWeight: '700', buttonRadius: 'none', shadow: 'none', borderWidth: '2' } },
+{ name: 'Daisy Acid', baseColor: '#FF00FF', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'Space Grotesk', bodyFont: 'Rubik', headingWeight: '800', buttonRadius: 'none', shadow: 'sm' } },
   { name: 'Daisy Night', baseColor: '#6366F1', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'Manrope', bodyFont: 'Geist', headingWeight: '600', buttonRadius: 'md', shadow: 'sm', borderWidth: '0' } },
-  { name: 'Daisy Winter', baseColor: '#3B82F6', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'Cabinet Grotesk', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'md', shadow: 'none', borderWidth: '1' } },
-  { name: 'Daisy Dim', baseColor: '#0F766E', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'Satoshi', bodyFont: 'Karla', headingWeight: '500', buttonRadius: 'md', shadow: 'sm', borderWidth: '0' } },
+{ name: 'Daisy Winter', baseColor: '#3B82F6', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'Archivo', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'md', shadow: 'none', borderWidth: '1' } },
+{ name: 'Daisy Dim', baseColor: '#0F766E', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'Plus Jakarta Sans', bodyFont: 'Karla', headingWeight: '500', buttonRadius: 'md', shadow: 'sm', borderWidth: '0' } },
   { name: 'Daisy Sunset', baseColor: '#F97316', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'DM Sans', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'lg', shadow: 'md', density: 'normal' } },
 ];
 
@@ -97,20 +97,89 @@ export const ConfigControls = () => {
     ];
 
 const fontOptions = [
-        // Extended Google Fonts & Specific UI Fonts matched with App themes
-        'Anton', 'Bebas Neue', 'Bitter', 'Cabinet Grotesk', 'Comic Neue',
-        'DM Sans', 'Exo 2', 'Figtree', 'Fraunces', 'Fredoka', 'Geist', 'GT Walsheim', 
-        'Inter', 'Karla', 'Lato', 'Lora', 'Manrope', 'Merriweather', 
-        'Montserrat', 'Nunito', 'Open Sans', 'Orbitron', 'Oswald', 
-        'Playfair Display', 'Poppins', 'Press Start 2P', 'Rajdhani', 
-        'Raleway', 'Roboto', 'Roboto Slab', 'Rubik', 'Satoshi', 
-        'Space Grotesk', 'Syne', 'Ubuntu', 'VT323',
-        
-        // System Configs & Mono fallbacks
-        'system-ui', 'ui-sans-serif', 'ui-serif', 'ui-monospace', 
-        'SF Pro Display', 'Helvetica Neue', 'Segoe UI',
-        'Fira Code', 'IBM Plex Mono', 'Inconsolata', 'JetBrains Mono', 'Recursive', 'Source Code Pro', 'Space Mono'
-    ];
+
+    // ── SANS-SERIF UI (most reliable, widely used) ──────────────────
+    'Inter',
+    'Roboto',
+    'Open Sans',
+    'Lato',
+    'Poppins',
+    'Montserrat',
+    'Nunito',
+    'Nunito Sans',
+    'DM Sans',
+    'Manrope',
+    'Raleway',
+    'Rubik',
+    'Ubuntu',
+    'Karla',
+    'Figtree',
+    'Outfit',
+    'Lexend',
+    'Work Sans',
+    'Barlow',
+    'Barlow Condensed',
+    'Archivo',
+    'Epilogue',
+    'Plus Jakarta Sans',
+    'Urbanist',          // ← trending 2025, clean geometric
+    'Syne',
+    'Space Grotesk',
+    'Exo 2',
+    'Overpass',
+
+    // ── DISPLAY / HEADING SANS ──────────────────────────────────────
+    'Oswald',
+    'Bebas Neue',
+    'Anton',
+    'Rajdhani',
+    'Orbitron',
+    'Bricolage Grotesque',
+    'Instrument Sans',
+
+    // ── SERIF ───────────────────────────────────────────────────────
+    'Playfair Display',
+    'Merriweather',
+    'Lora',
+    'Bitter',
+    'Roboto Slab',
+    'DM Serif Display',
+    'Fraunces',
+    'Cormorant Garamond',
+    'Crimson Pro',
+    'Cardo',
+    'Source Serif 4',
+    'Cinzel',            // elegant Roman caps — fantasy/luxury
+    'Alegreya',          // literary editorial
+    'Libre Baskerville', // classic book serif
+
+    // ── DISPLAY / DECORATIVE ────────────────────────────────────────
+    'Alfa Slab One',     // chunky retro slab
+    'Creepster',         // halloween display
+    'Fredoka',           // playful rounded
+    'Comic Neue',        // casual/fun
+    'Press Start 2P',    // retro pixel
+    'VT323',             // terminal / retro
+    'Lobster',           // bold script heading
+
+    // ── MONOSPACE ───────────────────────────────────────────────────
+    'Space Mono',
+    'Source Code Pro',
+    'Fira Code',
+    'IBM Plex Mono',
+    'JetBrains Mono',
+    'Inconsolata',
+    'Chivo Mono',
+    'Recursive',
+
+    // ── SYSTEM FALLBACKS ────────────────────────────────────────────
+    'system-ui',
+    'ui-sans-serif',
+    'ui-serif',
+    'ui-monospace',
+    'IBM Plex Sans',
+    'Geist',             // Vercel/shadcn default — load via @fontsource
+];
 
     const weightOptions = [
         { label: 'Regular (400)', value: '400' },

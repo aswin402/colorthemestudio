@@ -56,7 +56,7 @@ export const ComponentsLivePreview = () => {
                 </div>
             </div>
 
-            <div className="flex-1 overflow-hidden">
+<div className="flex-1 min-h-[600px] overflow-auto">
                 {activeTab === 'web' ? <WebPreview /> : <FlutterPreview />}
             </div>
         </div>

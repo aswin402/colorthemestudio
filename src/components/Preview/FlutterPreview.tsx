@@ -86,7 +86,8 @@ export const FlutterPreview = () => {
                 fontFamily: `"${componentConfig.bodyFont}", -apple-system, BlinkMacSystemFont, sans-serif`,
                 fontSize: fontSizeBody,
                 lineHeight,
-                fontWeight: componentConfig.bodyWeight,
+fontWeight: componentConfig.bodyWeight,
+                minHeight: '600px',
                 ...shadow 
             }}>
                 <div className="space-y-2" style={{ fontFamily: `"${componentConfig.headingFont}", -apple-system, BlinkMacSystemFont, sans-serif`, fontWeight: componentConfig.headingWeight }}>
