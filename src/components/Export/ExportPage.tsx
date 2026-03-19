@@ -1,14 +1,15 @@
 import { useState } from 'react';
 import { FlutterExport } from './FlutterExport';
 import { TailwindExport } from './TailwindExport';
-import { Smartphone, Code2 } from 'lucide-react';
+import { ShadcnExport } from './ShadcnExport';
+import { Smartphone, Code2, Layout } from 'lucide-react';
 
 interface ExportPageProps {
   panelClass: string;
 }
 
 export const ExportPage = ({ panelClass }: ExportPageProps) => {
-  const [activeTab, setActiveTab] = useState<'flutter' | 'tailwind'>('flutter');
+  const [activeTab, setActiveTab] = useState<'flutter' | 'tailwind' | 'shadcn'>('flutter');
 
   return (
     <div className={`flex flex-col h-full overflow-hidden rounded-2xl border ${panelClass} shadow-sm bg-black/20 p-6`}>
@@ -25,18 +26,26 @@ export const ExportPage = ({ panelClass }: ExportPageProps) => {
             onClick={() => setActiveTab('flutter')}
             className={`flex justify-center items-center gap-2 px-6 py-2 rounded-md text-sm font-medium transition-all ${activeTab === 'flutter' ? 'bg-white dark:bg-[#27272a] shadow-sm text-black dark:text-white' : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-300'}`}
           >
-            <Smartphone className="w-4 h-4" /> Flutter Setup
+            <Smartphone className="w-4 h-4" /> Flutter
           </button>
           <button
             onClick={() => setActiveTab('tailwind')}
             className={`flex justify-center items-center gap-2 px-6 py-2 rounded-md text-sm font-medium transition-all ${activeTab === 'tailwind' ? 'bg-white dark:bg-[#27272a] shadow-sm text-black dark:text-white' : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-300'}`}
           >
-            <Code2 className="w-4 h-4" /> Tailwind Setup
+            <Code2 className="w-4 h-4" /> Tailwind
+          </button>
+          <button
+            onClick={() => setActiveTab('shadcn')}
+            className={`flex justify-center items-center gap-2 px-6 py-2 rounded-md text-sm font-medium transition-all ${activeTab === 'shadcn' ? 'bg-white dark:bg-[#27272a] shadow-sm text-black dark:text-white' : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-300'}`}
+          >
+            <Layout className="w-4 h-4" /> shadcn/ui
           </button>
         </div>
 
         <div className="flex-1 overflow-y-auto">
-          {activeTab === 'flutter' ? <FlutterExport /> : <TailwindExport />}
+          {activeTab === 'flutter' && <FlutterExport />}
+          {activeTab === 'tailwind' && <TailwindExport />}
+          {activeTab === 'shadcn' && <ShadcnExport />}
         </div>
       </div>
     </div>
