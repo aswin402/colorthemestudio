@@ -1,171 +1,130 @@
-import { useState } from 'react';
 import { useThemeStore } from '../../store/useThemeStore';
-import { Copy, Check } from 'lucide-react';
+import { CodeSnippet } from './CodeSnippet';
 import type { BorderRadiusSize } from '../../types';
 
 export const TailwindExport = () => {
     const { theme, componentConfig } = useThemeStore();
-    const [copiedCss, setCopiedCss] = useState(false);
-    const [copiedConfig, setCopiedConfig] = useState(false);
 
-    const getRadiusRem = (size: BorderRadiusSize) => {
-        switch (size) {
-            case 'none': return '0rem';
-            case 'sm': return '0.125rem';
-            case 'md': return '0.375rem';
-            case 'lg': return '0.5rem';
-            case 'full': return '9999px';
-            default: return '0.375rem';
-        }
+    const radiusMap: Record<BorderRadiusSize, string> = {
+        'none': '0',
+        'sm': '0.125',
+        'md': '0.375',
+        'lg': '0.5',
+        'full': '9999',
     };
 
-    const generateCssVariables = () => {
-        let css = `@import url('https://fonts.googleapis.com/css2?family=${componentConfig.headingFont.replace(/ /g, '+')}:wght@400;500;600;700&family=${componentConfig.bodyFont.replace(/ /g, '+')}:wght@400;500;600;700&display=swap');\n\n`;
-        css += `@tailwind base;\n@tailwind components;\n@tailwind utilities;\n\n`;
-        
-        css += `@layer base {\n  :root {\n`;
-        Object.values(theme.light).forEach((token) => {
-            css += `    ${token.cssVar}: ${token.oklchValue};\n`;
-        });
-        css += `    --radius-button: ${getRadiusRem(componentConfig.buttonRadius)};\n`;
-        css += `    --radius-card: ${getRadiusRem(componentConfig.cardRadius)};\n`;
-        css += `    --radius-input: ${getRadiusRem(componentConfig.inputRadius)};\n`;
-        css += `    --font-heading: '${componentConfig.headingFont}', sans-serif;\n`;
-        css += `    --font-body: '${componentConfig.bodyFont}', sans-serif;\n`;
-        css += `    --weight-heading: ${componentConfig.headingWeight};\n`;
-        css += `    --weight-body: ${componentConfig.bodyWeight};\n`;
-        css += `  }\n\n`;
-
-        css += `  .dark {\n`;
-        Object.values(theme.dark).forEach((token) => {
-            css += `    ${token.cssVar}: ${token.oklchValue};\n`;
-        });
-        css += `  }\n}\n`;
-
-        css += `\n@layer base {\n  * {\n    @apply border-border;\n  }\n  body {\n    @apply bg-background text-foreground;\n  }\n}\n`;
-        return css;
+    const getFontWeights = (weight: string) => {
+        const baseWeights = ['400', '500', '600', '700'];
+        const index = baseWeights.indexOf(weight || '400');
+        const weights = baseWeights.slice(index).join(';');
+        return weights || '400;500;600;700';
     };
 
-    const tailwindConfigStr = `/** @type {import('tailwindcss').Config} */
-module.exports = {
-  darkMode: ["class"],
-  content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-  ],
-  prefix: "",
-  theme: {
-    container: {
-      center: true,
-      padding: "2rem",
-      screens: {
-        "2xl": "1400px",
-      },
-    },
-    extend: {
-      colors: {
-        border: "oklch(var(--border) / <alpha-value>)",
-        input: "oklch(var(--input) / <alpha-value>)",
-        ring: "oklch(var(--ring) / <alpha-value>)",
-        background: "oklch(var(--background) / <alpha-value>)",
-        foreground: "oklch(var(--foreground) / <alpha-value>)",
-        primary: {
-          DEFAULT: "oklch(var(--primary) / <alpha-value>)",
-          foreground: "oklch(var(--primary-foreground) / <alpha-value>)",
-        },
-        secondary: {
-          DEFAULT: "oklch(var(--secondary) / <alpha-value>)",
-          foreground: "oklch(var(--secondary-foreground) / <alpha-value>)",
-        },
-        destructive: {
-          DEFAULT: "oklch(var(--destructive) / <alpha-value>)",
-          foreground: "oklch(var(--destructive-foreground) / <alpha-value>)",
-        },
-        muted: {
-          DEFAULT: "oklch(var(--muted) / <alpha-value>)",
-          foreground: "oklch(var(--muted-foreground) / <alpha-value>)",
-        },
-        accent: {
-          DEFAULT: "oklch(var(--accent) / <alpha-value>)",
-          foreground: "oklch(var(--accent-foreground) / <alpha-value>)",
-        },
-        popover: {
-          DEFAULT: "oklch(var(--popover) / <alpha-value>)",
-          foreground: "oklch(var(--popover-foreground) / <alpha-value>)",
-        },
-        card: {
-          DEFAULT: "oklch(var(--card) / <alpha-value>)",
-          foreground: "oklch(var(--card-foreground) / <alpha-value>)",
-        },
-      },
-      fontFamily: {
-        sans: ['var(--font-body)'],
-        heading: ['var(--font-heading)'],
-      },
-      fontWeight: {
-        heading: 'var(--weight-heading)',
-        body: 'var(--weight-body)',
-      },
-      borderRadius: {
-        button: 'var(--radius-button)',
-        card: 'var(--radius-card)',
-        input: 'var(--radius-input)',
-      },
-    },
-  },
-  plugins: [require("tailwindcss-animate")],
-}`;
+    const lightVars = Object.values(theme.light)
+        .map((token) => `    ${token.cssVar}: ${token.oklchValue};`)
+        .join('\n');
 
-    const handleCopyCss = () => {
-        navigator.clipboard.writeText(generateCssVariables());
-        setCopiedCss(true);
-        setTimeout(() => setCopiedCss(false), 2000);
-    };
+    const darkVars = Object.values(theme.dark)
+        .map((token) => `    ${token.cssVar}: ${token.oklchValue};`)
+        .join('\n');
 
-    const handleCopyConfig = () => {
-        navigator.clipboard.writeText(tailwindConfigStr);
-        setCopiedConfig(true);
-        setTimeout(() => setCopiedConfig(false), 2000);
-    };
+    const headingFont = componentConfig.headingFont || 'Manrope';
+    const bodyFont = componentConfig.bodyFont || 'Geist';
+    const headingWeights = getFontWeights(componentConfig.headingWeight);
+    const bodyWeights = getFontWeights(componentConfig.bodyWeight);
+    const radius = radiusMap[componentConfig.cardRadius || 'lg'];
+
+    const files = [
+        {
+            name: 'src/styles/globals.css',
+            content: `@import url('https://fonts.googleapis.com/css2?family=${headingFont.replace(/ /g, '+')}:wght@${headingWeights}&family=${bodyFont.replace(/ /g, '+')}:wght@${bodyWeights}&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-background: oklch(var(--background));
+  --color-foreground: oklch(var(--foreground));
+
+  --color-primary: oklch(var(--primary));
+  --color-primary-foreground: oklch(var(--primary-foreground));
+
+  --color-secondary: oklch(var(--secondary));
+  --color-secondary-foreground: oklch(var(--secondary-foreground));
+
+  --color-muted: oklch(var(--muted));
+  --color-muted-foreground: oklch(var(--muted-foreground));
+
+  --color-accent: oklch(var(--accent));
+  --color-accent-foreground: oklch(var(--accent-foreground));
+
+  --color-destructive: oklch(var(--destructive));
+  --color-destructive-foreground: oklch(var(--destructive-foreground));
+
+  --color-border: oklch(var(--border));
+  --color-input: oklch(var(--input));
+  --color-ring: oklch(var(--ring));
+
+  --radius-lg: ${radius}rem;
+  --radius-md: calc(${radius}rem - 2px);
+  --radius-sm: calc(${radius}rem - 4px);
+
+  --font-heading: '${headingFont}', sans-serif;
+  --font-body: '${bodyFont}', sans-serif;
+}
+
+@layer base {
+  :root {
+${lightVars}
+  }
+
+  .dark {
+${darkVars}
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  /* Displays */
+  .display-large { @apply font-heading text-7xl font-light tracking-tighter; }
+  .display-medium { @apply font-heading text-6xl font-light tracking-tight; }
+  .display-small { @apply font-heading text-5xl font-normal; }
+
+  /* Headlines */
+  h1, .headline-large { @apply font-heading text-4xl font-normal; }
+  h2, .headline-medium { @apply font-heading text-3xl font-normal; }
+  h3, .headline-small { @apply font-heading text-2xl font-normal; }
+
+  /* Titles */
+  h4, .title-large { @apply font-heading text-xl font-medium tracking-tight; }
+  h5, .title-medium { @apply font-heading text-lg font-medium tracking-tight; }
+  h6, .title-small { @apply font-heading text-base font-medium tracking-tight; }
+
+  /* Body */
+  p, .body-large { @apply font-body text-lg font-normal; }
+  .body-medium { @apply font-body text-base font-normal; }
+  .body-small { @apply font-body text-sm font-normal; }
+
+  /* Labels */
+  .label-large { @apply font-body text-sm font-medium tracking-wide; }
+  .label-medium { @apply font-body text-xs font-medium tracking-wide; }
+  .label-small { @apply font-body text-[11px] font-medium tracking-wider; }
+}
+`,
+        },
+    ];
 
     return (
-        <div className="flex flex-col gap-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-[calc(100vh-280px)]">
-                {/* CSS Variables Section */}
-                <div className="relative group flex flex-col h-full bg-zinc-950 p-6 rounded-xl border border-white/10 shadow-sm">
-                    <div className="flex justify-between items-center mb-4">
-                        <h3 className="text-white font-medium">1. index.css / global.css</h3>
-                        <button
-                            onClick={handleCopyCss}
-                            className="p-2 bg-white/10 hover:bg-white/20 text-white rounded-md backdrop-blur-md transition-all shadow-sm flex items-center gap-2 text-sm font-medium"
-                        >
-                            {copiedCss ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
-                            {copiedCss ? 'Copied' : 'Copy'}
-                        </button>
-                    </div>
-                    <pre className="flex-1 overflow-x-auto overflow-y-auto w-full text-zinc-300 text-sm font-mono leading-relaxed scrollbar-hide pb-4">
-                        <code>{generateCssVariables()}</code>
-                    </pre>
-                </div>
-
-                {/* Tailwind Config Section */}
-                <div className="relative group flex flex-col h-full bg-zinc-950 p-6 rounded-xl border border-white/10 shadow-sm">
-                    <div className="flex justify-between items-center mb-4">
-                        <h3 className="text-white font-medium">2. tailwind.config.js</h3>
-                        <button
-                            onClick={handleCopyConfig}
-                            className="p-2 bg-white/10 hover:bg-white/20 text-white rounded-md backdrop-blur-md transition-all shadow-sm flex items-center gap-2 text-sm font-medium"
-                        >
-                            {copiedConfig ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
-                            {copiedConfig ? 'Copied' : 'Copy'}
-                        </button>
-                    </div>
-                    <pre className="flex-1 overflow-x-auto overflow-y-auto w-full text-zinc-300 text-sm font-mono leading-relaxed scrollbar-hide pb-4">
-                        <code>{tailwindConfigStr}</code>
-                    </pre>
-                </div>
+        <div className="flex flex-col gap-6 h-[calc(100vh-280px)]">
+            <h3 className="text-white font-medium text-lg mb-2">Tailwind CSS Setup</h3>
+            <div className="flex-1 overflow-y-auto">
+                {files.map((file) => (
+                    <CodeSnippet key={file.name} filename={file.name} code={file.content} />
+                ))}
             </div>
         </div>
     );
