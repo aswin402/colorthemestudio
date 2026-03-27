@@ -8,10 +8,10 @@ export interface BaseColorInfo {
 }
 
 export interface ColorToken {
-  name: string;        // e.g., 'primary'
-  cssVar: string;      // e.g., '--primary'
-  oklchValue: string;  // e.g., '0.620 0.150 145.000'
-  hexValue: string;    // e.g., '#16A34A'
+  name: string;
+  cssVar: string;
+  oklchValue: string;
+  hexValue: string;
 }
 
 export interface ThemeColors {
@@ -42,26 +42,28 @@ export interface ThemeOutput {
 }
 
 export type BorderRadiusSize = 'none' | 'sm' | 'md' | 'lg' | 'full';
-
-export type FontSize = 'xs' | 'sm' | 'base' | 'lg' | 'xl' | '2xl';
-export type LineHeightType = 'compact' | 'normal' | 'relaxed';
-export type ShadowSize = 'none' | 'sm' | 'md' | 'lg' | 'xl';
+export type FontSize = 'xs' | 'sm' | 'base' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl';
+export type LineHeightType = 'compact' | 'normal' | 'relaxed' | 'loose';
+export type ShadowSize = 'none' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 export type DensityType = 'compact' | 'normal' | 'spacious';
-export type BorderWidthType = '0' | '1' | '2' | '4' | '8';
+export type BorderWidthType = '0' | '1' | '2' | '4' | '8' | '12';
+export type AnimationType = 'none' | 'quick' | 'smooth' | 'bounce' | 'pulse';
+export type LayoutType = 'stack' | 'grid' | 'masonry';
 
 export interface ComponentConfig {
-    buttonRadius: BorderRadiusSize;
-    cardRadius: BorderRadiusSize;
-    inputRadius: BorderRadiusSize;
-    headingFont: string;
-    bodyFont: string;
-    headingWeight: string;
-    bodyWeight: string;
-    // New fields for more freedom
-    fontSizeHeading: FontSize;
-    fontSizeBody: FontSize;
-    lineHeight: LineHeightType;
-    shadow: ShadowSize;
-    density: DensityType;
-    borderWidth: BorderWidthType;
+  buttonRadius: BorderRadiusSize;
+  cardRadius: BorderRadiusSize;
+  inputRadius: BorderRadiusSize;
+  headingFont: string;
+  bodyFont: string;
+  headingWeight: string;
+  bodyWeight: string;
+  fontSizeHeading: FontSize;
+  fontSizeBody: FontSize;
+  lineHeight: LineHeightType;
+  shadow: ShadowSize;
+  density: DensityType;
+  borderWidth: BorderWidthType;
+  animation: AnimationType;
+  layout: LayoutType;
 }

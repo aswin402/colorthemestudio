@@ -1,292 +1,594 @@
 import { useThemeStore } from '../../store/useThemeStore';
-import React from 'react';
-import type { BorderRadiusSize, FontSize, LineHeightType, ShadowSize, DensityType, BorderWidthType } from '../../types';
+import React, { useState } from 'react';
+import type {
+  BorderRadiusSize,
+  FontSize,
+  LineHeightType,
+  ShadowSize,
+  DensityType,
+  BorderWidthType,
+} from '../../types';
+import {
+  Info, X, Check, ChevronDown, Sun, Moon, AlertCircle,
+  Mail, MessageSquare, User, Settings, BarChart3,
+  Save, XCircle, Tag, Star, Heart, Bell, 
+  ChevronUp, Home,
+  
+  Link, 
+  
+  FileText,
+  
+  
+  Activity} from 'lucide-react';
 
-export const WebPreview = () => {
-    const { theme, mode, componentConfig } = useThemeStore();
-    const currentTheme = theme[mode];
+interface WebPreviewProps {
+  showAll?: boolean;
+  layout?: string;
+}
 
-    const getDensityPadding = (density: DensityType) => {
-        const paddings: Record<DensityType, string> = {
-            compact: 'p-3 py-1.5 px-3',
-            normal: 'p-6 py-2.5 px-4',
-            spacious: 'p-8 py-3 px-6',
-        };
-        return paddings[density] || 'p-6';
+export const WebPreview = (_props?: WebPreviewProps) => {
+  const { theme, mode, componentConfig } = useThemeStore();
+  const currentTheme = theme[mode];
+  const [accordionOpen, setAccordionOpen] = useState(false);
+  const [switchOn, setSwitchOn] = useState(true);
+  const [sliderValue] = useState(65);
+  const [selectedTab, setSelectedTab] = useState(0);
+
+  const getDensityPadding = (density: DensityType) => {
+    const paddings: Record<DensityType, string> = {
+      compact: 'p-3',
+      normal: 'p-5',
+      spacious: 'p-7',
     };
+    return paddings[density] || 'p-5';
+  };
 
-    const getRadiusClass = (size: BorderRadiusSize) => {
-        switch (size) {
-            case 'none': return 'rounded-none';
-            case 'sm': return 'rounded-sm';
-            case 'md': return 'rounded-md';
-            case 'lg': return 'rounded-lg';
-            case 'full': return 'rounded-full';
-            default: return 'rounded-md';
-        }
+  const getRadiusClass = (size: BorderRadiusSize) => {
+    const map: Record<BorderRadiusSize, string> = {
+      none: 'rounded-none',
+      sm: 'rounded-sm',
+      md: 'rounded-md',
+      lg: 'rounded-lg',
+      full: 'rounded-full',
     };
+    return map[size] || 'rounded-md';
+  };
 
-    const getShadowClass = (size: ShadowSize) => {
-        const shadows: Record<ShadowSize, string> = {
-            none: 'shadow-none',
-            sm: 'shadow-sm',
-            md: 'shadow-md',
-            lg: 'shadow-lg',
-            xl: 'shadow-xl',
-        };
-        return shadows[size] || 'shadow-md';
+  const getShadowClass = (size: ShadowSize) => {
+    const map: Record<ShadowSize, string> = {
+      none: '',
+      sm: 'shadow-sm',
+      md: 'shadow-md',
+      lg: 'shadow-lg',
+      xl: 'shadow-xl',
+      '2xl': 'shadow-2xl',
     };
+    return map[size] || '';
+  };
 
-    const getFontSizeClass = (size: FontSize) => {
-        const sizes: Record<FontSize, string> = {
-            xs: 'text-xs',
-            sm: 'text-sm',
-            base: 'text-base',
-            lg: 'text-lg',
-            xl: 'text-xl',
-            '2xl': 'text-2xl',
-        };
-        return sizes[size] || 'text-base';
+  const getFontSizeClass = (size: FontSize) => {
+    const map: Record<FontSize, string> = {
+      xs: 'text-xs',
+      sm: 'text-sm',
+      base: 'text-base',
+      lg: 'text-lg',
+      xl: 'text-xl',
+      '2xl': 'text-2xl',
+      '3xl': 'text-3xl',
+      '4xl': 'text-4xl',
     };
+    return map[size] || 'text-base';
+  };
 
-    const getLineHeightClass = (lh: LineHeightType) => {
-        const heights: Record<LineHeightType, string> = {
-            compact: 'leading-tight',
-            normal: 'leading-normal',
-            relaxed: 'leading-relaxed',
-        };
-        return heights[lh] || 'leading-normal';
+  const getLineHeightClass = (lh: LineHeightType) => {
+    const map: Record<LineHeightType, string> = {
+      compact: 'leading-tight',
+      normal: 'leading-normal',
+      relaxed: 'leading-relaxed',
+      loose: 'leading-loose',
     };
+    return map[lh] || 'leading-normal';
+  };
 
-    const getBorderWidthStyle = (width: BorderWidthType) => ({
-        borderWidth: `${parseInt(width)}px`
-    });
+  const getBorderWidthStyle = (width: BorderWidthType) => ({
+    borderWidth: `${parseInt(width)}px`,
+  });
 
-    const dynamicPadding = getDensityPadding(componentConfig.density);
-    const dynamicShadow = getShadowClass(componentConfig.shadow);
-    const dynamicFontSize = getFontSizeClass(componentConfig.fontSizeBody);
-    const dynamicLineHeight = getLineHeightClass(componentConfig.lineHeight);
-    const dynamicBorder = getBorderWidthStyle(componentConfig.borderWidth);
+  const dynamicStyles = {
+    '--background': currentTheme.background.hexValue,
+    '--foreground': currentTheme.foreground.hexValue,
+    '--primary': currentTheme.primary.hexValue,
+    '--primary-foreground': currentTheme.primaryForeground.hexValue,
+    '--secondary': currentTheme.secondary.hexValue,
+    '--secondary-foreground': currentTheme.secondaryForeground.hexValue,
+    '--destructive': currentTheme.destructive.hexValue,
+    '--destructive-foreground': currentTheme.destructiveForeground.hexValue,
+    '--border': currentTheme.border.hexValue,
+    '--input': currentTheme.input.hexValue,
+    '--ring': currentTheme.ring.hexValue,
+    '--card': currentTheme.card.hexValue,
+    '--card-foreground': currentTheme.cardForeground.hexValue,
+    '--muted': currentTheme.muted.hexValue,
+    '--muted-foreground': currentTheme.mutedForeground.hexValue,
+    '--popover': currentTheme.popover.hexValue,
+    '--popover-foreground': currentTheme.popoverForeground.hexValue,
+  } as React.CSSProperties;
 
-    const dynamicStyles = {
-        '--background': currentTheme.background.hexValue,
-        '--foreground': currentTheme.foreground.hexValue,
-        '--primary': currentTheme.primary.hexValue,
-        '--primary-foreground': currentTheme.primaryForeground.hexValue,
-        '--secondary': currentTheme.secondary.hexValue,
-        '--secondary-foreground': currentTheme.secondaryForeground.hexValue,
-        '--destructive': currentTheme.destructive.hexValue,
-        '--destructive-foreground': currentTheme.destructiveForeground.hexValue,
-        '--border': currentTheme.border.hexValue,
-        '--input': currentTheme.input.hexValue,
-        '--ring': currentTheme.ring.hexValue,
-        '--card': currentTheme.card.hexValue,
-        '--card-foreground': currentTheme.cardForeground.hexValue,
-        '--muted': currentTheme.muted.hexValue,
-        '--muted-foreground': currentTheme.mutedForeground.hexValue,
-        '--popover': currentTheme.popover.hexValue,
-        '--popover-foreground': currentTheme.popoverForeground.hexValue,
-    } as React.CSSProperties;
+  const cfg = componentConfig;
 
-    return (
-<div className={`flex flex-col gap-6 ${dynamicPadding} rounded-md border transition-all ${dynamicShadow} min-h-[600px]`}
-            style={{ 
-                ...dynamicStyles, 
-                backgroundColor: 'var(--background)', 
-                color: 'var(--foreground)', 
-                borderColor: 'var(--border)',
-                ...dynamicBorder,
-                fontFamily: `"${componentConfig.bodyFont}", sans-serif`,
-                fontWeight: componentConfig.bodyWeight,
-                fontSize: dynamicFontSize === 'text-base' ? undefined : dynamicFontSize, // Tailwind text-base is default
-                lineHeight: dynamicLineHeight === 'leading-normal' ? undefined : dynamicLineHeight,
-            }}>
-                <div className="space-y-2" style={{ fontFamily: `"${componentConfig.headingFont}", sans-serif`, fontWeight: componentConfig.headingWeight }}>
-                <h3 className={`${getFontSizeClass(componentConfig.fontSizeHeading)} font-bold mb-1`}>Tailwind / CSS Components</h3>
-                <p className={`${getFontSizeClass('sm')} opacity-60 ${getLineHeightClass(componentConfig.lineHeight)}`}>Live preview with your custom typography, density, radius, shadows.</p>
-            </div>
+  return (
+    <div
+      className={`flex flex-col gap-5 ${getDensityPadding(cfg.density)} ${getRadiusClass('lg')} border transition-all ${getShadowClass(cfg.shadow)}`}
+      style={{
+        ...dynamicStyles,
+        backgroundColor: 'var(--background)',
+        color: 'var(--foreground)',
+        borderColor: 'var(--border)',
+        ...getBorderWidthStyle(cfg.borderWidth),
+        fontFamily: `"${cfg.bodyFont}", sans-serif`,
+        fontWeight: cfg.bodyWeight,
+      }}
+    >
+      {/* Header */}
+      <div
+        style={{
+          fontFamily: `"${cfg.headingFont}", sans-serif`,
+          fontWeight: cfg.headingWeight,
+        }}
+      >
+        <h3 className={`${getFontSizeClass(cfg.fontSizeHeading)} font-bold mb-1 flex items-center gap-2`}>
+          <Palette className="w-5 h-5" style={{ color: 'var(--primary)' }} />
+          Tailwind / CSS Components
+        </h3>
+        <p
+          className={`${getFontSizeClass('sm')} opacity-60 ${getLineHeightClass(cfg.lineHeight)}`}
+        >
+          Interactive preview with real-time theming
+        </p>
+      </div>
 
-            <div className={`flex flex-wrap gap-4 ${getDensityPadding(componentConfig.density)}`}>
-                <button className={`py-2 px-4 font-medium text-sm transition-all hover:opacity-90 ${getRadiusClass(componentConfig.buttonRadius)} ${getShadowClass(componentConfig.shadow)} ${getFontSizeClass('base')} ${getLineHeightClass(componentConfig.lineHeight)}`} 
-                    style={{ 
-                        backgroundColor: 'var(--primary)', 
-                        color: 'var(--primary-foreground)',
-                        fontFamily: `"${componentConfig.headingFont}", sans-serif`,
-                        fontWeight: componentConfig.headingWeight,
-                        ...getBorderWidthStyle(componentConfig.borderWidth)
-                    }}>
-                    Primary Action
-                </button>
-                <button className={`py-2 px-4 font-medium text-sm transition-all hover:opacity-90 border ${getRadiusClass(componentConfig.buttonRadius)} ${getShadowClass(componentConfig.shadow)} ${getFontSizeClass('base')} ${getLineHeightClass(componentConfig.lineHeight)}`} 
-                    style={{ 
-                        backgroundColor: 'var(--secondary)', 
-                        color: 'var(--secondary-foreground)',
-                        borderColor: 'var(--border)',
-                        fontFamily: `"${componentConfig.headingFont}", sans-serif`,
-                        fontWeight: componentConfig.headingWeight,
-                        ...getBorderWidthStyle(componentConfig.borderWidth)
-                    }}>
-                    Secondary
-                </button>
-                <button className={`py-2 px-4 font-medium text-sm transition-all hover:opacity-90 ${getRadiusClass(componentConfig.buttonRadius)} ${getShadowClass(componentConfig.shadow)} ${getFontSizeClass('base')} ${getLineHeightClass(componentConfig.lineHeight)}`} 
-                    style={{ 
-                        backgroundColor: 'var(--destructive)', 
-                        color: 'var(--destructive-foreground)',
-                        fontFamily: `"${componentConfig.headingFont}", sans-serif`,
-                        fontWeight: componentConfig.headingWeight
-                    }}>
-                    Destructive
-                </button>
-            </div>
+      {/* Buttons */}
+      <div className="flex flex-wrap gap-3">
+        {[
+          { label: 'Primary', bg: 'var(--primary)', fg: 'var(--primary-foreground)', icon: Save },
+          { label: 'Secondary', bg: 'var(--secondary)', fg: 'var(--secondary-foreground)', icon: Star },
+          { label: 'Destructive', bg: 'var(--destructive)', fg: 'var(--destructive-foreground)', icon: XCircle },
+        ].map((btn) => (
+          <button
+            key={btn.label}
+            className={`py-2 px-5 font-medium text-sm transition-all hover:opacity-90 active:scale-[0.97] ${getRadiusClass(cfg.buttonRadius)} ${getShadowClass(cfg.shadow)} flex items-center gap-2`}
+            style={{
+              backgroundColor: btn.bg,
+              color: btn.fg,
+              fontFamily: `"${cfg.headingFont}", sans-serif`,
+              fontWeight: cfg.headingWeight,
+              ...getBorderWidthStyle(cfg.borderWidth),
+              borderColor: 'transparent',
+            }}
+          >
+            <btn.icon size={16} />
+            {btn.label}
+          </button>
+        ))}
+        <button
+          className={`py-2 px-5 font-medium text-sm transition-all hover:opacity-90 border ${getRadiusClass(cfg.buttonRadius)} flex items-center gap-2`}
+          style={{
+            backgroundColor: 'transparent',
+            color: 'var(--primary)',
+            borderColor: 'var(--border)',
+            ...getBorderWidthStyle(cfg.borderWidth),
+            fontFamily: `"${cfg.headingFont}", sans-serif`,
+          }}
+        >
+          <Link size={16} />
+          Outline
+        </button>
+        <button
+          className={`py-2 px-5 font-medium text-sm transition-all hover:opacity-80 ${getRadiusClass(cfg.buttonRadius)} flex items-center gap-2`}
+          style={{
+            backgroundColor: 'transparent',
+            color: 'var(--foreground)',
+            fontFamily: `"${cfg.headingFont}", sans-serif`,
+          }}
+        >
+          <Heart size={16} />
+          Ghost
+        </button>
+      </div>
 
-            <div className={`${getDensityPadding(componentConfig.density)} ${getRadiusClass(componentConfig.cardRadius || componentConfig.buttonRadius)} border ${getShadowClass(componentConfig.shadow)}`} 
-                style={{ 
-                    backgroundColor: 'var(--card)', 
-                    color: 'var(--card-foreground)', 
-                    borderColor: 'var(--border)',
-                    ...getBorderWidthStyle(componentConfig.borderWidth)
-                }}>
-                <h4 className={`${getFontSizeClass(componentConfig.fontSizeHeading)} font-semibold mb-2`} style={{ 
-                    fontFamily: `"${componentConfig.headingFont}", sans-serif`, 
-                    fontWeight: componentConfig.headingWeight 
-                }}>Card Component</h4>
-                <p className={`${getFontSizeClass(componentConfig.fontSizeBody)} ${getLineHeightClass(componentConfig.lineHeight)}`} style={{ 
-                    color: 'var(--muted-foreground)',
-                    fontFamily: `"${componentConfig.bodyFont}", sans-serif`,
-                    fontWeight: componentConfig.bodyWeight
-                }}>Live preview card with custom density, radius, shadows, typography. Adapts to light/dark modes with OKLCH tokens.</p>
-            </div>
-
-            <div className={`${getDensityPadding('compact')} ${getRadiusClass(componentConfig.inputRadius || componentConfig.buttonRadius)} border flex flex-col gap-1`} style={{ 
-                backgroundColor: 'var(--muted)', 
-                color: 'var(--foreground)', 
-                borderColor: 'var(--border)',
-                ...getBorderWidthStyle(componentConfig.borderWidth)
-            }}>
-                <span className={`${getFontSizeClass('sm')} font-semibold tracking-wide`} style={{ fontFamily: `"${componentConfig.headingFont}", sans-serif` }}>Alert Notification</span>
-                <span className={`${getFontSizeClass('sm')} opacity-80 ${getLineHeightClass(componentConfig.lineHeight)}`} style={{ 
-                    fontFamily: `"${componentConfig.bodyFont}", sans-serif`,
-                    fontWeight: componentConfig.bodyWeight
-                }}>Live muted notification with custom typography.</span>
-            </div>
-
-            <div className="flex flex-col gap-2 max-w-sm">
-                <label className={`${getFontSizeClass('sm')} font-medium`} style={{ 
-                    fontFamily: `"${componentConfig.bodyFont}", sans-serif`,
-                    fontWeight: componentConfig.bodyWeight
-                }}>Email Address</label>
-                <div
-                    className={`flex ${getDensityPadding(componentConfig.density)} ${getRadiusClass(componentConfig.inputRadius || componentConfig.buttonRadius)} border focus-within:ring-2 focus-within:ring-offset-2 transition-all ${getShadowClass('sm')}`}
-                    style={{
-                        backgroundColor: 'var(--background)',
-                        borderColor: 'var(--input)',
-                        ...getBorderWidthStyle(componentConfig.borderWidth),
-                        // @ts-expect-error: Tailwind dynamic Custom CSS property
-                        '--tw-ring-color': 'var(--ring)'
-                    }}
-                >
-                    <input
-                        placeholder="name@example.com"
-                        className={`w-full bg-transparent outline-none ${getFontSizeClass(componentConfig.fontSizeBody)} placeholder:opacity-50 ${getLineHeightClass(componentConfig.lineHeight)}`}
-                        style={{ 
-                            color: 'var(--foreground)',
-                            fontFamily: `"${componentConfig.bodyFont}", sans-serif`,
-                            fontWeight: componentConfig.bodyWeight
-                        }}
-                    />
-                </div>
-            </div>
-
-            {/* New Components */}
-            <div className={`inline-flex items-center px-2.5 py-0.5 ${getRadiusClass(componentConfig.buttonRadius)} text-xs font-medium ${getShadowClass('sm')}`} style={{
-                backgroundColor: 'var(--muted)',
-                color: 'var(--muted-foreground)',
-            }}>
-                Badge Label
-            </div>
-
-            <div className={`w-12 h-12 flex items-center justify-center text-sm font-semibold ${getRadiusClass('full')} ${getShadowClass('md')}`} style={{
-                backgroundColor: 'var(--secondary)',
-                color: 'var(--secondary-foreground)',
-            }}>
-                AV
-            </div>
-
-            <div className={`w-full bg-[var(--muted)] h-3 ${getRadiusClass(componentConfig.inputRadius)} overflow-hidden ${getShadowClass('sm')}`}>
-                <div className={`h-full bg-[var(--primary)] w-4/5 ${getRadiusClass(componentConfig.inputRadius)} transition-all`} />
-            </div>
-
-            <div className="flex items-center gap-3 p-4 border rounded-lg" style={{
-                backgroundColor: 'var(--card)',
-                borderColor: 'var(--border)',
-                ...getBorderWidthStyle(componentConfig.borderWidth)
-            }}>
-                <label className="flex items-center gap-2 cursor-pointer group" style={{
-                    fontFamily: `"${componentConfig.bodyFont}", sans-serif`,
-                    fontWeight: componentConfig.bodyWeight
-                }}>
-                    <div className={`w-5 h-5 border-2 rounded ${getRadiusClass('sm')} flex items-center justify-center transition-all ${getShadowClass('none')} group-hover:border-[var(--primary)]`} style={{
-                        borderColor: 'var(--border)',
-                    }}>
-                        <div className={`w-2 h-2 ${getRadiusClass('full')} transition-all ${getShadowClass('sm')}`} style={{
-                            backgroundColor: 'transparent',
-                        }} />
-                    </div>
-                    <span className={getFontSizeClass(componentConfig.fontSizeBody)}>Checkbox</span>
-                </label>
-            </div>
-
-            <div className="flex items-center gap-3 p-4 border rounded-lg" style={{
-                backgroundColor: 'var(--card)',
-                borderColor: 'var(--border)',
-                ...getBorderWidthStyle(componentConfig.borderWidth)
-            }}>
-                <label className="relative inline-flex items-center cursor-pointer" style={{
-                    fontFamily: `"${componentConfig.bodyFont}", sans-serif`,
-                    fontWeight: componentConfig.bodyWeight
-                }}>
-                    <input type="checkbox" className="sr-only peer" />
-                    <div className={`w-11 h-6 ${getRadiusClass('full')} peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-[var(--ring)] ${getShadowClass('sm')} peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[var(--primary)]`} style={{
-                        backgroundColor: 'var(--border)',
-                        borderColor: 'var(--border)',
-                        // @ts-expect-error: Tailwind dynamic Custom CSS property
-                        '--tw-ring-color': 'var(--ring)'
-                    }} />
-                    <span className={`ml-3 text-sm font-medium ${getFontSizeClass(componentConfig.fontSizeBody)}`}>Toggle</span>
-                </label>
-            </div>
-
-            {/* Simple Accordion */}
-            <div className={`${getRadiusClass(componentConfig.cardRadius)} border shadow-md overflow-hidden max-w-md`} style={{
-                backgroundColor: 'var(--card)',
-                borderColor: 'var(--border)',
-                ...getBorderWidthStyle(componentConfig.borderWidth)
-            }}>
-                <div className={`p-4 cursor-pointer hover:bg-[var(--muted)] transition-colors flex justify-between items-center ${getDensityPadding('compact')}`} style={{
-                    backgroundColor: 'var(--background)',
-                }}
-                    onClick={() => { /* toggle */ }}
-                >
-                    <span className={`${getFontSizeClass(componentConfig.fontSizeHeading)} font-semibold`} style={{
-                        fontFamily: `"${componentConfig.headingFont}", sans-serif`,
-                        fontWeight: componentConfig.headingWeight
-                    }}>Accordion Item</span>
-                    <svg className={`w-5 h-5 transition-transform`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                    </svg>
-                </div>
-                <div className={`${getDensityPadding('compact')} ${getShadowClass('none')}`} style={{
-                    backgroundColor: 'var(--popover)',
-maxHeight: '600px',
-                    overflow: 'hidden'
-                }}>
-                    <p className={getFontSizeClass(componentConfig.fontSizeBody)} style={{
-                        color: 'var(--popover-foreground)',
-                        fontFamily: `"${componentConfig.bodyFont}", sans-serif`,
-                    }}>Accordion content with custom styles...</p>
-                </div>
-            </div>
-
+      {/* Card */}
+      <div
+        className={`${getDensityPadding(cfg.density)} ${getRadiusClass(cfg.cardRadius)} border ${getShadowClass(cfg.shadow)}`}
+        style={{
+          backgroundColor: 'var(--card)',
+          color: 'var(--card-foreground)',
+          borderColor: 'var(--border)',
+          ...getBorderWidthStyle(cfg.borderWidth),
+        }}
+      >
+        <h4
+          className={`${getFontSizeClass(cfg.fontSizeHeading)} font-semibold mb-2 flex items-center gap-2`}
+          style={{
+            fontFamily: `"${cfg.headingFont}", sans-serif`,
+            fontWeight: cfg.headingWeight,
+          }}
+        >
+          <FileText size={18} />
+          Card Component
+        </h4>
+        <p
+          className={`${getFontSizeClass(cfg.fontSizeBody)} ${getLineHeightClass(cfg.lineHeight)}`}
+          style={{ color: 'var(--muted-foreground)', fontFamily: `"${cfg.bodyFont}", sans-serif` }}
+        >
+          A responsive card component with customizable density, radius, shadows, and typography. Adapts to light/dark modes.
+        </p>
+        <div className="flex gap-2 mt-4">
+          <button
+            className={`py-1.5 px-4 text-xs font-medium ${getRadiusClass(cfg.buttonRadius)} flex items-center gap-1.5`}
+            style={{ backgroundColor: 'var(--primary)', color: 'var(--primary-foreground)' }}
+          >
+            <Save size={12} />
+            Save
+          </button>
+          <button
+            className={`py-1.5 px-4 text-xs font-medium border ${getRadiusClass(cfg.buttonRadius)} flex items-center gap-1.5`}
+            style={{ borderColor: 'var(--border)', color: 'var(--foreground)', backgroundColor: 'transparent' }}
+          >
+            <XCircle size={12} />
+            Cancel
+          </button>
         </div>
-    );
+      </div>
+
+      {/* Tabs */}
+      <div
+        className={`${getRadiusClass(cfg.cardRadius)} border overflow-hidden ${getShadowClass('sm')}`}
+        style={{
+          backgroundColor: 'var(--card)',
+          borderColor: 'var(--border)',
+          ...getBorderWidthStyle(cfg.borderWidth),
+        }}
+      >
+        <div className="flex border-b" style={{ borderColor: 'var(--border)' }}>
+          {[
+            { label: 'Overview', icon: Home },
+            { label: 'Analytics', icon: BarChart3 },
+            { label: 'Settings', icon: Settings }
+          ].map((tab, i) => (
+            <button
+              key={tab.label}
+              onClick={() => setSelectedTab(i)}
+              className={`flex-1 py-2.5 text-sm font-medium transition-colors flex items-center justify-center gap-2 ${
+                selectedTab === i ? 'border-b-2' : 'opacity-50 hover:opacity-75'
+              }`}
+              style={{
+                borderColor: selectedTab === i ? 'var(--primary)' : 'transparent',
+                color: selectedTab === i ? 'var(--primary)' : 'var(--foreground)',
+                fontFamily: `"${cfg.bodyFont}", sans-serif`,
+              }}
+            >
+              <tab.icon size={14} />
+              {tab.label}
+            </button>
+          ))}
+        </div>
+        <div className="p-4">
+          <p
+            className={`${getFontSizeClass('sm')} ${getLineHeightClass(cfg.lineHeight)}`}
+            style={{ color: 'var(--muted-foreground)', fontFamily: `"${cfg.bodyFont}", sans-serif` }}
+          >
+            {selectedTab === 0 && 'Overview tab content with your custom theme tokens.'}
+            {selectedTab === 1 && 'Analytics dashboard with data visualizations.'}
+            {selectedTab === 2 && 'Settings panel for configuration options.'}
+          </p>
+        </div>
+      </div>
+
+      {/* Badges */}
+      <div className="flex flex-wrap gap-2">
+        {[
+          { label: 'Default', bg: 'var(--primary)', fg: 'var(--primary-foreground)', icon: Tag },
+          { label: 'Secondary', bg: 'var(--secondary)', fg: 'var(--secondary-foreground)', icon: Star },
+          { label: 'Destructive', bg: 'var(--destructive)', fg: 'var(--destructive-foreground)', icon: AlertCircle },
+          { label: 'Outline', bg: 'transparent', fg: 'var(--foreground)', border: true, icon: Link },
+          { label: 'Success', bg: '#22c55e', fg: '#ffffff', icon: Check },
+          { label: 'Warning', bg: '#f59e0b', fg: '#ffffff', icon: AlertCircle },
+        ].map((badge) => (
+          <span
+            key={badge.label}
+            className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 text-xs font-medium ${getRadiusClass('full')}`}
+            style={{
+              backgroundColor: badge.bg,
+              color: badge.fg,
+              border: badge.border ? '1px solid var(--border)' : 'none',
+            }}
+          >
+            <badge.icon size={10} />
+            {badge.label}
+          </span>
+        ))}
+      </div>
+
+      {/* Alert */}
+      <div
+        className={`${getDensityPadding('compact')} ${getRadiusClass(cfg.inputRadius)} border flex gap-3 items-start`}
+        style={{
+          backgroundColor: 'var(--muted)',
+          color: 'var(--foreground)',
+          borderColor: 'var(--border)',
+          ...getBorderWidthStyle(cfg.borderWidth),
+        }}
+      >
+        <Info size={18} style={{ color: 'var(--primary)', marginTop: '2px' }} />
+        <div className="flex-1">
+          <span
+            className={`${getFontSizeClass('sm')} font-semibold block mb-0.5`}
+            style={{ fontFamily: `"${cfg.headingFont}", sans-serif` }}
+          >
+            Heads up!
+          </span>
+          <span
+            className={`${getFontSizeClass('sm')} opacity-80 ${getLineHeightClass(cfg.lineHeight)}`}
+            style={{ fontFamily: `"${cfg.bodyFont}", sans-serif` }}
+          >
+            You can add components to your app using the CLI.
+          </span>
+        </div>
+        <button className="opacity-50 hover:opacity-100 transition-opacity">
+          <X size={14} />
+        </button>
+      </div>
+
+      {/* Input */}
+      <div className="flex flex-col gap-2 max-w-sm">
+        <label
+          className={`${getFontSizeClass('sm')} font-medium flex items-center gap-2`}
+          style={{ fontFamily: `"${cfg.bodyFont}", sans-serif` }}
+        >
+          <Mail size={14} />
+          Email Address
+        </label>
+        <div
+          className={`flex ${getDensityPadding('compact')} ${getRadiusClass(cfg.inputRadius)} border focus-within:ring-2 focus-within:ring-offset-1 transition-all items-center gap-2`}
+          style={{
+            backgroundColor: 'var(--background)',
+            borderColor: 'var(--input)',
+            ...getBorderWidthStyle(cfg.borderWidth),
+          }}
+        >
+          <Mail size={16} style={{ color: 'var(--muted-foreground)' }} />
+          <input
+            placeholder="name@example.com"
+            className={`w-full bg-transparent outline-none ${getFontSizeClass(cfg.fontSizeBody)} placeholder:opacity-40`}
+            style={{ color: 'var(--foreground)', fontFamily: `"${cfg.bodyFont}", sans-serif` }}
+          />
+        </div>
+      </div>
+
+      {/* Textarea */}
+      <div className="flex flex-col gap-2 max-w-sm">
+        <label
+          className={`${getFontSizeClass('sm')} font-medium flex items-center gap-2`}
+          style={{ fontFamily: `"${cfg.bodyFont}", sans-serif` }}
+        >
+          <MessageSquare size={14} />
+          Message
+        </label>
+        <textarea
+          placeholder="Type your message here..."
+          rows={3}
+          className={`w-full bg-transparent outline-none ${getDensityPadding('compact')} ${getRadiusClass(cfg.inputRadius)} border focus:ring-2 focus:ring-offset-1 transition-all ${getFontSizeClass(cfg.fontSizeBody)} placeholder:opacity-40 resize-none`}
+          style={{
+            backgroundColor: 'var(--background)',
+            borderColor: 'var(--input)',
+            color: 'var(--foreground)',
+            fontFamily: `"${cfg.bodyFont}", sans-serif`,
+            ...getBorderWidthStyle(cfg.borderWidth),
+          }}
+        />
+      </div>
+
+      {/* Avatar */}
+      <div className="flex items-center gap-3">
+        <div
+          className={`w-10 h-10 flex items-center justify-center text-sm font-bold ${getRadiusClass('full')} ${getShadowClass('sm')}`}
+          style={{ backgroundColor: 'var(--primary)', color: 'var(--primary-foreground)' }}
+        >
+          JD
+        </div>
+        <div
+          className={`w-10 h-10 flex items-center justify-center text-sm font-bold ${getRadiusClass('full')} ${getShadowClass('sm')}`}
+          style={{ backgroundColor: 'var(--secondary)', color: 'var(--secondary-foreground)' }}
+        >
+          <User size={16} />
+        </div>
+        <div
+          className={`w-10 h-10 flex items-center justify-center text-sm font-bold ${getRadiusClass('full')} border`}
+          style={{ borderColor: 'var(--border)', color: 'var(--muted-foreground)' }}
+        >
+          +3
+        </div>
+      </div>
+
+      {/* Progress */}
+      <div className="space-y-2">
+        <div className="flex justify-between items-center">
+          <span className={`${getFontSizeClass('sm')} font-medium flex items-center gap-2`}>
+            <Activity size={14} />
+            Progress
+          </span>
+          <span className={`${getFontSizeClass('sm')}`} style={{ color: 'var(--muted-foreground)' }}>
+            {sliderValue}%
+          </span>
+        </div>
+        <div
+          className={`w-full h-2.5 overflow-hidden ${getRadiusClass('full')}`}
+          style={{ backgroundColor: 'var(--muted)' }}
+        >
+          <div
+            className={`h-full transition-all ${getRadiusClass('full')}`}
+            style={{ backgroundColor: 'var(--primary)', width: `${sliderValue}%` }}
+          />
+        </div>
+      </div>
+
+      {/* Switch */}
+      <div
+        className={`flex items-center justify-between p-4 border ${getRadiusClass(cfg.cardRadius)}`}
+        style={{
+          backgroundColor: 'var(--card)',
+          borderColor: 'var(--border)',
+          ...getBorderWidthStyle(cfg.borderWidth),
+        }}
+      >
+        <div className="flex items-center gap-3">
+          {switchOn ? <Sun size={18} /> : <Moon size={18} />}
+          <div>
+            <span className={`${getFontSizeClass('sm')} font-medium block`}>Dark Mode</span>
+            <span className={`${getFontSizeClass('xs')}`} style={{ color: 'var(--muted-foreground)' }}>
+              Toggle dark mode appearance
+            </span>
+          </div>
+        </div>
+        <button
+          onClick={() => setSwitchOn(!switchOn)}
+          className={`relative w-11 h-6 ${getRadiusClass('full')} transition-colors duration-200`}
+          style={{ backgroundColor: switchOn ? 'var(--primary)' : 'var(--muted)' }}
+        >
+          <span
+            className={`absolute top-0.5 w-5 h-5 bg-white rounded-full shadow-sm transition-transform duration-200 ${
+              switchOn ? 'left-[22px]' : 'left-0.5'
+            }`}
+          />
+        </button>
+      </div>
+
+      {/* Accordion */}
+      <div
+        className={`${getRadiusClass(cfg.cardRadius)} border overflow-hidden ${getShadowClass('sm')}`}
+        style={{
+          backgroundColor: 'var(--card)',
+          borderColor: 'var(--border)',
+          ...getBorderWidthStyle(cfg.borderWidth),
+        }}
+      >
+        <button
+          onClick={() => setAccordionOpen(!accordionOpen)}
+          className="w-full p-4 flex justify-between items-center hover:opacity-80 transition-opacity"
+          style={{ fontFamily: `"${cfg.headingFont}", sans-serif`, fontWeight: cfg.headingWeight }}
+        >
+          <span className={`${getFontSizeClass('sm')} flex items-center gap-2`}>
+            <HelpCircle size={16} />
+            Is this accordion interactive?
+          </span>
+          {accordionOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+        </button>
+        {accordionOpen && (
+          <div className="px-4 pb-4" style={{ color: 'var(--muted-foreground)' }}>
+            <p className={getFontSizeClass('sm')}>
+              Yes! This accordion is fully interactive. Click the header to toggle.
+            </p>
+          </div>
+        )}
+      </div>
+
+      {/* Toast Preview */}
+      <div
+        className={`flex items-center gap-3 p-3 ${getRadiusClass(cfg.cardRadius)} ${getShadowClass('lg')} border`}
+        style={{
+          backgroundColor: 'var(--card)',
+          borderColor: 'var(--border)',
+          ...getBorderWidthStyle(cfg.borderWidth),
+        }}
+      >
+        <div
+          className="w-8 h-8 flex items-center justify-center rounded-full flex-shrink-0"
+          style={{ backgroundColor: '#22c55e20', color: '#22c55e' }}
+        >
+          <Check size={16} />
+        </div>
+        <div className="flex-1 min-w-0">
+          <p className={`${getFontSizeClass('sm')} font-medium flex items-center gap-2`}>
+            <Bell size={12} />
+            Success
+          </p>
+          <p className={`${getFontSizeClass('xs')}`} style={{ color: 'var(--muted-foreground)' }}>
+            Your changes have been saved.
+          </p>
+        </div>
+        <button className="opacity-50 hover:opacity-100 transition-opacity">
+          <X size={12} />
+        </button>
+      </div>
+
+      {/* Skeleton */}
+      <div className={`${getDensityPadding(cfg.density)} ${getRadiusClass(cfg.cardRadius)} border`} style={{ backgroundColor: 'var(--card)', borderColor: 'var(--border)', ...getBorderWidthStyle(cfg.borderWidth) }}>
+        <div className="animate-pulse flex gap-4">
+          <div className="w-12 h-12 rounded-full" style={{ backgroundColor: 'var(--muted)' }} />
+          <div className="flex-1 space-y-3 py-1">
+            <div className="h-3 rounded-full w-3/4" style={{ backgroundColor: 'var(--muted)' }} />
+            <div className="h-3 rounded-full w-1/2" style={{ backgroundColor: 'var(--muted)' }} />
+          </div>
+        </div>
+      </div>
+
+      {/* Select Dropdown */}
+      <div className="flex flex-col gap-2 max-w-sm">
+        <label className={`${getFontSizeClass('sm')} font-medium flex items-center gap-2`} style={{ fontFamily: `"${cfg.bodyFont}", sans-serif` }}>
+          <Code size={14} />
+          Framework
+        </label>
+        <div className="relative">
+          <select
+            className={`${getDensityPadding('compact')} ${getRadiusClass(cfg.inputRadius)} border outline-none ${getFontSizeClass(cfg.fontSizeBody)} appearance-none cursor-pointer pr-8`}
+            style={{
+              backgroundColor: 'var(--background)',
+              borderColor: 'var(--input)',
+              color: 'var(--foreground)',
+              fontFamily: `"${cfg.bodyFont}", sans-serif`,
+              ...getBorderWidthStyle(cfg.borderWidth),
+            }}
+          >
+            <option>React</option>
+            <option>Vue</option>
+            <option>Svelte</option>
+            <option>Angular</option>
+          </select>
+          <ChevronDown size={14} className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" style={{ color: 'var(--muted-foreground)' }} />
+        </div>
+      </div>
+
+      {/* Tooltip-like */}
+      <div className="relative inline-block w-fit">
+        <div
+          className={`absolute -top-9 left-1/2 -translate-x-1/2 px-3 py-1.5 text-xs ${getRadiusClass('md')} ${getShadowClass('lg')} whitespace-nowrap flex items-center gap-1.5`}
+          style={{
+            backgroundColor: 'var(--foreground)',
+            color: 'var(--background)',
+          }}
+        >
+          <Info size={10} />
+          Tooltip preview
+          <div
+            className="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0"
+            style={{
+              borderLeft: '4px solid transparent',
+              borderRight: '4px solid transparent',
+              borderTop: `4px solid var(--foreground)`,
+            }}
+          />
+        </div>
+        <button
+          className={`py-2 px-4 text-sm font-medium border ${getRadiusClass(cfg.buttonRadius)} flex items-center gap-2`}
+          style={{ borderColor: 'var(--border)', color: 'var(--foreground)' }}
+        >
+          <HelpCircle size={14} />
+          Hover me
+        </button>
+      </div>
+    </div>
+  );
 };
+
+// Add missing imports
+import { Palette, HelpCircle, Code } from 'lucide-react';

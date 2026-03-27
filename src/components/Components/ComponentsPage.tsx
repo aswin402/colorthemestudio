@@ -12,12 +12,11 @@ export const ComponentsPage = ({ panelClass }: ComponentsPageProps) => {
   const [activeTab, setActiveTab] = useState<'preview' | 'export'>('preview');
 
   return (
-    <div className={`h-full grid grid-cols-1 lg:grid-cols-12 gap-6 p-4 lg:p-6 overflow-hidden`}>
-      {/* Tabs Header */}
-      <div className="lg:col-span-12 flex bg-black/5 dark:bg-white/5 p-1 rounded-xl border border-black/5 dark:border-white/5 mb-4">
+    <div className="h-full flex flex-col gap-4 overflow-hidden">
+      <div className="flex bg-black/5 dark:bg-white/5 p-1 rounded-xl border border-black/5 dark:border-white/5 w-fit">
         <button
           onClick={() => setActiveTab('preview')}
-          className={`flex-1 flex items-center justify-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold transition-all ${
+          className={`flex items-center gap-1.5 px-5 py-2.5 rounded-lg text-sm font-semibold transition-all ${
             activeTab === 'preview'
               ? 'bg-white dark:bg-zinc-800 shadow-sm text-black dark:text-white'
               : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-300'
@@ -27,7 +26,7 @@ export const ComponentsPage = ({ panelClass }: ComponentsPageProps) => {
         </button>
         <button
           onClick={() => setActiveTab('export')}
-          className={`flex-1 flex items-center justify-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold transition-all ${
+          className={`flex items-center gap-1.5 px-5 py-2.5 rounded-lg text-sm font-semibold transition-all ${
             activeTab === 'export'
               ? 'bg-white dark:bg-zinc-800 shadow-sm text-black dark:text-white'
               : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-300'
@@ -37,17 +36,17 @@ export const ComponentsPage = ({ panelClass }: ComponentsPageProps) => {
         </button>
       </div>
 
-      {/* Left Panel - Config Controls */}
-      <div className={`lg:col-span-4 flex flex-col ${panelClass} rounded-2xl border shadow-sm overflow-hidden`}>
-        <div className="flex-1 overflow-y-auto p-6 scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-transparent">
-          <ConfigControls />
+      <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-4 overflow-hidden">
+        <div className={`lg:col-span-4 flex flex-col ${panelClass} rounded-2xl border shadow-sm overflow-hidden`}>
+          <div className="flex-1 overflow-y-auto p-5 scrollbar-thin">
+            <ConfigControls />
+          </div>
         </div>
-      </div>
 
-      {/* Right Panel - Preview or Export */}
-      <div className={`lg:col-span-8 flex flex-col ${panelClass} rounded-2xl border shadow-sm overflow-hidden`}>
-        <div className="flex-1 overflow-y-auto p-6 scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-transparent">
-          {activeTab === 'preview' ? <ComponentsLivePreview /> : <ComponentsExportSection />}
+        <div className={`lg:col-span-8 flex flex-col ${panelClass} rounded-2xl border shadow-sm overflow-hidden`}>
+          <div className="flex-1 overflow-y-auto scrollbar-thin">
+            {activeTab === 'preview' ? <ComponentsLivePreview /> : <ComponentsExportSection />}
+          </div>
         </div>
       </div>
     </div>

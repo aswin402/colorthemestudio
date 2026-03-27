@@ -4,13 +4,11 @@ import { Copy, Check } from 'lucide-react';
 import { useState } from 'react';
 
 const formatFlutterTheme = (light: ThemeColors, dark: ThemeColors) => {
-    const getDartColor = (hex: string) => `Color(0xFF${hex.replace('#', '').toUpperCase()})`;
+  const getDartColor = (hex: string) => `Color(0xFF${hex.replace('#', '').toUpperCase()})`;
 
-    return `// lib/theme/app_theme.dart
-import 'package:flutter/material.dart';
+  return `import 'package:flutter/material.dart';
 
 class AppTheme {
-  // Light Theme
   static const ColorScheme lightColorScheme = ColorScheme(
     brightness: Brightness.light,
     primary: ${getDartColor(light.primary.hexValue)},
@@ -30,7 +28,6 @@ class AppTheme {
     surfaceTint: ${getDartColor(light.primary.hexValue)},
   );
 
-  // Dark Theme
   static const ColorScheme darkColorScheme = ColorScheme(
     brightness: Brightness.dark,
     primary: ${getDartColor(dark.primary.hexValue)},
@@ -63,32 +60,31 @@ class AppTheme {
 };
 
 export const FlutterTheme = () => {
-    const { theme } = useThemeStore();
-    const [copied, setCopied] = useState(false);
+  const { theme } = useThemeStore();
+  const [copied, setCopied] = useState(false);
 
-    const flutterString = formatFlutterTheme(theme.light, theme.dark);
+  const flutterString = formatFlutterTheme(theme.light, theme.dark);
 
-    const handleCopy = () => {
-        navigator.clipboard.writeText(flutterString);
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
-    };
+  const handleCopy = () => {
+    navigator.clipboard.writeText(flutterString);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
-    return (
-        <div className="relative group h-full flex flex-col">
-            <div className="absolute top-4 right-4 z-10">
-                <button
-                    onClick={handleCopy}
-                    className="p-2 bg-white/10 hover:bg-white/20 text-white rounded-md backdrop-blur-md transition-all shadow-sm flex items-center gap-2 text-sm font-medium"
-                >
-                    {copied ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
-                    {copied ? 'Copied' : 'Copy'}
-                </button>
-            </div>
-
-            <pre className="flex-1 bg-zinc-950 text-zinc-300 p-6 rounded-xl overflow-x-auto overflow-y-auto text-sm font-mono leading-relaxed border border-white/10 scrollbar-hide">
-                <code>{flutterString}</code>
-            </pre>
-        </div>
-    );
+  return (
+    <div className="relative group h-full flex flex-col">
+      <div className="absolute top-3 right-3 z-10">
+        <button
+          onClick={handleCopy}
+          className="p-2 bg-white/10 hover:bg-white/20 text-white rounded-md backdrop-blur-md transition-all shadow-sm flex items-center gap-1.5 text-xs font-medium"
+        >
+          {copied ? <Check className="w-3.5 h-3.5 text-green-400" /> : <Copy className="w-3.5 h-3.5" />}
+          {copied ? 'Copied' : 'Copy'}
+        </button>
+      </div>
+      <pre className="flex-1 bg-zinc-950 text-zinc-300 p-5 rounded-xl overflow-x-auto overflow-y-auto text-xs font-mono leading-relaxed border border-white/10 scrollbar-thin">
+        <code>{flutterString}</code>
+      </pre>
+    </div>
+  );
 };

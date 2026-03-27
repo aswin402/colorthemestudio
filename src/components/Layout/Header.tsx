@@ -1,4 +1,4 @@
-import { Palette, Sun, Moon } from 'lucide-react';
+import { Palette, Sun, Moon, Sparkles } from 'lucide-react';
 
 interface HeaderProps {
   appMode: 'light' | 'dark';
@@ -8,45 +8,59 @@ interface HeaderProps {
 }
 
 const Header = ({ appMode, setAppMode, view, setView }: HeaderProps) => {
+  const tabs: { key: typeof view; label: string }[] = [
+    { key: 'editor', label: 'Colors' },
+    { key: 'components', label: 'Components' },
+    { key: 'export', label: 'Export Setup' },
+  ];
+
   return (
-    <header className={`h-16 border-b flex items-center justify-between px-6 shrink-0 transition-colors duration-200 ${appMode === 'dark' ? 'border-white/10' : 'border-black/10'}`}>
-      <div className="flex items-center gap-2">
-        <Palette className="w-6 h-6 text-green-500" />
-        <h1 className="text-xl font-bold tracking-tight">ColorTheme Studio</h1>
+    <header
+      className={`h-14 border-b flex items-center justify-between px-5 shrink-0 transition-colors duration-300 backdrop-blur-xl ${
+        appMode === 'dark' ? 'border-white/[0.06] bg-zinc-900/40' : 'border-black/[0.06] bg-white/60'
+      }`}
+    >
+      <div className="flex items-center gap-2.5">
+        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg shadow-emerald-500/20">
+          <Palette className="w-4.5 h-4.5 text-white" />
+        </div>
+        <h1 className="text-lg font-bold tracking-tight">
+          ColorTheme <span className="text-emerald-500">Studio</span>
+        </h1>
       </div>
 
-      <div className="flex bg-black/5 dark:bg-white/5 p-1 rounded-lg border border-black/5 dark:border-white/5 w-fit">
-        <button
-          onClick={() => setView('editor')}
-          className={`flex justify-center items-center gap-2 px-4 py-1.5 rounded-md text-sm font-medium transition-all ${view === 'editor' ? 'bg-white dark:bg-[#27272a] shadow-sm text-black dark:text-white' : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-300'}`}
-        >
-          Colors
-        </button>
-        <button
-          onClick={() => setView('components')}
-          className={`flex justify-center items-center gap-2 px-4 py-1.5 rounded-md text-sm font-medium transition-all ${view === 'components' ? 'bg-white dark:bg-[#27272a] shadow-sm text-black dark:text-white' : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-300'}`}
-        >
-          Components
-        </button>
-        <button
-          onClick={() => setView('export')}
-          className={`flex justify-center items-center gap-2 px-4 py-1.5 rounded-md text-sm font-medium transition-all ${view === 'export' ? 'bg-white dark:bg-[#27272a] shadow-sm text-black dark:text-white' : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-300'}`}
-        >
-           Export Setup
-        </button>
+      <div className="flex bg-black/5 dark:bg-white/5 p-0.5 rounded-xl border border-black/5 dark:border-white/5">
+        {tabs.map((tab) => (
+          <button
+            key={tab.key}
+            onClick={() => setView(tab.key)}
+            className={`px-5 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 ${
+              view === tab.key
+                ? 'bg-white dark:bg-zinc-800 shadow-sm text-black dark:text-white'
+                : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-300'
+            }`}
+          >
+            {tab.label}
+          </button>
+        ))}
       </div>
 
-      <div className="flex items-center gap-4">
-
-        <span className="text-[10px] font-bold px-2 py-1 rounded-full bg-zinc-100/50 text-zinc-500 ring-1 ring-inset ring-zinc-500/10 dark:bg-white/5 dark:text-zinc-400 dark:ring-white/10 uppercase tracking-widest">
-          v0.0.9
+      <div className="flex items-center gap-3">
+        <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-500 ring-1 ring-inset ring-emerald-500/20 uppercase tracking-widest flex items-center gap-1">
+          <Sparkles className="w-3 h-3" /> v1.0.0
         </span>
         <button
           onClick={() => setAppMode(appMode === 'light' ? 'dark' : 'light')}
-          className={`p-2 rounded-full transition-colors ${appMode === 'dark' ? 'hover:bg-white/10' : 'hover:bg-black/5'}`}
+          className={`p-2 rounded-xl transition-all duration-200 ${
+            appMode === 'dark' ? 'hover:bg-white/10' : 'hover:bg-black/5'
+          }`}
           aria-label="Toggle App Theme"
         >
-          {appMode === 'dark' ? <Sun className="w-5 h-5 text-zinc-400" /> : <Moon className="w-5 h-5 text-zinc-600" />}
+          {appMode === 'dark' ? (
+            <Sun className="w-4.5 h-4.5 text-zinc-400" />
+          ) : (
+            <Moon className="w-4.5 h-4.5 text-zinc-600" />
+          )}
         </button>
       </div>
     </header>

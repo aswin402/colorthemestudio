@@ -1,110 +1,112 @@
 import { useThemeStore } from '../../store/useThemeStore';
-import type { BorderRadiusSize, ComponentConfig, ShadowSize, DensityType, ThemeTemperature } from '../../types';
+import type {
+  BorderRadiusSize, ComponentConfig, ShadowSize, DensityType,
+  ThemeTemperature, AnimationType,
+} from '../../types';
 import { generateRandomStyles } from '../../utils/randomTheme';
 import { useState } from 'react';
+import { Sparkles, Palette, Layout, Type, Box, Zap } from 'lucide-react';
 
 type Preset = {
   name: string;
   baseColor: string;
   temperature: ThemeTemperature;
   componentConfig: Partial<ComponentConfig>;
+  category: string;
+  description?: string;
 };
 
-// Full Presets Array with new Modern, Minimal & Simple themes
 const presets: Preset[] = [
-  // ── Original Shadcn & Basic Presets ──
-  { name: 'Shadcn Slate', baseColor: '#475569', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'Inter', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'md', shadow: 'md' } },
-  { name: 'Shadcn Zinc', baseColor: '#71717A', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'Inter', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'md', shadow: 'none' } },
-  { name: 'Modern Blue', baseColor: '#3B82F6', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'Poppins', bodyFont: 'Inter', buttonRadius: 'lg' } },
-  { name: 'Warm Orange', baseColor: '#F59E0B', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'Playfair Display', bodyFont: 'Inter', buttonRadius: 'full' } },
-  { name: 'Dark Purple', baseColor: '#8B5CF6', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'Roboto Mono', bodyFont: 'Roboto Mono', shadow: 'none' } },
-  { name: 'Neutral Gray', baseColor: '#6B7280', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'Open Sans', bodyFont: 'Open Sans', density: 'normal' } },
-  { name: 'Vibrant Red', baseColor: '#EF4444', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'Oswald', bodyFont: 'Inter', fontSizeHeading: '2xl' } },
-  { name: 'Cool Mint', baseColor: '#06D6A0', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'Lato', bodyFont: 'Lato', lineHeight: 'compact' } },
-  { name: 'Pro Indigo', baseColor: '#6366F1', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'Raleway', bodyFont: 'Raleway', buttonRadius: 'lg' } },
-  { name: 'Sunny Yellow', baseColor: '#FBBF24', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'Montserrat', bodyFont: 'Montserrat', shadow: 'xl' } },
+  // Modern Category (Expanded)
+  { name: 'Modern Minimal', baseColor: '#0F172A', temperature: 'cooler', category: 'modern', componentConfig: { headingFont: 'Inter', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'lg', shadow: 'sm', density: 'normal', borderWidth: '1', animation: 'smooth' }, description: 'Clean and contemporary' },
+  { name: 'Glassmorphism', baseColor: '#3B82F6', temperature: 'natural', category: 'modern', componentConfig: { headingFont: 'Space Grotesk', bodyFont: 'Inter', headingWeight: '700', buttonRadius: 'md', shadow: 'xl', borderWidth: '1', density: 'spacious', animation: 'smooth' }, description: 'Frosted glass effect' },
+  { name: 'Neubrutalism', baseColor: '#171717', temperature: 'natural', category: 'modern', componentConfig: { headingFont: 'Space Grotesk', bodyFont: 'Inter', headingWeight: '800', buttonRadius: 'none', shadow: 'none', borderWidth: '4', density: 'compact', animation: 'none' }, description: 'Bold and raw' },
+  { name: 'Rose Gold', baseColor: '#BE185D', temperature: 'warmer', category: 'modern', componentConfig: { headingFont: 'Outfit', bodyFont: 'DM Sans', headingWeight: '600', buttonRadius: 'lg', shadow: 'md', borderWidth: '1', animation: 'smooth' }, description: 'Elegant and refined' },
+  { name: 'Nordic Frost', baseColor: '#E2E8F0', temperature: 'cooler', category: 'modern', componentConfig: { headingFont: 'Inter', bodyFont: 'Inter', headingWeight: '500', buttonRadius: 'md', shadow: 'sm', borderWidth: '0', density: 'spacious', animation: 'smooth' }, description: 'Scandinavian simplicity' },
+  { name: 'Tech Noir', baseColor: '#1A1A2E', temperature: 'cooler', category: 'modern', componentConfig: { headingFont: 'Plus Jakarta Sans', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'sm', shadow: 'lg', borderWidth: '1', density: 'normal', animation: 'quick' }, description: 'Cyberpunk minimalism' },
+  { name: 'Aurora', baseColor: '#0F2027', temperature: 'cooler', category: 'modern', componentConfig: { headingFont: 'Poppins', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'lg', shadow: 'md', borderWidth: '1', density: 'normal', animation: 'smooth' }, description: 'Northern lights inspiration' },
+  { name: 'Monochrome', baseColor: '#2D2D2D', temperature: 'natural', category: 'modern', componentConfig: { headingFont: 'Work Sans', bodyFont: 'Inter', headingWeight: '500', buttonRadius: 'none', shadow: 'none', borderWidth: '1', density: 'compact', animation: 'none' }, description: 'Black and white elegance' },
 
-  // ── Advanced & Thematic Presets ──
-  { name: 'Amethyst Haze', baseColor: '#A855F7', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'Lora', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'lg', shadow: 'lg', density: 'spacious' } },
-  { name: 'Kodama Grove', baseColor: '#22C55E', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'Playfair Display', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'sm', shadow: 'md', density: 'normal' } },
-  { name: 'Quantum Rose', baseColor: '#F43F5E', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'Poppins', bodyFont: 'Inter', headingWeight: '700', buttonRadius: 'full', shadow: 'md' } },
-  { name: 'Caffeine', baseColor: '#9A3412', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'Oswald', bodyFont: 'Roboto', headingWeight: '600', buttonRadius: 'none', shadow: 'sm', borderWidth: '2' } },
-  { name: 'Neo Brutalism', baseColor: '#EAB308', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'Space Grotesk', bodyFont: 'system-ui', headingWeight: '800', buttonRadius: 'none', shadow: 'none', borderWidth: '4' } },
-  { name: 'Vintage Paper', baseColor: '#D4A373', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'Playfair Display', bodyFont: 'Lora', headingWeight: '600', buttonRadius: 'md', shadow: 'sm', borderWidth: '1' } },
-  { name: 'Claude', baseColor: '#5E5CE6', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'system-ui', bodyFont: 'system-ui', headingWeight: '500', buttonRadius: 'lg', shadow: 'sm' } },
-  { name: 'Mono / Graphite', baseColor: '#52525B', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'Inter', bodyFont: 'ui-monospace', headingWeight: '600', buttonRadius: 'md', shadow: 'none' } },
-  { name: 'Ocean Breeze', baseColor: '#14B8A6', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'Lato', bodyFont: 'Open Sans', headingWeight: '600', buttonRadius: 'full', shadow: 'md' } },
-  { name: 'Solar Dusk', baseColor: '#F97316', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'Montserrat', bodyFont: 'Inter', headingWeight: '700', buttonRadius: 'lg', density: 'spacious' } },
+  // Minimal Category (Expanded)
+  { name: 'Pure Minimal', baseColor: '#111827', temperature: 'natural', category: 'minimal', componentConfig: { headingFont: 'Inter', bodyFont: 'Inter', headingWeight: '500', buttonRadius: 'none', shadow: 'none', borderWidth: '1', density: 'spacious', animation: 'none' }, description: 'Less is more' },
+  { name: 'Zen White', baseColor: '#FFFFFF', temperature: 'natural', category: 'minimal', componentConfig: { headingFont: 'Figtree', bodyFont: 'DM Sans', headingWeight: '400', buttonRadius: 'md', shadow: 'none', borderWidth: '0', density: 'spacious', animation: 'none' }, description: 'Peaceful simplicity' },
+  { name: 'Calm Gray', baseColor: '#6B7280', temperature: 'natural', category: 'minimal', componentConfig: { headingFont: 'Inter', bodyFont: 'Inter', headingWeight: '400', buttonRadius: 'md', shadow: 'none', borderWidth: '1', density: 'normal', animation: 'quick' }, description: 'Understated elegance' },
+  { name: 'Soft Touch', baseColor: '#F3F4F6', temperature: 'warmer', category: 'minimal', componentConfig: { headingFont: 'Nunito', bodyFont: 'Inter', headingWeight: '400', buttonRadius: 'full', shadow: 'sm', borderWidth: '0', density: 'spacious', animation: 'smooth' }, description: 'Gentle and welcoming' },
+  { name: 'Architect', baseColor: '#4A4A4A', temperature: 'natural', category: 'minimal', componentConfig: { headingFont: 'Manrope', bodyFont: 'Inter', headingWeight: '500', buttonRadius: 'none', shadow: 'none', borderWidth: '2', density: 'compact', animation: 'none' }, description: 'Clean architectural lines' },
 
-  // ── Playful & Thematic ──
-  { name: 'Bubblegum', baseColor: '#EC4899', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'Fredoka', bodyFont: 'Comic Neue', headingWeight: '800', buttonRadius: 'full', shadow: 'sm', borderWidth: '2', fontSizeHeading: '2xl', lineHeight: 'compact' } },
-  { name: 'Claymorphism', baseColor: '#D3B89E', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'Plus Jakarta Sans', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'lg', shadow: 'xl', borderWidth: '0', fontSizeHeading: 'xl', lineHeight: 'relaxed' } },
-  { name: 'Pastel Dreams', baseColor: '#C4B5FD', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'Syne', bodyFont: 'Nunito', headingWeight: '400', buttonRadius: 'lg', shadow: 'none', borderWidth: '1', density: 'spacious', lineHeight: 'relaxed', fontSizeHeading: 'xl' } },
-  { name: 'Northern Lights', baseColor: '#0D9488', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'Orbitron', bodyFont: 'Exo 2', headingWeight: '800', buttonRadius: 'md', shadow: 'lg', fontSizeHeading: '2xl', lineHeight: 'compact' } },
-  { name: 'Mocha Mousse', baseColor: '#8C5A3E', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'Playfair Display', bodyFont: 'Merriweather', headingWeight: '600', buttonRadius: 'md', shadow: 'sm', lineHeight: 'relaxed' } },
-  { name: 'Bold Tech', baseColor: '#06B6D4', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'Archivo', bodyFont: 'Inter', headingWeight: '800', buttonRadius: 'sm', shadow: 'sm', borderWidth: '1', fontSizeHeading: '2xl', lineHeight: 'normal' } },
-  { name: 'Retro Arcade', baseColor: '#D946EF', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'Press Start 2P', bodyFont: 'Rubik', headingWeight: '400', buttonRadius: 'sm', shadow: 'none', borderWidth: '4', density: 'compact', lineHeight: 'compact' } },
-  { name: 'Sage Garden', baseColor: '#86EFAC', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'Fraunces', bodyFont: 'DM Sans', headingWeight: '500', buttonRadius: 'lg', shadow: 'md', density: 'normal', lineHeight: 'relaxed' } },
-  { name: 'Darkmatter', baseColor: '#0A0A0A', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'Manrope', bodyFont: 'Karla', headingWeight: '500', buttonRadius: 'md', shadow: 'sm', borderWidth: '0', lineHeight: 'normal' } },
-  { name: 'Tangerine', baseColor: '#EA580C', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'Bebas Neue', bodyFont: 'Montserrat', headingWeight: '800', buttonRadius: 'lg', shadow: 'lg', fontSizeHeading: '2xl' } },
+  // Dark Category (Expanded)
+  { name: 'Dark Matter', baseColor: '#0A0A0A', temperature: 'cooler', category: 'dark', componentConfig: { headingFont: 'Manrope', bodyFont: 'Karla', headingWeight: '500', buttonRadius: 'md', shadow: 'sm', borderWidth: '0', animation: 'smooth' }, description: 'Deep space aesthetic' },
+  { name: 'Cyberpunk', baseColor: '#FF00FF', temperature: 'cooler', category: 'dark', componentConfig: { headingFont: 'Outfit', bodyFont: 'Space Grotesk', headingWeight: '800', buttonRadius: 'sm', shadow: 'lg', borderWidth: '2', density: 'compact', animation: 'bounce' }, description: 'Neon-drenched future' },
+  { name: 'Midnight Indigo', baseColor: '#1E1B4B', temperature: 'cooler', category: 'dark', componentConfig: { headingFont: 'Plus Jakarta Sans', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'lg', shadow: 'xl', borderWidth: '1', animation: 'smooth' }, description: 'Deep purple night' },
+  { name: 'Obsidian', baseColor: '#000000', temperature: 'cooler', category: 'dark', componentConfig: { headingFont: 'Inter', bodyFont: 'Inter', headingWeight: '400', buttonRadius: 'md', shadow: 'md', borderWidth: '0', density: 'compact', animation: 'quick' }, description: 'Pure black elegance' },
+  { name: 'Deep Ocean', baseColor: '#001F3F', temperature: 'cooler', category: 'dark', componentConfig: { headingFont: 'Lexend', bodyFont: 'Inter', headingWeight: '500', buttonRadius: 'lg', shadow: 'lg', borderWidth: '1', animation: 'smooth' }, description: 'Mysterious depths' },
+  { name: 'Purple Haze', baseColor: '#2E1A47', temperature: 'cooler', category: 'dark', componentConfig: { headingFont: 'Poppins', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'md', shadow: 'xl', borderWidth: '1', animation: 'smooth' }, description: 'Mystical purple tones' },
+  { name: 'Matrix', baseColor: '#003B00', temperature: 'cooler', category: 'dark', componentConfig: { headingFont: 'Space Grotesk', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'none', shadow: 'sm', borderWidth: '1', animation: 'quick' }, description: 'Digital rain aesthetic' },
+  { name: 'Void', baseColor: '#121212', temperature: 'cooler', category: 'dark', componentConfig: { headingFont: 'Rubik', bodyFont: 'Inter', headingWeight: '400', buttonRadius: 'md', shadow: 'none', borderWidth: '0', density: 'normal', animation: 'none' }, description: 'Minimal darkness' },
+  { name: 'Nightfall', baseColor: '#1A1F2E', temperature: 'cooler', category: 'dark', componentConfig: { headingFont: 'DM Sans', bodyFont: 'Inter', headingWeight: '500', buttonRadius: 'lg', shadow: 'md', borderWidth: '1', animation: 'smooth' }, description: 'Twilight hues' },
 
-  // ── DaisyUI Classic Overhauls ──
-  { name: 'Daisy Light', baseColor: '#64748B', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'Geist', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'md', shadow: 'sm', borderWidth: '1', lineHeight: 'normal' } },
-  { name: 'Daisy Dark', baseColor: '#1E293B', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'Geist', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'md', shadow: 'lg', borderWidth: '1', lineHeight: 'normal' } },
-  { name: 'Daisy Cupcake', baseColor: '#65C3C8', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'Inter', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'full', shadow: 'sm' } },
-  { name: 'Daisy Bumblebee', baseColor: '#EAB308', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'Montserrat', bodyFont: 'Inter', headingWeight: '700', buttonRadius: 'md', shadow: 'sm', density: 'normal' } },
-  { name: 'Daisy Emerald', baseColor: '#10B981', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'Syne', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'md', shadow: 'sm', borderWidth: '0' } },
-  { name: 'Daisy Corporate', baseColor: '#3B82F6', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'Manrope', bodyFont: 'Inter', headingWeight: '700', buttonRadius: 'md', shadow: 'sm', borderWidth: '1', density: 'normal' } },
-  { name: 'Daisy Forest', baseColor: '#1eb854', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'system-ui', bodyFont: 'system-ui', headingWeight: '600', buttonRadius: 'full', shadow: 'sm' } },
-  { name: 'Daisy Lofi', baseColor: '#A1A1AA', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'Nunito Sans', bodyFont: 'Inter', headingWeight: '500', buttonRadius: 'sm', shadow: 'none', borderWidth: '1', density: 'compact' } },
-  { name: 'Daisy Pastel', baseColor: '#C4B5FD', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'Nunito', bodyFont: 'Figtree', headingWeight: '600', buttonRadius: 'lg', shadow: 'none', borderWidth: '1', density: 'spacious' } },
-  { name: 'Daisy Fantasy', baseColor: '#6e0b75', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'Cinzel', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'md', shadow: 'sm', borderWidth: '0' } },
-  { name: 'Daisy Black', baseColor: '#333333', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'system-ui', bodyFont: 'system-ui', headingWeight: '700', buttonRadius: 'none', shadow: 'md' } },
-  { name: 'Daisy Dracula', baseColor: '#ff79c6', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'Space Grotesk', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'md', shadow: 'lg' } },
-  { name: 'Daisy CMYK', baseColor: '#45AEEE', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'system-ui', bodyFont: 'system-ui', headingWeight: '700', buttonRadius: 'none', shadow: 'none', borderWidth: '2' } },
-  { name: 'Daisy Acid', baseColor: '#FF00FF', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'Space Grotesk', bodyFont: 'Rubik', headingWeight: '800', buttonRadius: 'none', shadow: 'sm' } },
-  { name: 'Daisy Night', baseColor: '#6366F1', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'Manrope', bodyFont: 'Geist', headingWeight: '600', buttonRadius: 'md', shadow: 'sm', borderWidth: '0' } },
-  { name: 'Daisy Winter', baseColor: '#3B82F6', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'Archivo', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'md', shadow: 'none', borderWidth: '1' } },
-  { name: 'Daisy Dim', baseColor: '#0F766E', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'Plus Jakarta Sans', bodyFont: 'Karla', headingWeight: '500', buttonRadius: 'md', shadow: 'sm', borderWidth: '0' } },
-  { name: 'Daisy Sunset', baseColor: '#F97316', temperature: 'warmer' as ThemeTemperature, componentConfig: { headingFont: 'DM Sans', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'lg', shadow: 'md', density: 'normal' } },
+  // Playful Category (Expanded)
+  { name: 'Bubblegum', baseColor: '#EC4899', temperature: 'warmer', category: 'playful', componentConfig: { headingFont: 'Poppins', bodyFont: 'Nunito', headingWeight: '800', buttonRadius: 'full', shadow: 'sm', borderWidth: '2', animation: 'bounce' }, description: 'Sweet and fun' },
+  { name: 'Pastel Dreams', baseColor: '#C4B5FD', temperature: 'cooler', category: 'playful', componentConfig: { headingFont: 'DM Sans', bodyFont: 'Nunito', headingWeight: '400', buttonRadius: 'lg', shadow: 'none', borderWidth: '1', density: 'spacious', animation: 'smooth' }, description: 'Soft and dreamy' },
+  { name: 'Candy Crush', baseColor: '#FF6B6B', temperature: 'warmer', category: 'playful', componentConfig: { headingFont: 'Quicksand', bodyFont: 'Nunito', headingWeight: '700', buttonRadius: 'full', shadow: 'md', borderWidth: '2', animation: 'bounce' }, description: 'Sweet treats' },
+  { name: 'Neon Pop', baseColor: '#00FF87', temperature: 'cooler', category: 'playful', componentConfig: { headingFont: 'Bebas Neue', bodyFont: 'Montserrat', headingWeight: '700', buttonRadius: 'sm', shadow: 'lg', borderWidth: '2', density: 'compact', animation: 'pulse' }, description: 'Electric energy' },
+  { name: 'Sunset Vibes', baseColor: '#FF9A8B', temperature: 'warmer', category: 'playful', componentConfig: { headingFont: 'Poppins', bodyFont: 'Quicksand', headingWeight: '600', buttonRadius: 'lg', shadow: 'md', borderWidth: '1', animation: 'smooth' }, description: 'Warm and vibrant' },
+  { name: 'Tropical', baseColor: '#FF6B6B', temperature: 'warmer', category: 'playful', componentConfig: { headingFont: 'Poppins', bodyFont: 'Inter', headingWeight: '700', buttonRadius: 'full', shadow: 'md', borderWidth: '2', animation: 'bounce' }, description: 'Island paradise' },
+  { name: 'Galaxy Candy', baseColor: '#FF69B4', temperature: 'warmer', category: 'playful', componentConfig: { headingFont: 'Outfit', bodyFont: 'Nunito', headingWeight: '800', buttonRadius: 'full', shadow: 'xl', borderWidth: '2', animation: 'pulse' }, description: 'Cosmic sweetness' },
 
-  // ── NEW: Modern Presets ─────────────────────────────────────
-  { name: 'Modern Minimal', baseColor: '#0F172A', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'Inter', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'lg', shadow: 'sm', density: 'normal', borderWidth: '1' } },
-  { name: 'Modern Glassmorphism', baseColor: '#3B82F6', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'Space Grotesk', bodyFont: 'Inter', headingWeight: '700', buttonRadius: 'md', shadow: 'xl', borderWidth: '1', density: 'spacious' } },
-  { name: 'Modern Neubrutalism', baseColor: '#171717', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'Space Grotesk', bodyFont: 'Inter', headingWeight: '800', buttonRadius: 'none', shadow: 'none', borderWidth: '4', density: 'compact' } },
-  { name: 'Modern Swiss', baseColor: '#1E2937', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'Inter', bodyFont: 'Inter', headingWeight: '500', buttonRadius: 'md', shadow: 'none', borderWidth: '1', density: 'normal' } },
+  // Professional Category (Expanded)
+  { name: 'Corporate Blue', baseColor: '#2563EB', temperature: 'cooler', category: 'professional', componentConfig: { headingFont: 'Inter', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'md', shadow: 'sm', borderWidth: '1', density: 'normal', animation: 'quick' }, description: 'Trustworthy and clean' },
+  { name: 'Executive', baseColor: '#0F172A', temperature: 'natural', category: 'professional', componentConfig: { headingFont: 'Manrope', bodyFont: 'Inter', headingWeight: '700', buttonRadius: 'md', shadow: 'md', borderWidth: '1', density: 'compact', animation: 'none' }, description: 'Sophisticated authority' },
+  { name: 'SaaS Modern', baseColor: '#6366F1', temperature: 'cooler', category: 'professional', componentConfig: { headingFont: 'Inter', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'lg', shadow: 'md', borderWidth: '1', density: 'normal', animation: 'smooth' }, description: 'Tech-forward' },
+  { name: 'Finance', baseColor: '#047857', temperature: 'cooler', category: 'professional', componentConfig: { headingFont: 'Inter', bodyFont: 'Inter', headingWeight: '500', buttonRadius: 'md', shadow: 'sm', borderWidth: '1', density: 'compact', animation: 'quick' }, description: 'Stable and reliable' },
+  { name: 'Consultant', baseColor: '#5B21B6', temperature: 'cooler', category: 'professional', componentConfig: { headingFont: 'DM Sans', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'md', shadow: 'sm', borderWidth: '1', density: 'normal', animation: 'smooth' }, description: 'Wise and strategic' },
+  { name: 'Law Firm', baseColor: '#1E293B', temperature: 'natural', category: 'professional', componentConfig: { headingFont: 'Playfair Display', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'none', shadow: 'none', borderWidth: '2', density: 'compact', animation: 'none' }, description: 'Authoritative tradition' },
+  { name: 'Tech Startup', baseColor: '#06B6D4', temperature: 'cooler', category: 'professional', componentConfig: { headingFont: 'Space Grotesk', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'lg', shadow: 'lg', borderWidth: '1', density: 'normal', animation: 'smooth' }, description: 'Innovative and fresh' },
 
-  // ── NEW: Minimal Presets ────────────────────────────────────
-  { name: 'Pure Minimal', baseColor: '#111827', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'Inter', bodyFont: 'Inter', headingWeight: '500', buttonRadius: 'none', shadow: 'none', borderWidth: '1', density: 'spacious', lineHeight: 'relaxed' } },
-  { name: 'Minimal Light', baseColor: '#64748B', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'Inter', bodyFont: 'Inter', headingWeight: '400', buttonRadius: 'sm', shadow: 'none', borderWidth: '1', density: 'normal' } },
-  { name: 'Minimal Monochrome', baseColor: '#374151', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'Geist', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'md', shadow: 'none', borderWidth: '0', density: 'normal' } },
+  // Nature Category (Expanded)
+  { name: 'Forest', baseColor: '#059669', temperature: 'natural', category: 'nature', componentConfig: { headingFont: 'Lexend', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'lg', shadow: 'md', borderWidth: '1', animation: 'smooth' }, description: 'Woodland retreat' },
+  { name: 'Ocean Breeze', baseColor: '#0891B2', temperature: 'cooler', category: 'nature', componentConfig: { headingFont: 'Lato', bodyFont: 'Open Sans', headingWeight: '600', buttonRadius: 'full', shadow: 'md', animation: 'smooth' }, description: 'Coastal calm' },
+  { name: 'Sage Garden', baseColor: '#84A98C', temperature: 'natural', category: 'nature', componentConfig: { headingFont: 'Nunito', bodyFont: 'Inter', headingWeight: '500', buttonRadius: 'lg', shadow: 'sm', borderWidth: '1', density: 'spacious', animation: 'smooth' }, description: 'Herbal serenity' },
+  { name: 'Desert Rose', baseColor: '#E6B17E', temperature: 'warmer', category: 'nature', componentConfig: { headingFont: 'Poppins', bodyFont: 'Inter', headingWeight: '500', buttonRadius: 'lg', shadow: 'md', borderWidth: '1', animation: 'smooth' }, description: 'Warm sands' },
+  { name: 'Moss', baseColor: '#2C5F2D', temperature: 'natural', category: 'nature', componentConfig: { headingFont: 'Inter', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'md', shadow: 'sm', borderWidth: '1', density: 'normal', animation: 'quick' }, description: 'Lush green' },
+  { name: 'Lavender Field', baseColor: '#967AA1', temperature: 'cooler', category: 'nature', componentConfig: { headingFont: 'Quicksand', bodyFont: 'Nunito', headingWeight: '500', buttonRadius: 'full', shadow: 'md', borderWidth: '1', animation: 'smooth' }, description: 'Soothing purple' },
+  { name: 'Sunflower', baseColor: '#F4D03F', temperature: 'warmer', category: 'nature', componentConfig: { headingFont: 'Poppins', bodyFont: 'Inter', headingWeight: '700', buttonRadius: 'lg', shadow: 'lg', borderWidth: '2', animation: 'bounce' }, description: 'Bright and cheerful' },
 
-  // ── NEW: Simple & Clean Presets ─────────────────────────────
-  { name: 'Simple Clean', baseColor: '#334155', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'Inter', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'md', shadow: 'sm', borderWidth: '1', density: 'normal', lineHeight: 'normal' } },
-  { name: 'Simple Soft', baseColor: '#64748B', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'Nunito', bodyFont: 'Inter', headingWeight: '500', buttonRadius: 'lg', shadow: 'sm', borderWidth: '1', density: 'spacious' } },
-  { name: 'Simple Corporate', baseColor: '#1E40AF', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'Manrope', bodyFont: 'Inter', headingWeight: '700', buttonRadius: 'md', shadow: 'none', borderWidth: '1', density: 'normal' } },
+  // Vintage Category (Expanded)
+  { name: 'Vintage Paper', baseColor: '#D4A373', temperature: 'warmer', category: 'vintage', componentConfig: { headingFont: 'Playfair Display', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'md', shadow: 'sm', borderWidth: '1', animation: 'none' }, description: 'Aged parchment' },
+  { name: 'Sunset', baseColor: '#EA580C', temperature: 'warmer', category: 'vintage', componentConfig: { headingFont: 'Bebas Neue', bodyFont: 'Montserrat', headingWeight: '800', buttonRadius: 'lg', shadow: 'lg', animation: 'pulse' }, description: 'Golden hour glow' },
+  { name: 'Retro Wave', baseColor: '#FF6B35', temperature: 'warmer', category: 'vintage', componentConfig: { headingFont: 'Bebas Neue', bodyFont: 'Montserrat', headingWeight: '700', buttonRadius: 'md', shadow: 'md', borderWidth: '2', density: 'compact', animation: 'quick' }, description: '80s aesthetic' },
+  { name: 'Sepia', baseColor: '#C06C4F', temperature: 'warmer', category: 'vintage', componentConfig: { headingFont: 'Playfair Display', bodyFont: 'Inter', headingWeight: '500', buttonRadius: 'md', shadow: 'sm', borderWidth: '1', animation: 'none' }, description: 'Old photograph' },
+  { name: 'Art Deco', baseColor: '#D4AF37', temperature: 'warmer', category: 'vintage', componentConfig: { headingFont: 'Playfair Display', bodyFont: 'Inter', headingWeight: '700', buttonRadius: 'none', shadow: 'lg', borderWidth: '1', density: 'compact', animation: 'none' }, description: 'Gatsby era' },
+  { name: 'Mid-Century', baseColor: '#E07A5F', temperature: 'warmer', category: 'vintage', componentConfig: { headingFont: 'Outfit', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'md', shadow: 'md', borderWidth: '1', animation: 'smooth' }, description: '1950s modern' },
 
-  // ── NEW: Elegant & Professional ─────────────────────────────
-  { name: 'Elegant Luxury', baseColor: '#4338CA', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'Playfair Display', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'lg', shadow: 'md', borderWidth: '1', density: 'spacious', lineHeight: 'relaxed' } },
-  { name: 'Sophisticated Dark', baseColor: '#0A0A0A', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'Instrument Sans', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'lg', shadow: 'lg', borderWidth: '0', density: 'normal' } },
+  // New Categories
+  // Futuristic
+  { name: 'Hologram', baseColor: '#00F5FF', temperature: 'cooler', category: 'futuristic', componentConfig: { headingFont: 'Space Grotesk', bodyFont: 'Inter', headingWeight: '700', buttonRadius: 'sm', shadow: 'xl', borderWidth: '2', density: 'compact', animation: 'pulse' }, description: 'Holographic interface' },
+  { name: 'Neo Tokyo', baseColor: '#FF0055', temperature: 'cooler', category: 'futuristic', componentConfig: { headingFont: 'Outfit', bodyFont: 'Space Grotesk', headingWeight: '800', buttonRadius: 'none', shadow: 'lg', borderWidth: '2', density: 'compact', animation: 'bounce' }, description: 'Cyberpunk city' },
+  { name: 'Digital', baseColor: '#00F260', temperature: 'cooler', category: 'futuristic', componentConfig: { headingFont: 'Space Grotesk', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'md', shadow: 'lg', borderWidth: '1', animation: 'quick' }, description: 'Digital interface' },
 
-  // ── NEW: Tech & Futuristic ──────────────────────────────────
-  { name: 'Tech Futuristic', baseColor: '#22D3EE', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'Orbitron', bodyFont: 'Inter', headingWeight: '700', buttonRadius: 'full', shadow: 'xl', borderWidth: '1', density: 'compact', fontSizeHeading: '2xl' } },
-  { name: 'Cyber Minimal', baseColor: '#06B6D4', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'Space Grotesk', bodyFont: 'Inter', headingWeight: '600', buttonRadius: 'none', shadow: 'sm', borderWidth: '2', density: 'normal' } },
+  // Luxury
+  { name: 'Gold Leaf', baseColor: '#B8860B', temperature: 'warmer', category: 'luxury', componentConfig: { headingFont: 'Playfair Display', bodyFont: 'Inter', headingWeight: '700', buttonRadius: 'md', shadow: 'xl', borderWidth: '2', density: 'spacious', animation: 'smooth' }, description: 'Opulent elegance' },
+  { name: 'Platinum', baseColor: '#E5E4E2', temperature: 'cooler', category: 'luxury', componentConfig: { headingFont: 'Manrope', bodyFont: 'Inter', headingWeight: '400', buttonRadius: 'lg', shadow: 'lg', borderWidth: '1', density: 'spacious', animation: 'smooth' }, description: 'Premium metallic' },
+  { name: 'Royal', baseColor: '#6C3483', temperature: 'cooler', category: 'luxury', componentConfig: { headingFont: 'Playfair Display', bodyFont: 'Inter', headingWeight: '700', buttonRadius: 'md', shadow: 'xl', borderWidth: '2', density: 'normal', animation: 'smooth' }, description: 'Regal purple' },
 
-  // ── NEW: Soft & Friendly ────────────────────────────────────
-  { name: 'Soft Pastel', baseColor: '#A5B4FC', temperature: 'cooler' as ThemeTemperature, componentConfig: { headingFont: 'Nunito', bodyFont: 'Inter', headingWeight: '500', buttonRadius: 'full', shadow: 'sm', borderWidth: '1', density: 'spacious' } },
-  { name: 'Calm Nature', baseColor: '#10B981', temperature: 'natural' as ThemeTemperature, componentConfig: { headingFont: 'Lora', bodyFont: 'Inter', headingWeight: '500', buttonRadius: 'lg', shadow: 'md', borderWidth: '1', density: 'normal' } },
+  // Artistic
+  { name: 'Watercolor', baseColor: '#A6C1E0', temperature: 'cooler', category: 'artistic', componentConfig: { headingFont: 'Poppins', bodyFont: 'Nunito', headingWeight: '400', buttonRadius: 'full', shadow: 'md', borderWidth: '1', density: 'spacious', animation: 'smooth' }, description: 'Soft brush strokes' },
+  { name: 'Sketch', baseColor: '#2C3E50', temperature: 'natural', category: 'artistic', componentConfig: { headingFont: 'Poppins', bodyFont: 'Inter', headingWeight: '500', buttonRadius: 'none', shadow: 'none', borderWidth: '1', density: 'normal', animation: 'none' }, description: 'Hand-drawn style' },
+  { name: 'Bauhaus', baseColor: '#E31B23', temperature: 'warmer', category: 'artistic', componentConfig: { headingFont: 'Bebas Neue', bodyFont: 'Inter', headingWeight: '700', buttonRadius: 'none', shadow: 'md', borderWidth: '2', density: 'compact', animation: 'quick' }, description: 'Bold primary colors' },
 ];
 
 export const ConfigControls = () => {
   const { componentConfig, setBaseColor, setTemperature, setComponentConfig } = useThemeStore();
   const [showPresets, setShowPresets] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState('all');
 
   const applyPreset = (preset: Preset) => {
     setBaseColor(preset.baseColor);
     setTemperature(preset.temperature);
     setComponentConfig(preset.componentConfig);
+    setShowPresets(false);
   };
 
   const handleRandomStyles = () => {
@@ -114,303 +116,122 @@ export const ConfigControls = () => {
     setComponentConfig(random.componentConfig);
   };
 
+  const categories = [
+    'all', 'modern', 'minimal', 'dark', 'playful', 
+    'professional', 'nature', 'vintage', 'futuristic', 
+    'luxury', 'artistic'
+  ];
+
+  const filteredPresets = selectedCategory === 'all'
+    ? presets
+    : presets.filter((p) => p.category === selectedCategory);
+
   const radiusOptions: { label: string; value: BorderRadiusSize }[] = [
-    { label: 'None', value: 'none' },
-    { label: 'Sm', value: 'sm' },
-    { label: 'Md', value: 'md' },
-    { label: 'Lg', value: 'lg' },
-    { label: 'Full', value: 'full' },
+    { label: 'None', value: 'none' }, { label: 'Sm', value: 'sm' },
+    { label: 'Md', value: 'md' }, { label: 'Lg', value: 'lg' }, { label: 'Full', value: 'full' },
   ];
 
   const fontOptions = [
-    // Sans-serif UI
-    'Inter', 'Roboto', 'Open Sans', 'Lato', 'Poppins', 'Montserrat', 'Nunito', 
-    'Nunito Sans', 'DM Sans', 'Manrope', 'Raleway', 'Rubik', 'Ubuntu', 'Karla', 
-    'Figtree', 'Outfit', 'Lexend', 'Work Sans', 'Barlow', 'Archivo', 
-    'Plus Jakarta Sans', 'Urbanist', 'Syne', 'Space Grotesk', 'Exo 2',
-    // Display / Heading
-    'Oswald', 'Bebas Neue', 'Anton', 'Orbitron', 'Instrument Sans',
-    // Serif
-    'Playfair Display', 'Merriweather', 'Lora', 'Fraunces', 'Cinzel',
-    // Decorative & Monospace
-    'Fredoka', 'Comic Neue', 'Press Start 2P', 'Space Mono', 'Geist',
-    // System
-    'system-ui', 'ui-monospace',
-  ];
-
-  const weightOptions = [
-    { label: 'Regular (400)', value: '400' },
-    { label: 'Medium (500)', value: '500' },
-    { label: 'Semibold (600)', value: '600' },
-    { label: 'Bold (700)', value: '700' },
-    { label: 'Extra Bold (800)', value: '800' },
+    'Inter', 'Roboto', 'Open Sans', 'Lato', 'Poppins', 'Montserrat', 'Nunito',
+    'DM Sans', 'Manrope', 'Raleway', 'Rubik', 'Karla', 'Figtree', 'Outfit',
+    'Lexend', 'Work Sans', 'Plus Jakarta Sans', 'Urbanist', 'Space Grotesk',
+    'Quicksand', 'Oswald', 'Bebas Neue', 'Playfair Display', 'Syne', 'Figtree',
   ];
 
   const updateConfig = (key: keyof ComponentConfig, value: string) => {
     setComponentConfig({ [key]: value });
   };
 
-  const renderWeightSelector = (title: string, configKey: keyof ComponentConfig) => {
-    const currentValue = componentConfig[configKey];
-    return (
-      <div className="flex flex-col gap-3">
-        <label className="text-sm font-medium">{title}</label>
-        <select
-          value={currentValue as string}
-          onChange={(e) => updateConfig(configKey, e.target.value)}
-          className="px-3 py-2 text-sm bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50 text-foreground"
-        >
-          {weightOptions.map(opt => (
-            <option key={opt.value} value={opt.value} className="bg-background text-foreground">
-              {opt.label}
-            </option>
-          ))}
-        </select>
+  const renderPillSelector = (label: string, icon: React.ReactNode, configKey: keyof ComponentConfig, options: { label: string; value: string }[]) => (
+    <div className="flex flex-col gap-2.5">
+      <label className="text-xs font-medium flex items-center gap-1.5">{icon} {label}</label>
+      <div className="flex flex-wrap gap-1.5">
+        {options.map((opt) => (
+          <button
+            key={opt.value}
+            onClick={() => updateConfig(configKey, opt.value)}
+            className={`px-2.5 py-1 text-xs font-medium rounded-md transition-colors border ${
+              componentConfig[configKey] === opt.value
+                ? 'bg-blue-500 text-white border-blue-500'
+                : 'bg-transparent text-zinc-400 border-zinc-700 hover:border-zinc-500'
+            }`}
+          >
+            {opt.label}
+          </button>
+        ))}
       </div>
-    );
-  };
+    </div>
+  );
 
-  const renderRadiusSelector = (title: string, configKey: keyof ComponentConfig) => {
-    const currentValue = componentConfig[configKey];
-    return (
-      <div className="flex flex-col gap-3">
-        <label className="text-sm font-medium">{title}</label>
-        <div className="flex flex-wrap gap-2">
-          {radiusOptions.map((opt) => (
-            <button
-              key={opt.value}
-              onClick={() => updateConfig(configKey, opt.value)}
-              className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors border ${
-                currentValue === opt.value
-                  ? 'bg-primary text-primary-foreground border-primary'
-                  : 'bg-transparent text-foreground border-border hover:border-black/20 dark:hover:border-white/20'
-              }`}
-            >
-              {opt.label}
-            </button>
-          ))}
-        </div>
-      </div>
-    );
-  };
-
-  const renderFontSelector = (title: string, configKey: keyof ComponentConfig) => {
-    const currentValue = componentConfig[configKey];
-    return (
-      <div className="flex flex-col gap-3">
-        <label className="text-sm font-medium">{title}</label>
-        <select
-          value={currentValue as string}
-          onChange={(e) => updateConfig(configKey, e.target.value)}
-          className="px-3 py-2 text-sm bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50 text-foreground"
-        >
-          {fontOptions.map(font => (
-            <option key={font} value={font} className="bg-background text-foreground">
-              {font}
-            </option>
-          ))}
-        </select>
-      </div>
-    );
-  };
-
-  const renderFontSizeSelector = (title: string, configKey: keyof ComponentConfig) => {
-    const fontSizeOptions = [
-      { label: 'XS', value: 'xs' },
-      { label: 'Sm', value: 'sm' },
-      { label: 'Base', value: 'base' },
-      { label: 'Lg', value: 'lg' },
-      { label: 'Xl', value: 'xl' },
-      { label: '2Xl', value: '2xl' },
-    ];
-    const currentValue = componentConfig[configKey];
-    return (
-      <div className="flex flex-col gap-3">
-        <label className="text-sm font-medium">{title}</label>
-        <select
-          value={currentValue as string}
-          onChange={(e) => updateConfig(configKey, e.target.value)}
-          className="px-3 py-2 text-sm bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50 text-foreground"
-        >
-          {fontSizeOptions.map(opt => (
-            <option key={opt.value} value={opt.value} className="bg-background text-foreground">
-              {opt.label}
-            </option>
-          ))}
-        </select>
-      </div>
-    );
-  };
-
-  const renderLineHeightSelector = (title: string, configKey: keyof ComponentConfig) => {
-    const lineHeightOptions = [
-      { label: 'Compact', value: 'compact' },
-      { label: 'Normal', value: 'normal' },
-      { label: 'Relaxed', value: 'relaxed' },
-    ];
-    const currentValue = componentConfig[configKey];
-    return (
-      <div className="flex flex-col gap-3">
-        <label className="text-sm font-medium">{title}</label>
-        <select
-          value={currentValue as string}
-          onChange={(e) => updateConfig(configKey, e.target.value)}
-          className="px-3 py-2 text-sm bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50 text-foreground"
-        >
-          {lineHeightOptions.map(opt => (
-            <option key={opt.value} value={opt.value} className="bg-background text-foreground">
-              {opt.label}
-            </option>
-          ))}
-        </select>
-      </div>
-    );
-  };
-
-  const renderShadowSelector = (title: string, configKey: keyof ComponentConfig) => {
-    const shadowOptions: { label: string; value: ShadowSize }[] = [
-      { label: 'None', value: 'none' },
-      { label: 'Sm', value: 'sm' },
-      { label: 'Md', value: 'md' },
-      { label: 'Lg', value: 'lg' },
-      { label: 'Xl', value: 'xl' },
-    ];
-    const currentValue = componentConfig[configKey];
-    return (
-      <div className="flex flex-col gap-3">
-        <label className="text-sm font-medium">{title}</label>
-        <div className="flex flex-wrap gap-2">
-          {shadowOptions.map((opt) => (
-            <button
-              key={opt.value}
-              onClick={() => updateConfig(configKey, opt.value)}
-              className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors border ${
-                currentValue === opt.value
-                  ? 'bg-primary text-primary-foreground border-primary'
-                  : 'bg-transparent text-foreground border-border hover:border-black/20 dark:hover:border-white/20'
-              }`}
-            >
-              {opt.label}
-            </button>
-          ))}
-        </div>
-      </div>
-    );
-  };
-
-  const renderDensitySelector = (title: string, configKey: keyof ComponentConfig) => {
-    const densityOptions: { label: string; value: DensityType }[] = [
-      { label: 'Compact', value: 'compact' },
-      { label: 'Normal', value: 'normal' },
-      { label: 'Spacious', value: 'spacious' },
-    ];
-    const currentValue = componentConfig[configKey];
-    return (
-      <div className="flex flex-col gap-3">
-        <label className="text-sm font-medium">{title}</label>
-        <div className="flex flex-wrap gap-2">
-          {densityOptions.map((opt) => (
-            <button
-              key={opt.value}
-              onClick={() => updateConfig(configKey, opt.value)}
-              className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors border ${
-                currentValue === opt.value
-                  ? 'bg-primary text-primary-foreground border-primary'
-                  : 'bg-transparent text-foreground border-border hover:border-black/20 dark:hover:border-white/20'
-              }`}
-            >
-              {opt.label}
-            </button>
-          ))}
-        </div>
-      </div>
-    );
-  };
-
-  const renderBorderWidthSelector = (title: string, configKey: keyof ComponentConfig) => {
-    const borderWidthOptions = [
-      { label: '0px', value: '0' },
-      { label: '1px', value: '1' },
-      { label: '2px', value: '2' },
-      { label: '4px', value: '4' },
-      { label: '8px', value: '8' },
-    ];
-    const currentValue = componentConfig[configKey];
-    return (
-      <div className="flex flex-col gap-3">
-        <label className="text-sm font-medium">{title}</label>
-        <select
-          value={currentValue as string}
-          onChange={(e) => updateConfig(configKey, e.target.value)}
-          className="px-3 py-2 text-sm bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50 text-foreground"
-        >
-          {borderWidthOptions.map(opt => (
-            <option key={opt.value} value={opt.value} className="bg-background text-foreground">
-              {opt.label}
-            </option>
-          ))}
-        </select>
-      </div>
-    );
-  };
+  const renderSelect = (label: string, icon: React.ReactNode, configKey: keyof ComponentConfig, options: string[]) => (
+    <div className="flex flex-col gap-2">
+      <label className="text-xs font-medium flex items-center gap-1.5">{icon} {label}</label>
+      <select
+        value={componentConfig[configKey] as string}
+        onChange={(e) => updateConfig(configKey, e.target.value)}
+        className="px-3 py-2 text-xs bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-zinc-200"
+      >
+        {options.map((opt) => (
+          <option key={opt} value={opt} className="bg-zinc-900 text-zinc-200">{opt}</option>
+        ))}
+      </select>
+    </div>
+  );
 
   return (
-    <div className="flex flex-col gap-8 h-full">
+    <div className="flex flex-col gap-6 h-full overflow-y-auto">
       <div>
-        <h2 className="text-xl font-bold tracking-tight mb-1">Component Themes</h2>
-        <p className="text-sm text-zinc-500 dark:text-zinc-400">
-          Customize typography, geometry, layout and effects with live preview.
-        </p>
+        <h2 className="text-lg font-bold tracking-tight mb-1 flex items-center gap-2">
+          <Palette className="w-4 h-4 text-blue-400" /> Component Config
+        </h2>
+        <p className="text-xs text-zinc-500">Customize typography, geometry, and effects.</p>
       </div>
 
-      <div className="flex flex-wrap justify-center mb-6 gap-3">
-        <button
-          onClick={handleRandomStyles}
-          className="inline-flex items-center gap-2 px-6 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white font-medium rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 border border-emerald-600/50"
-          title="Generate random theme + component styles"
-        >
-          Random Styles
+      <div className="flex flex-wrap gap-2">
+        <button onClick={handleRandomStyles} className="inline-flex items-center gap-1.5 px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-medium rounded-xl shadow-lg transition-all group">
+          <Sparkles className="w-3.5 h-3.5 group-hover:rotate-12 transition-transform" /> Random
         </button>
-
         <div className="relative">
-          <button
-            onClick={() => setShowPresets(!showPresets)}
-            className="inline-flex items-center gap-2 px-6 py-2.5 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 border border-blue-600/50"
-            title="Browse professional presets"
-          >
-            Preset Styles
-            <svg className={`w-4 h-4 transition-transform ${showPresets ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <button onClick={() => setShowPresets(!showPresets)} className="inline-flex items-center gap-1.5 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium rounded-xl shadow-lg transition-all">
+            <Palette className="w-3.5 h-3.5" /> Presets
+            <svg className={`w-3.5 h-3.5 transition-transform ${showPresets ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
             </svg>
           </button>
-
           {showPresets && (
             <>
               <div className="fixed inset-0 z-40" onClick={() => setShowPresets(false)} />
-              <div className="absolute right-0 mt-2 w-80 bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-xl shadow-2xl z-50 overflow-hidden">
-                <div className="p-4 border-b border-gray-100 dark:border-zinc-700">
-                  <h4 className="font-semibold text-gray-900 dark:text-white text-sm">Professional Presets</h4>
-                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Click any preset to apply</p>
+              <div className="absolute left-0 mt-2 w-96 bg-zinc-900 border border-zinc-700 rounded-xl shadow-2xl z-50 overflow-hidden">
+                <div className="p-3 border-b border-zinc-700">
+                  <h4 className="font-semibold text-sm text-white">Theme Presets</h4>
+                  <p className="text-xs text-zinc-400 mt-1">{filteredPresets.length} themes available</p>
+                  <div className="flex flex-wrap gap-1.5 mt-2 max-h-32 overflow-y-auto">
+                    {categories.map((cat) => (
+                      <button
+                        key={cat}
+                        onClick={() => setSelectedCategory(cat)}
+                        className={`px-2.5 py-1 text-xs rounded-full capitalize transition-colors ${
+                          selectedCategory === cat ? 'bg-blue-500 text-white' : 'bg-zinc-700 text-zinc-400 hover:bg-zinc-600'
+                        }`}
+                      >
+                        {cat}
+                      </button>
+                    ))}
+                  </div>
                 </div>
-                <div className="py-2 max-h-80 overflow-y-auto">
-                  {presets.map((preset, index) => (
-                    <button
-                      key={index}
-                      onClick={() => {
-                        applyPreset(preset);
-                        setShowPresets(false);
-                      }}
-                      className="w-full flex items-center gap-3 p-3 hover:bg-gray-50 dark:hover:bg-zinc-700 transition-colors text-left first:rounded-t-xl last:rounded-b-xl"
-                    >
-                      <div 
-                        className="w-12 h-12 rounded-lg flex-shrink-0 border border-black/10 dark:border-white/10" 
-                        style={{ backgroundColor: preset.baseColor }} 
-                      />
-                      <div className="min-w-0">
-                        <div className="font-medium text-sm text-gray-900 dark:text-white truncate">{preset.name}</div>
-                        <div className="text-xs text-gray-500 dark:text-gray-400 truncate">
-                          {preset.componentConfig.headingFont || 'Default'} • {preset.componentConfig.buttonRadius || 'md'}
-                        </div>
+                <div className="py-1 max-h-96 overflow-y-auto scrollbar-thin">
+                  {filteredPresets.map((preset, i) => (
+                    <button key={i} onClick={() => applyPreset(preset)} className="w-full flex items-center gap-2.5 p-2.5 hover:bg-zinc-800 transition-colors text-left">
+                      <div className="w-8 h-8 rounded-lg flex-shrink-0 border border-white/10" style={{ backgroundColor: preset.baseColor }} />
+                      <div className="min-w-0 flex-1">
+                        <div className="font-medium text-xs text-white truncate">{preset.name}</div>
+                        {preset.description && (
+                          <div className="text-[10px] text-zinc-500 truncate">{preset.description}</div>
+                        )}
+                        <div className="text-[10px] text-zinc-600 truncate mt-0.5">{preset.componentConfig.headingFont}</div>
+                      </div>
+                      <div className="text-[10px] text-zinc-500 capitalize bg-zinc-800 px-1.5 py-0.5 rounded-full">
+                        {preset.category}
                       </div>
                     </button>
                   ))}
@@ -421,51 +242,48 @@ export const ConfigControls = () => {
         </div>
       </div>
 
-      <hr className="border-black/10 dark:border-white/10" />
+      <hr className="border-white/5" />
 
-      {/* Typography Section */}
-      <div className="flex flex-col gap-6">
-        <h3 className="text-base font-semibold text-primary">Typography</h3>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          {renderFontSelector('Heading Font', 'headingFont')}
-          {renderFontSelector('Body Font', 'bodyFont')}
+      <div className="flex flex-col gap-5">
+        <h3 className="text-sm font-semibold flex items-center gap-1.5"><Type className="w-3.5 h-3.5" /> Typography</h3>
+        <div className="grid grid-cols-2 gap-3">
+          {renderSelect('Heading', null, 'headingFont', fontOptions)}
+          {renderSelect('Body', null, 'bodyFont', fontOptions)}
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          {renderWeightSelector('Heading Weight', 'headingWeight')}
-          {renderWeightSelector('Body Weight', 'bodyWeight')}
+        <div className="grid grid-cols-2 gap-3">
+          {renderSelect('Head Wt', null, 'headingWeight', ['400', '500', '600', '700', '800'])}
+          {renderSelect('Body Wt', null, 'bodyWeight', ['400', '500', '600', '700'])}
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          {renderFontSizeSelector('Heading Size', 'fontSizeHeading')}
-          {renderFontSizeSelector('Body Size', 'fontSizeBody')}
-        </div>
-        {renderLineHeightSelector('Line Height', 'lineHeight')}
       </div>
 
-      <hr className="border-black/10 dark:border-white/10" />
+      <hr className="border-white/5" />
 
-      {/* Layout Section */}
-      <div className="flex flex-col gap-6">
-        <h3 className="text-base font-semibold text-primary">Layout</h3>
-        {renderDensitySelector('Density', 'density')}
-        {renderBorderWidthSelector('Border Width', 'borderWidth')}
+      <div className="flex flex-col gap-5">
+        <h3 className="text-sm font-semibold flex items-center gap-1.5"><Layout className="w-3.5 h-3.5" /> Layout</h3>
+        {renderPillSelector('Density', null, 'density', [
+          { label: 'Compact', value: 'compact' }, { label: 'Normal', value: 'normal' }, { label: 'Spacious', value: 'spacious' },
+        ] as { label: string; value: DensityType }[])}
       </div>
 
-      <hr className="border-black/10 dark:border-white/10" />
+      <hr className="border-white/5" />
 
-      {/* Effects */}
-      <div className="flex flex-col gap-6">
-        <h3 className="text-base font-semibold text-primary">Effects</h3>
-        {renderShadowSelector('Shadow', 'shadow')}
+      <div className="flex flex-col gap-5">
+        <h3 className="text-sm font-semibold flex items-center gap-1.5"><Zap className="w-3.5 h-3.5" /> Effects</h3>
+        {renderPillSelector('Shadow', null, 'shadow', [
+          { label: 'None', value: 'none' }, { label: 'Sm', value: 'sm' }, { label: 'Md', value: 'md' }, { label: 'Lg', value: 'lg' }, { label: 'Xl', value: 'xl' },
+        ] as { label: string; value: ShadowSize }[])}
+        {renderPillSelector('Animation', null, 'animation', [
+          { label: 'None', value: 'none' }, { label: 'Quick', value: 'quick' }, { label: 'Smooth', value: 'smooth' }, { label: 'Bounce', value: 'bounce' }, { label: 'Pulse', value: 'pulse' },
+        ] as { label: string; value: AnimationType }[])}
       </div>
 
-      <hr className="border-black/10 dark:border-white/10" />
+      <hr className="border-white/5" />
 
-      {/* Geometry */}
-      <div className="flex flex-col gap-6">
-        <h3 className="text-base font-semibold">Geometry</h3>
-        {renderRadiusSelector('Button Radius', 'buttonRadius')}
-        {renderRadiusSelector('Card Radius', 'cardRadius')}
-        {renderRadiusSelector('Input Radius', 'inputRadius')}
+      <div className="flex flex-col gap-5">
+        <h3 className="text-sm font-semibold flex items-center gap-1.5"><Box className="w-3.5 h-3.5" /> Geometry</h3>
+        {renderPillSelector('Button Radius', null, 'buttonRadius', radiusOptions)}
+        {renderPillSelector('Card Radius', null, 'cardRadius', radiusOptions)}
+        {renderPillSelector('Input Radius', null, 'inputRadius', radiusOptions)}
       </div>
     </div>
   );
