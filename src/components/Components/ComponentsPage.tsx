@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ConfigControls } from './ConfigControls';
+import { ConfigControls } from './ConfigControl';
 import { ComponentsLivePreview } from './ComponentsLivePreview';
 import ComponentsExportSection from './ComponentsExportSection';
 import { Monitor, Code2 } from 'lucide-react';

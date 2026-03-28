@@ -47,7 +47,7 @@ const Header = ({ appMode, setAppMode, view, setView }: HeaderProps) => {
 
       <div className="flex items-center gap-3">
         <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-500 ring-1 ring-inset ring-emerald-500/20 uppercase tracking-widest flex items-center gap-1">
-          <Sparkles className="w-3 h-3" /> v1.0.0
+          <Sparkles className="w-3 h-3" /> v1.0.1
         </span>
         <button
           onClick={() => setAppMode(appMode === 'light' ? 'dark' : 'light')}

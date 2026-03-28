@@ -1,24 +1,28 @@
 # ColorTheme Studio
 
-[![Version](https://img.shields.io/badge/version-0.0.1-blue.svg)](https://colorthemestudio.vercel.app/)
+[![Version](https://img.shields.io/badge/version-1.0.1-blue.svg)](https://colorthemestudio.vercel.app/)
+[![React](https://img.shields.io/badge/React-19-green.svg)](https://reactjs.org)
+[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4-blue.svg)](https://tailwindcss.com)
 [![Website](https://img.shields.io/badge/website-live-success.svg)](https://colorthemestudio.vercel.app/)
 
-ColorTheme Studio is a powerful, elegant, and developer-friendly color theme generator. It allows designers and developers to create, customize, and preview comprehensive color palettes, and seamlessly export them to modern frameworks like Tailwind CSS and Flutter.
+ColorTheme Studio is a powerful, elegant, and developer-friendly color theme generator built with React + Vite. It enables designers and developers to create, customize, and preview comprehensive, accessible color palettes with light/dark modes, then seamlessly export production-ready configurations for modern frameworks including Tailwind CSS, Shadcn UI, Flutter, and Web CSS.
 
 ## 🚀 Features
 
-- **Intuitive Color Generation:** Pick a base color and automatically generate a harmonious, accessible color palette.
-- **Theme Temperature Adjustment:** Fine-tune your theme's feel by adjusting between natural, warmer, and cooler variations.
-- **Real-Time Preview:** Instantly see how your generated theme looks in both Web (Tailwind component) and Mobile (Flutter component) contexts.
-- **Dark & Light Modes:** Comprehensive support for both light and dark mode versions of your generated themes.
-- **One-Click Code Export:** Easily transition from design to development with a dedicated "Export Setup" page providing:
-  - Full modern Tailwind CSS configurations (`tailwind.config.js`)
-  - Native Web CSS Variables (`:root` definitions)
-  - Complete Flutter themes generated across 9 comprehensive Dart files mirroring professional app setups.
+- **Intuitive Color Palette Generation**: Select a base color via interactive wheel or categories, auto-generate harmonious scales with temperature adjustments (warm/cool/natural).
+- **Real-Time Previews**: Live rendering of themes in modern Web (Tailwind/Shadcn components) and Flutter UI mockups.
+- **Advanced Components Customization**: 48+ built-in presets (Core, Thematic like Retro Arcade/Neo Brutalism, DaisyUI replicas). Customize typography, geometry, effects, layout with live previews.
+- **Dark & Light Mode Support**: Full dual-mode theme generation and previews.
+- **One-Click Code Exports**:
+  - Tailwind `tailwind.config.js` + CSS vars.
+  - Shadcn UI configs.
+  - Complete Flutter theme (9+ Dart files with AppTheme context).
+  - Clean React/Flutter snippets using semantic classes (no inline styles).
+- **Professional Outputs**: Semantic, framework-native code ready for production apps.
 
 ## 📸 Screenshots
 
-### Web & Tailwind CSS Preview
+### Web & Tailwind Preview
 
 ![Tailwind CSS Preview](screenshots/forTailwinds.png)
 
@@ -29,32 +33,66 @@ ColorTheme Studio is a powerful, elegant, and developer-friendly color theme gen
 ### Export Setup
 
 ![Export Setup](screenshots/exportSetup.png)
-![Export Setup for tailwind](screenshots/exportSetupTw.png)
+![Tailwind Export](screenshots/exportSetupTw.png)
 
-## 📖 Documentation
+## 🚀 Quick Start
 
-To understand the core project workings and how different pieces fit together, please refer to our documentation directory:
+### Prerequisites
 
-- [explain.md](./docs/explain.md) - Detailed explanation of the project capabilities and usage.
-- [architecture.md](./docs/architecture.md) - Deep dive into the component architecture, state management, and file structure.
-- [components.md](./docs/components.md) - New Components customization feature (typography, geometry, live previews).
-- [file-structure.md](./docs/file-structure.md) - Detailed per-file responsibilities.
-- [getting-started.md](./docs/getting-started.md) - How to run and test the project locally.
+- Node.js 18+ or Bun
+- Yarn/NPM/Bun
 
-## 🚀 Recent Developments
+### Installation & Run
 
-- **Themes & Typography Engine:** Massively expanded "Components" tab capabilities. Added **48 Built-in Presets** split across Core Foundations, highly specific Thematic/Playful Overhauls (e.g. *Retro Arcade*, *Claymorphism*, *Neo Brutalism*), and 18 perfect replicas of the official *DaisyUI* ecosystem. (See [docs/themes.md](./docs/themes.md)).
-- **Unified Component Export:** "Components Export" section now generates completely clean React (Tailwind) and Flutter code snippets without inline styles. Snippets natively leverage semantic classes (e.g., \`bg-primary rounded-button\`) and the exported Flutter \`AppTheme\` context.
-- Progress tracked in [TODO.md](./TODO.md).
+```bash
+git clone <repo>
+cd colorthemestudio
+bun install  # or npm/yarn install
+bun dev      # or npm run dev
+```
 
-## 🔗 Live Demo
+- Opens at [http://localhost:5173](http://localhost:5173)
+- Hot reload enabled.
 
-Visit the live website here: [https://colorthemestudio.vercel.app/](https://colorthemestudio.vercel.app/)
+### Build for Production
+
+```bash
+bun build  # dist/ folder ready for deployment
+```
+
+[Live Demo](https://colorthemestudio.vercel.app/)
 
 ## 🛠️ Tech Stack
 
-- **Framework:** React + Vite
-- **Styling:** Tailwind CSS, ShadCN UI
-- **Icons:** Lucide React
-- **State Management:** Zustand
-- **Color Manipulation:** culori, chroma-js
+- **Core**: React 19, Vite 8, TypeScript 6
+- **Styling**: Tailwind CSS 4 (@tailwindcss/vite), Shadcn UI 0.9, clsx, tailwind-merge
+- **State/UI**: Zustand 5, Framer Motion 12, Lucide React
+- **Colors**: culori 4, chroma-js 3, react-colorful
+- **Dev**: ESLint 9, PostCSS, Autoprefixer
+
+Full deps in [package.json](package.json).
+
+## 📖 Documentation
+
+- [Getting Started](./docs/getting-started.md) - Setup & testing.
+- [Architecture](./docs/architecture.md) - Data flow & structure.
+- [File Structure](./docs/file-structure.md) - Per-file details.
+- [Components](./docs/components.md) - Customization guide.
+- [Themes](./docs/themes.md) - Preset details.
+
+Recent: Enhanced Components export (semantic snippets), DaisyUI presets.
+
+## 🤝 Contributing
+
+1. Fork & clone.
+2. `bun install && bun dev`.
+3. Make changes, test locally.
+4. Commit/PR to `main`.
+
+## 📄 License
+
+MIT License - see [LICENSE](LICENSE) (add if missing).
+
+---
+
+⭐ Star on GitHub | [Deployed on Vercel](https://colorthemestudio.vercel.app/)

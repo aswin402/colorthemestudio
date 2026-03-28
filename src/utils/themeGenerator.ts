@@ -44,6 +44,14 @@ export const generateTheme = (baseColor: string, temperature: ThemeTemperature):
     mutedFgLight = '#64748b';
   }
 
+  const chartLight = [primaryHex, '#2a9d8f', '#e9c46a', '#f4a261', '#e76f51'];
+  try {
+    chartLight[1] = chroma(primaryHex).set('hsl.h', '+60').hex();
+    chartLight[2] = chroma(primaryHex).set('hsl.h', '+120').hex();
+    chartLight[3] = chroma(primaryHex).set('hsl.h', '+180').hex();
+    chartLight[4] = chroma(primaryHex).set('hsl.h', '+240').hex();
+  } catch {}
+
   const light: ThemeColors = {
     background: createToken('Background', lightBg, '--background'),
     foreground: createToken('Foreground', lightFg, '--foreground'),
@@ -64,6 +72,19 @@ export const generateTheme = (baseColor: string, temperature: ThemeTemperature):
     cardForeground: createToken('Card Foreground', lightFg, '--card-foreground'),
     popover: createToken('Popover', lightBg, '--popover'),
     popoverForeground: createToken('Popover Foreground', lightFg, '--popover-foreground'),
+    sidebarBackground: createToken('Sidebar Background', '#fafafa', '--sidebar-background'),
+    sidebarForeground: createToken('Sidebar Foreground', lightFg, '--sidebar-foreground'),
+    sidebarPrimary: createToken('Sidebar Primary', primaryHex, '--sidebar-primary'),
+    sidebarPrimaryForeground: createToken('Sidebar Primary Foreground', primaryFgLight, '--sidebar-primary-foreground'),
+    sidebarAccent: createToken('Sidebar Accent', secondaryLight, '--sidebar-accent'),
+    sidebarAccentForeground: createToken('Sidebar Accent Foreground', secondaryFgLight, '--sidebar-accent-foreground'),
+    sidebarBorder: createToken('Sidebar Border', borderLight, '--sidebar-border'),
+    sidebarRing: createToken('Sidebar Ring', primaryHex, '--sidebar-ring'),
+    chart1: createToken('Chart 1', chartLight[0], '--chart-1'),
+    chart2: createToken('Chart 2', chartLight[1], '--chart-2'),
+    chart3: createToken('Chart 3', chartLight[2], '--chart-3'),
+    chart4: createToken('Chart 4', chartLight[3], '--chart-4'),
+    chart5: createToken('Chart 5', chartLight[4], '--chart-5'),
   };
 
   // Dark Theme
@@ -95,6 +116,14 @@ export const generateTheme = (baseColor: string, temperature: ThemeTemperature):
     mutedFgDark = '#a1a1aa';
   }
 
+  const chartDark = [darkPrimary, '#2a9d8f', '#e9c46a', '#f4a261', '#e76f51'];
+  try {
+    chartDark[1] = chroma(darkPrimary).set('hsl.h', '+60').hex();
+    chartDark[2] = chroma(darkPrimary).set('hsl.h', '+120').hex();
+    chartDark[3] = chroma(darkPrimary).set('hsl.h', '+180').hex();
+    chartDark[4] = chroma(darkPrimary).set('hsl.h', '+240').hex();
+  } catch {}
+
   const dark: ThemeColors = {
     background: createToken('Background', darkBg, '--background'),
     foreground: createToken('Foreground', darkFg, '--foreground'),
@@ -115,6 +144,19 @@ export const generateTheme = (baseColor: string, temperature: ThemeTemperature):
     cardForeground: createToken('Card Foreground', darkFg, '--card-foreground'),
     popover: createToken('Popover', darkBg, '--popover'),
     popoverForeground: createToken('Popover Foreground', darkFg, '--popover-foreground'),
+    sidebarBackground: createToken('Sidebar Background', darkBg, '--sidebar-background'),
+    sidebarForeground: createToken('Sidebar Foreground', darkFg, '--sidebar-foreground'),
+    sidebarPrimary: createToken('Sidebar Primary', darkPrimary, '--sidebar-primary'),
+    sidebarPrimaryForeground: createToken('Sidebar Primary Foreground', primaryFgDark, '--sidebar-primary-foreground'),
+    sidebarAccent: createToken('Sidebar Accent', secondaryDark, '--sidebar-accent'),
+    sidebarAccentForeground: createToken('Sidebar Accent Foreground', secondaryFgDark, '--sidebar-accent-foreground'),
+    sidebarBorder: createToken('Sidebar Border', borderDark, '--sidebar-border'),
+    sidebarRing: createToken('Sidebar Ring', darkPrimary, '--sidebar-ring'),
+    chart1: createToken('Chart 1', chartDark[0], '--chart-1'),
+    chart2: createToken('Chart 2', chartDark[1], '--chart-2'),
+    chart3: createToken('Chart 3', chartDark[2], '--chart-3'),
+    chart4: createToken('Chart 4', chartDark[3], '--chart-4'),
+    chart5: createToken('Chart 5', chartDark[4], '--chart-5'),
   };
 
   return { light, dark };

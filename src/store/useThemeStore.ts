@@ -37,11 +37,10 @@ export const useThemeStore = create<ThemeState>()(
                 fontSizeHeading: '2xl',
                 fontSizeBody: 'base',
                 lineHeight: 'normal',
+                letterSpacing: 'normal',
                 shadow: 'md',
                 density: 'normal',
-                borderWidth: '1',
-                animation: 'smooth',
-                layout: 'grid',
+                borderWidth: '1'
             },
 
             setBaseColor: (color: string) =>

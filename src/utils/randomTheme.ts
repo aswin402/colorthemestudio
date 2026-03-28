@@ -7,12 +7,15 @@ import type {
   ShadowSize,
   DensityType,
   BorderWidthType,
-  AnimationType,
-  LayoutType,
+  FontWeightType,
+  LetterSpacingType,
 } from '../types';
 
 const pick = <T>(arr: T[]): T => arr[Math.floor(Math.random() * arr.length)];
 
+/**
+ * Generate a random hex color with constrained saturation/value for pleasing results
+ */
 export const randomHex = (): string => {
   const hue = Math.floor(Math.random() * 360);
   const sat = 0.6 + Math.random() * 0.3;
@@ -35,29 +38,56 @@ export const randomHex = (): string => {
 export const randomTemperature = (): ThemeTemperature =>
   pick<ThemeTemperature>(['natural', 'warmer', 'cooler']);
 
+// ==================== FONT LISTS ====================
+
+export const HEADING_FONTS = [
+  // Geometric / Modern (most popular)
+  'Inter', 'Poppins', 'Montserrat', 'Manrope',
+  // Display / Bold
+  'Oswald', 'Bebas Neue',
+  // Serif / Elegant
+  'Playfair Display', 'Fraunces',
+  // Clean alternatives
+  'DM Sans', 'Raleway',
+];
+
+/** Body fonts optimized for readability */
+export const BODY_FONTS = [
+  'Inter', 'Roboto', 'Open Sans', 'DM Sans', 'Lato',
+  'Nunito', 'Karla', 'Rubik',
+  'Source Sans 3', 'Mulish',
+  'Noto Sans', 'IBM Plex Sans',
+];
+
+/** Monospace fonts for code */
+export const MONO_FONTS = [
+  'JetBrains Mono', 'Fira Code', 'Source Code Pro',
+  'IBM Plex Mono', 'Roboto Mono',
+];
+
+// ==================== RANDOM CONFIG ====================
+
 export const randomComponentConfig = (): Partial<ComponentConfig> => ({
-  buttonRadius: pick<BorderRadiusSize>(['none', 'sm', 'md', 'lg', 'full']),
-  cardRadius: pick<BorderRadiusSize>(['none', 'sm', 'md', 'lg', 'full']),
-  inputRadius: pick<BorderRadiusSize>(['none', 'sm', 'md', 'lg', 'full']),
-  headingFont: pick([
-    'Poppins', 'Inter', 'Manrope', 'Playfair Display', 'Oswald', 'Geist',
-    'Work Sans', 'DM Sans', 'Space Grotesk', 'Plus Jakarta Sans', 'Outfit',
-    'Syne', 'Bebas Neue', 'Fraunces', 'Quicksand',
-  ]),
-  bodyFont: pick([
-    'Roboto', 'Inter', 'Open Sans', 'DM Sans', 'Work Sans', 'Lato',
-    'Nunito', 'Karla', 'Rubik', 'Figtree', 'Lexend', 'Urbanist',
-  ]),
-  headingWeight: pick(['400', '500', '600', '700', '800']),
-  bodyWeight: pick(['400', '500', '600', '700']),
-  fontSizeHeading: pick<FontSize>(['sm', 'base', 'lg', 'xl', '2xl']),
+  // Border radius
+  buttonRadius: pick<BorderRadiusSize>(['none', 'xs', 'sm', 'md', 'lg', 'xl', 'full']),
+  cardRadius: pick<BorderRadiusSize>(['none', 'sm', 'md', 'lg', 'xl', '2xl']),
+  inputRadius: pick<BorderRadiusSize>(['none', 'xs', 'sm', 'md', 'lg', 'full']),
+
+  // Typography
+  headingFont: pick(HEADING_FONTS),
+  bodyFont: pick(BODY_FONTS),
+  headingWeight: pick<FontWeightType>(['400', '500', '600', '700', '800', '900']),
+  bodyWeight: pick<FontWeightType>(['400', '500', '600']),
+  fontSizeHeading: pick<FontSize>(['sm', 'base', 'lg', 'xl', '2xl', '3xl']),
   fontSizeBody: pick<FontSize>(['xs', 'sm', 'base', 'lg']),
-  lineHeight: pick<LineHeightType>(['compact', 'normal', 'relaxed']),
+  lineHeight: pick<LineHeightType>(['compact', 'normal', 'relaxed', 'loose']),
+  letterSpacing: pick<LetterSpacingType>(['tighter', 'tight', 'normal', 'wide']),
+
+
+  // Layout & Spacing
   shadow: pick<ShadowSize>(['none', 'sm', 'md', 'lg', 'xl']),
   density: pick<DensityType>(['compact', 'normal', 'spacious']),
   borderWidth: pick<BorderWidthType>(['0', '1', '2', '4']),
-  animation: pick<AnimationType>(['none', 'quick', 'smooth', 'bounce']),
-  layout: pick<LayoutType>(['stack', 'grid', 'masonry']),
 });
 
 export const generateRandomTheme = () => ({
