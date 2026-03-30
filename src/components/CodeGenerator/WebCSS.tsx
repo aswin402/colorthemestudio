@@ -5,9 +5,13 @@ import { useState } from 'react';
 
 const radiusMap: Record<BorderRadiusSize, string> = {
   none: '0',
+  xs: '0.0625',
   sm: '0.125',
   md: '0.375',
   lg: '0.5',
+  xl: '0.75',
+  '2xl': '1',
+  '3xl': '1.5',
   full: '9999',
 };
 

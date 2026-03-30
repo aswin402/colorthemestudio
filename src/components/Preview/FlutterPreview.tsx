@@ -20,7 +20,7 @@ export const FlutterPreview = (_props: FlutterPreviewProps) => {
 
   const surface = currentTheme.background.hexValue;
   const onSurface = currentTheme.foreground.hexValue;
-  const primary = currentTheme.primary.hexValue;
+const primary = currentTheme.primary.hexValue;
   const onPrimary = currentTheme.primaryForeground.hexValue;
   const secondary = currentTheme.accent.hexValue;
   const onSecondary = currentTheme.accentForeground.hexValue;
@@ -30,7 +30,7 @@ export const FlutterPreview = (_props: FlutterPreviewProps) => {
   const muted = currentTheme.muted.hexValue;
 
   const getRadiusPx = (size: BorderRadiusSize) => {
-    const map: Record<BorderRadiusSize, string> = { none: '0px', sm: '4px', md: '8px', lg: '12px', full: '9999px' };
+    const map: Record<BorderRadiusSize, string> = { none: '0px', xs: '2px', sm: '4px', md: '8px', lg: '12px', xl: '16px', '2xl': '20px', '3xl': '24px', full: '9999px' };
     return map[size] || '8px';
   };
 
@@ -49,7 +49,7 @@ export const FlutterPreview = (_props: FlutterPreviewProps) => {
   const getFontSizePx = (size: FontSize) => {
     const map: Record<FontSize, string> = {
       xs: '12px', sm: '14px', base: '16px', lg: '18px',
-      xl: '20px', '2xl': '24px', '3xl': '30px', '4xl': '36px',
+      xl: '20px', '2xl': '24px', '3xl': '30px', '4xl': '36px', '5xl': '48px',
     };
     return map[size] || '16px';
   };
@@ -108,7 +108,7 @@ export const FlutterPreview = (_props: FlutterPreviewProps) => {
           <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: primary }}>
             <Menu size={16} style={{ color: onPrimary }} />
           </div>
-          <span className="font-bold" style={{ ...headingStyle, fontSize: getFontSizePx('lg') }}>Flutter Preview</span>
+          <span className="font-bold" style={{ ...headingStyle, fontSize: getFontSizePx('lg') }} >Flutter Preview</span>
         </div>
         <div className="flex gap-2">
           <div className="w-8 h-8 rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition-opacity" style={{ backgroundColor: muted }}>

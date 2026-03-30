@@ -1,4 +1,4 @@
-import { HEADING_FONTS, BODY_FONTS, MONO_FONTS } from '../../../../utils/randomTheme';
+import { HEADING_FONTS, BODY_FONTS } from '../../../../utils/randomTheme';
 
 export const allFontOptions = Array.from(new Set([...HEADING_FONTS, ...BODY_FONTS])).sort();
 

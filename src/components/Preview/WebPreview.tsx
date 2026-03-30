@@ -18,8 +18,8 @@ import {
   
   FileText,
   
-  
-  Activity} from 'lucide-react';
+  Activity, Palette, HelpCircle, Code
+} from 'lucide-react';
 
 interface WebPreviewProps {
   showAll?: boolean;
@@ -46,9 +46,13 @@ export const WebPreview = (_props?: WebPreviewProps) => {
   const getRadiusClass = (size: BorderRadiusSize) => {
     const map: Record<BorderRadiusSize, string> = {
       none: 'rounded-none',
+      xs: 'rounded-xs',
       sm: 'rounded-sm',
       md: 'rounded-md',
       lg: 'rounded-lg',
+      xl: 'rounded-xl',
+      '2xl': 'rounded-2xl',
+      '3xl': 'rounded-3xl',
       full: 'rounded-full',
     };
     return map[size] || 'rounded-md';
@@ -76,6 +80,7 @@ export const WebPreview = (_props?: WebPreviewProps) => {
       '2xl': 'text-2xl',
       '3xl': 'text-3xl',
       '4xl': 'text-4xl',
+      '5xl': 'text-5xl',
     };
     return map[size] || 'text-base';
   };
@@ -589,6 +594,3 @@ export const WebPreview = (_props?: WebPreviewProps) => {
     </div>
   );
 };
-
-// Add missing imports
-import { Palette, HelpCircle, Code } from 'lucide-react';

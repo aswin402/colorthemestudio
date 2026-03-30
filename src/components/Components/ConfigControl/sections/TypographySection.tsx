@@ -1,4 +1,4 @@
-import { Type, Italic, CaseSensitive, Monitor } from 'lucide-react';
+import { Type, Italic } from 'lucide-react';
 import {
   fontSizeOptions,
   lineHeightOptions,
