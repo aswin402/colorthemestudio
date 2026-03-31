@@ -4,6 +4,7 @@ import type {
   BorderRadiusSize,
   FontSize,
   LineHeightType,
+  LetterSpacingType,
   ShadowSize,
   DensityType,
   BorderWidthType,
@@ -85,6 +86,35 @@ export const WebPreview = (_props?: WebPreviewProps) => {
     return map[size] || 'text-base';
   };
 
+  // Returns inline font-size value for headings (bypasses Tailwind purging for dynamic values)
+  const getFontSizeValue = (size: FontSize): string => {
+    const map: Record<FontSize, string> = {
+      xs: '0.75rem',
+      sm: '0.875rem',
+      base: '1rem',
+      lg: '1.125rem',
+      xl: '1.25rem',
+      '2xl': '1.5rem',
+      '3xl': '1.875rem',
+      '4xl': '2.25rem',
+      '5xl': '3rem',
+    };
+    return map[size] || '1rem';
+  };
+
+  // Returns inline letter-spacing value
+  const getLetterSpacingValue = (ls: LetterSpacingType): string => {
+    const map: Record<LetterSpacingType, string> = {
+      tighter: '-0.05em',
+      tight:   '-0.025em',
+      normal:  '0em',
+      wide:    '0.025em',
+      wider:   '0.05em',
+      widest:  '0.1em',
+    };
+    return map[ls] || '0em';
+  };
+
   const getLineHeightClass = (lh: LineHeightType) => {
     const map: Record<LineHeightType, string> = {
       compact: 'leading-tight',
@@ -98,6 +128,16 @@ export const WebPreview = (_props?: WebPreviewProps) => {
   const getBorderWidthStyle = (width: BorderWidthType) => ({
     borderWidth: `${parseInt(width)}px`,
   });
+
+  const cfg = componentConfig;
+
+  // Heading style: combines font family, weight, size, and letter spacing
+  const headingStyle = {
+    fontFamily: `"${cfg.headingFont}", sans-serif`,
+    fontWeight: cfg.headingWeight,
+    fontSize: getFontSizeValue(cfg.fontSizeHeading),
+    letterSpacing: getLetterSpacingValue(cfg.letterSpacing),
+  };
 
   const dynamicStyles = {
     '--background': currentTheme.background.hexValue,
@@ -119,8 +159,6 @@ export const WebPreview = (_props?: WebPreviewProps) => {
     '--popover-foreground': currentTheme.popoverForeground.hexValue,
   } as React.CSSProperties;
 
-  const cfg = componentConfig;
-
   return (
     <div
       className={`flex flex-col gap-5 ${getDensityPadding(cfg.density)} ${getRadiusClass('lg')} border transition-all ${getShadowClass(cfg.shadow)}`}
@@ -135,13 +173,11 @@ export const WebPreview = (_props?: WebPreviewProps) => {
       }}
     >
       {/* Header */}
-      <div
-        style={{
-          fontFamily: `"${cfg.headingFont}", sans-serif`,
-          fontWeight: cfg.headingWeight,
-        }}
-      >
-        <h3 className={`${getFontSizeClass(cfg.fontSizeHeading)} font-bold mb-1 flex items-center gap-2`}>
+      <div>
+        <h3
+          className="font-bold mb-1 flex items-center gap-2"
+          style={headingStyle}
+        >
           <Palette className="w-5 h-5" style={{ color: 'var(--primary)' }} />
           Tailwind / CSS Components
         </h3>
@@ -212,11 +248,8 @@ export const WebPreview = (_props?: WebPreviewProps) => {
         }}
       >
         <h4
-          className={`${getFontSizeClass(cfg.fontSizeHeading)} font-semibold mb-2 flex items-center gap-2`}
-          style={{
-            fontFamily: `"${cfg.headingFont}", sans-serif`,
-            fontWeight: cfg.headingWeight,
-          }}
+          className="font-semibold mb-2 flex items-center gap-2"
+          style={headingStyle}
         >
           <FileText size={18} />
           Card Component

@@ -59,26 +59,21 @@ export const BODY_FONTS = [
   'Noto Sans', 'IBM Plex Sans',
 ];
 
-/** Monospace fonts for code */
-export const MONO_FONTS = [
-  'JetBrains Mono', 'Fira Code', 'Source Code Pro',
-  'IBM Plex Mono', 'Roboto Mono',
-];
 
 // ==================== RANDOM CONFIG ====================
 
 export const randomComponentConfig = (): Partial<ComponentConfig> => ({
   // Border radius
-  buttonRadius: pick<BorderRadiusSize>(['none', 'xs', 'sm', 'md', 'lg', 'xl', 'full']),
-  cardRadius: pick<BorderRadiusSize>(['none', 'sm', 'md', 'lg', 'xl', '2xl']),
-  inputRadius: pick<BorderRadiusSize>(['none', 'xs', 'sm', 'md', 'lg', 'full']),
+  buttonRadius: pick<BorderRadiusSize>(['none', 'xs', 'sm', 'md', 'lg', 'xl' ,'2xl', '3xl', 'full']),
+  cardRadius: pick<BorderRadiusSize>(['none', 'sm', 'md', 'lg', 'xl', '2xl', '3xl']),
+  inputRadius: pick<BorderRadiusSize>(['none', 'xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl']),
 
   // Typography
   headingFont: pick(HEADING_FONTS),
   bodyFont: pick(BODY_FONTS),
-  headingWeight: pick<FontWeightType>(['400', '500', '600', '700', '800', '900']),
-  bodyWeight: pick<FontWeightType>(['400', '500', '600']),
-  fontSizeHeading: pick<FontSize>(['sm', 'base', 'lg', 'xl', '2xl', '3xl']),
+  headingWeight: pick<FontWeightType>(['100', '200','300', '400', '500', '600', '700', '800', '900']),
+  bodyWeight: pick<FontWeightType>(['100', '200','300', '400', '500', '600', '700', '800', '900']),
+  fontSizeHeading: pick<FontSize>(['xs','sm', 'base', 'lg', 'xl', '2xl', '3xl']),
   fontSizeBody: pick<FontSize>(['xs', 'sm', 'base', 'lg']),
   lineHeight: pick<LineHeightType>(['compact', 'normal', 'relaxed', 'loose']),
   letterSpacing: pick<LetterSpacingType>(['tighter', 'tight', 'normal', 'wide']),
@@ -87,7 +82,7 @@ export const randomComponentConfig = (): Partial<ComponentConfig> => ({
   // Layout & Spacing
   shadow: pick<ShadowSize>(['none', 'sm', 'md', 'lg', 'xl']),
   density: pick<DensityType>(['compact', 'normal', 'spacious']),
-  borderWidth: pick<BorderWidthType>(['0', '1', '2', '4']),
+  borderWidth: pick<BorderWidthType>(['0', '1']),
 });
 
 export const generateRandomTheme = () => ({
