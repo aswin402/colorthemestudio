@@ -3,14 +3,15 @@ import { Palette, Sun, Moon, Sparkles } from 'lucide-react';
 interface HeaderProps {
   appMode: 'light' | 'dark';
   setAppMode: (val: 'light' | 'dark') => void;
-  view: 'editor' | 'components' | 'export';
-  setView: (val: 'editor' | 'components' | 'export') => void;
+  view: 'editor' | 'components' | 'code' | 'export';
+  setView: (val: 'editor' | 'components' | 'code' | 'export') => void;
 }
 
 const Header = ({ appMode, setAppMode, view, setView }: HeaderProps) => {
   const tabs: { key: typeof view; label: string }[] = [
     { key: 'editor', label: 'Colors' },
     { key: 'components', label: 'Components' },
+    { key: 'code', label: 'Component Code' },
     { key: 'export', label: 'Export Setup' },
   ];
 
@@ -47,7 +48,7 @@ const Header = ({ appMode, setAppMode, view, setView }: HeaderProps) => {
 
       <div className="flex items-center gap-3">
         <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-500 ring-1 ring-inset ring-emerald-500/20 uppercase tracking-widest flex items-center gap-1">
-          <Sparkles className="w-3 h-3" /> v1.0.2
+          <Sparkles className="w-3 h-3" /> v1.0.3
         </span>
         <button
           onClick={() => setAppMode(appMode === 'light' ? 'dark' : 'light')}

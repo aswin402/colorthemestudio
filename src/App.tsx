@@ -5,10 +5,11 @@ import { PreviewPanel } from './components/Preview/PreviewPanel';
 import { CodeGenPanel } from './components/CodeGenerator/CodeGenPanel';
 import { ExportPage } from './components/Export/ExportPage';
 import { ComponentsPage } from './components/Components/ComponentsPage';
+import ComponentsExportSection from './components/Components/ComponentsExportSection';
 
 function App() {
   const [appMode, setAppMode] = useState<'light' | 'dark'>('dark');
-  const [view, setView] = useState<'editor' | 'components' | 'export'>('editor');
+  const [view, setView] = useState<'editor' | 'components' | 'code' | 'export'>('editor');
 
   const bgClass = appMode === 'dark' ? 'bg-[#09090b] text-white' : 'app-light';
   const panelClass = appMode === 'dark'
@@ -35,6 +36,10 @@ function App() {
         ) : view === 'components' ? (
           <div className="h-full max-w-[1920px] mx-auto">
             <ComponentsPage panelClass={panelClass} />
+          </div>
+        ) : view === 'code' ? (
+          <div className={`h-full max-w-[1920px] mx-auto rounded-2xl border overflow-hidden ${panelClass}`}>
+            <ComponentsExportSection />
           </div>
         ) : (
           <div className="h-full max-w-[1920px] mx-auto">
