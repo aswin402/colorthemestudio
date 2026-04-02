@@ -5,6 +5,7 @@ import { TypographySection } from './sections/TypographySection';
 import { LayoutSection } from './sections/LayoutSection';
 import { EffectsSection } from './sections/EffectsSection';
 import { GeometrySection } from './sections/GeometrySection';
+import { OpacitySection } from './sections/OpacitySection';
 
 export const ConfigControls = () => {
   const { collapsedSections, toggleSection, applyPreset, handleRandomStyles } = useConfigControls();
@@ -57,6 +58,13 @@ export const ConfigControls = () => {
       <GeometrySection
         collapsed={collapsedSections.geometry}
         onToggle={() => toggleSection('geometry')}
+      />
+
+      <hr className="border-white/5" />
+
+      <OpacitySection
+        collapsed={collapsedSections.opacity}
+        onToggle={() => toggleSection('opacity')}
       />
     </div>
   );

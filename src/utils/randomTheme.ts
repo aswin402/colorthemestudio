@@ -9,7 +9,10 @@ import type {
   BorderWidthType,
   FontWeightType,
   LetterSpacingType,
+  OpacityType,
+  BlurSize,
 } from '../types';
+
 
 const pick = <T>(arr: T[]): T => arr[Math.floor(Math.random() * arr.length)];
 
@@ -62,28 +65,56 @@ export const BODY_FONTS = [
 
 // ==================== RANDOM CONFIG ====================
 
-export const randomComponentConfig = (): Partial<ComponentConfig> => ({
-  // Border radius
-  buttonRadius: pick<BorderRadiusSize>(['none', 'xs', 'sm', 'md', 'lg', 'xl' ,'2xl', '3xl', 'full']),
-  cardRadius: pick<BorderRadiusSize>(['none', 'sm', 'md', 'lg', 'xl', '2xl', '3xl']),
-  inputRadius: pick<BorderRadiusSize>(['none', 'xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl']),
+export const randomComponentConfig = (): Partial<ComponentConfig> => {
+  const isGlassy = Math.random() < 0.25; // 25% chance of dedicated Glassmorphism mode
 
-  // Typography
-  headingFont: pick(HEADING_FONTS),
-  bodyFont: pick(BODY_FONTS),
-  headingWeight: pick<FontWeightType>(['100', '200','300', '400', '500', '600', '700', '800', '900']),
-  bodyWeight: pick<FontWeightType>(['100', '200','300', '400', '500', '600', '700', '800', '900']),
-  fontSizeHeading: pick<FontSize>(['xs','sm', 'base', 'lg', 'xl', '2xl', '3xl']),
-  fontSizeBody: pick<FontSize>(['xs', 'sm', 'base', 'lg']),
-  lineHeight: pick<LineHeightType>(['compact', 'normal', 'relaxed', 'loose']),
-  letterSpacing: pick<LetterSpacingType>(['tighter', 'tight', 'normal', 'wide']),
+  return {
+    // Border radius
+    buttonRadius: pick<BorderRadiusSize>(['none', 'xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', 'full']),
+    cardRadius: pick<BorderRadiusSize>(['none', 'sm', 'md', 'lg', 'xl', '2xl', '3xl']),
+    inputRadius: pick<BorderRadiusSize>(['none', 'xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl']),
 
+    // Typography
+    headingFont: pick(HEADING_FONTS),
+    bodyFont: pick(BODY_FONTS),
+    headingWeight: pick<FontWeightType>(['100', '200', '300', '400', '500', '600', '700', '800', '900']),
+    bodyWeight: pick<FontWeightType>(['100', '200', '300', '400', '500', '600', '700', '800', '900']),
+    fontSizeHeading: pick<FontSize>(['xs', 'sm', 'base', 'lg', 'xl', '2xl', '3xl', '4xl']),
+    fontSizeBody: pick<FontSize>(['xs', 'sm', 'base', 'lg']),
+    lineHeight: pick<LineHeightType>(['compact', 'normal', 'relaxed', 'loose']),
+    letterSpacing: pick<LetterSpacingType>(['tighter', 'tight', 'normal', 'wide']),
 
-  // Layout & Spacing
-  shadow: pick<ShadowSize>(['none', 'sm', 'md', 'lg', 'xl']),
-  density: pick<DensityType>(['compact', 'normal', 'spacious']),
-  borderWidth: pick<BorderWidthType>(['0', '1']),
-});
+    // Layout & Spacing
+    shadow: pick<ShadowSize>(['none', 'sm', 'md', 'lg', 'xl']),
+    density: pick<DensityType>(['compact', 'normal', 'spacious']),
+    borderWidth: isGlassy ? '1' : pick<BorderWidthType>(['0', '1', '1']), // Glass requires borders
+
+    // Per-component opacity & glass sync
+    buttonOpacity: isGlassy
+      ? pick<OpacityType>(['75', '100']) // Buttons stay partially opaque for visibility
+      : '100',
+    cardOpacity: isGlassy
+      ? pick<OpacityType>(['50', '75'])
+      : '100',
+    navbarOpacity: isGlassy
+      ? pick<OpacityType>(['25', '50', '75'])
+      : '100',
+    inputOpacity: isGlassy
+      ? pick<OpacityType>(['50', '75'])
+      : '100',
+    badgeOpacity: isGlassy
+      ? pick<OpacityType>(['75', '100'])
+      : '100',
+    overlayOpacity: isGlassy
+      ? pick<OpacityType>(['25', '50', '75'])
+      : pick<OpacityType>(['75', '100']),
+    
+    blurAmount: isGlassy
+      ? pick<BlurSize>(['md', 'lg', 'xl']) // Intense blur for glassy look
+      : pick<BlurSize>(['none', 'none', 'sm']), // Subtle or no blur for solid look
+  };
+};
+
 
 export const generateRandomTheme = () => ({
   baseColor: randomHex(),

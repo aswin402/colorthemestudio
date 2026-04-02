@@ -6,6 +6,8 @@ import type {
   BorderWidthType,
   ShadowSize,
   DensityType,
+  OpacityType,
+  BlurSize,
 } from '../../../../types/index';
 
 export const radiusOptions: { label: string; value: BorderRadiusSize }[] = [
@@ -48,8 +50,6 @@ export const letterSpacingOptions: { label: string; value: LetterSpacingType }[]
   { label: 'Widest', value: 'widest' },
 ];
 
-
-
 export const borderWidthOptions: { label: string; value: BorderWidthType }[] = [
   { label: '0', value: '0' },
   { label: '1px', value: '1' },
@@ -58,10 +58,6 @@ export const borderWidthOptions: { label: string; value: BorderWidthType }[] = [
   { label: '8px', value: '8' },
   { label: '12px', value: '12' },
 ];
-
-
-
-
 
 export const shadowOptions: { label: string; value: ShadowSize }[] = [
   { label: 'None', value: 'none' },
@@ -72,8 +68,6 @@ export const shadowOptions: { label: string; value: ShadowSize }[] = [
   { label: '2XL', value: '2xl' },
 ];
 
-
-
 export const densityOptions: { label: string; value: DensityType }[] = [
   { label: 'Compact', value: 'compact' },
   { label: 'Normal', value: 'normal' },
@@ -82,3 +76,19 @@ export const densityOptions: { label: string; value: DensityType }[] = [
 
 export const fontWeightOptions = ['100', '200', '300', '400', '500', '600', '700', '800', '900'];
 export const bodyWeightOptions = ['300', '400', '500', '600', '700'];
+
+export const opacityOptions: { label: string; value: OpacityType }[] = [
+  { label: '0%',   value: '0' },
+  { label: '25%',  value: '25' },
+  { label: '50%',  value: '50' },
+  { label: '75%',  value: '75' },
+  { label: '100%', value: '100' },
+];
+
+export const blurOptions: { label: string; value: BlurSize }[] = [
+  { label: 'None', value: 'none' },
+  { label: 'Sm (4px)', value: 'sm' },
+  { label: 'Md (8px)', value: 'md' },
+  { label: 'Lg (12px)', value: 'lg' },
+  { label: 'XL (20px)', value: 'xl' },
+];

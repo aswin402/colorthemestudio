@@ -69,6 +69,8 @@ export type BorderWidthType = '0' | '1' | '2' | '4' | '8' | '12';
 export type FontWeightType = '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900';
 export type LetterSpacingType = 'tighter' | 'tight' | 'normal' | 'wide' | 'wider' | 'widest';
 export type OpacityType = '0' | '25' | '50' | '75' | '100';
+export type BlurSize = 'none' | 'sm' | 'md' | 'lg' | 'xl';
+
 
 // ==================== COMPONENT CONFIG ====================
 export interface ComponentConfig {
@@ -91,7 +93,17 @@ export interface ComponentConfig {
   shadow: ShadowSize;
   density: DensityType;
   borderWidth: BorderWidthType;
+
+  // Per-component opacity
+  buttonOpacity: OpacityType;
+  cardOpacity: OpacityType;
+  navbarOpacity: OpacityType;
+  inputOpacity: OpacityType;
+  badgeOpacity: OpacityType;
+  overlayOpacity: OpacityType;
+  blurAmount: BlurSize;
 }
+
 
 // ==================== FONT CATEGORY TYPES ====================
 export type FontCategory =

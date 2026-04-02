@@ -37,8 +37,14 @@ export const ComponentsLivePreview = () => {
         </div>
       </div>
 
-      <div className="flex-1 overflow-y-auto p-5 scrollbar-thin">
-        {activeTab === 'web' ? <WebPreview showAll layout="grid" /> : <FlutterPreview showAll layout="grid" />}
+      <div className={`flex-1 overflow-y-auto scrollbar-thin ${activeTab === 'flutter' ? 'bg-zinc-100 dark:bg-zinc-900/50 p-4 sm:p-8' : 'p-5'}`}>
+        {activeTab === 'web' ? (
+          <WebPreview showAll layout="grid" />
+        ) : (
+          <div className="flex justify-center items-start min-h-full">
+            <FlutterPreview showAll layout="grid" />
+          </div>
+        )}
       </div>
     </div>
   );

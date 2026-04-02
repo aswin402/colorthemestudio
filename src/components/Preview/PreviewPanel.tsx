@@ -65,8 +65,14 @@ export const PreviewPanel = () => {
         </div>
       </div>
 
-      <div className="flex-1 overflow-y-auto scrollbar-thin">
-        {activeTab === 'web' ? <WebPreview /> : <FlutterPreview />}
+      <div className={`flex-1 overflow-y-auto scrollbar-thin ${activeTab === 'flutter' ? 'bg-zinc-100 dark:bg-zinc-900/50 rounded-2xl p-4 sm:p-8' : ''}`}>
+        {activeTab === 'web' ? (
+          <WebPreview />
+        ) : (
+          <div className="flex justify-center items-start min-h-full">
+            <FlutterPreview />
+          </div>
+        )}
       </div>
     </div>
   );

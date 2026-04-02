@@ -8,7 +8,10 @@ import type {
   ShadowSize,
   DensityType,
   BorderWidthType,
+  OpacityType,
+  BlurSize,
 } from '../../types';
+
 import {
   Info, X, Check, ChevronDown, Sun, Moon, AlertCircle,
   Mail, MessageSquare, User, Settings, BarChart3,
@@ -129,7 +132,30 @@ export const WebPreview = (_props?: WebPreviewProps) => {
     borderWidth: `${parseInt(width)}px`,
   });
 
+  const getOpacity = (op: OpacityType): number => parseInt(op) / 100;
+
+
+  const getBlurValue = (size: BlurSize) => {
+    const map: Record<BlurSize, string> = {
+      none: '0px',
+      sm: '4px',
+      md: '8px',
+      lg: '12px',
+      xl: '24px',
+    };
+    return map[size] || '0px';
+  };
+
+  const colorWithAlpha = (hex: string, alpha: number) => {
+    if (alpha >= 1) return hex;
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+  };
+
   const cfg = componentConfig;
+
 
   // Heading style: combines font family, weight, size, and letter spacing
   const headingStyle = {
@@ -139,7 +165,16 @@ export const WebPreview = (_props?: WebPreviewProps) => {
     letterSpacing: getLetterSpacingValue(cfg.letterSpacing),
   };
 
+  const glassStyle = (opacity: OpacityType) => {
+    const alpha = getOpacity(opacity);
+    return {
+      backdropFilter: alpha < 1 ? `blur(${getBlurValue(cfg.blurAmount)})` : 'none',
+      WebkitBackdropFilter: alpha < 1 ? `blur(${getBlurValue(cfg.blurAmount)})` : 'none',
+    };
+  };
+
   const dynamicStyles = {
+
     '--background': currentTheme.background.hexValue,
     '--foreground': currentTheme.foreground.hexValue,
     '--primary': currentTheme.primary.hexValue,
@@ -197,14 +232,14 @@ export const WebPreview = (_props?: WebPreviewProps) => {
         ].map((btn) => (
           <button
             key={btn.label}
-            className={`py-2 px-5 font-medium text-sm transition-all hover:opacity-90 active:scale-[0.97] ${getRadiusClass(cfg.buttonRadius)} ${getShadowClass(cfg.shadow)} flex items-center gap-2`}
+            className={`py-2 px-5 font-medium text-sm transition-all hover:opacity-90 active:scale-[0.97] ${getRadiusClass(cfg.buttonRadius)} ${getShadowClass(cfg.shadow)} flex items-center gap-2 border border-white/10`}
             style={{
-              backgroundColor: btn.bg,
+              backgroundColor: colorWithAlpha(btn.bg.startsWith('var') ? (btn.bg === 'var(--primary)' ? currentTheme.primary.hexValue : btn.bg === 'var(--secondary)' ? currentTheme.secondary.hexValue : currentTheme.destructive.hexValue) : btn.bg, getOpacity(cfg.buttonOpacity)),
               color: btn.fg,
               fontFamily: `"${cfg.headingFont}", sans-serif`,
               fontWeight: cfg.headingWeight,
               ...getBorderWidthStyle(cfg.borderWidth),
-              borderColor: 'transparent',
+              ...glassStyle(cfg.buttonOpacity),
             }}
           >
             <btn.icon size={16} />
@@ -214,11 +249,12 @@ export const WebPreview = (_props?: WebPreviewProps) => {
         <button
           className={`py-2 px-5 font-medium text-sm transition-all hover:opacity-90 border ${getRadiusClass(cfg.buttonRadius)} flex items-center gap-2`}
           style={{
-            backgroundColor: 'transparent',
+            backgroundColor: colorWithAlpha(currentTheme.primary.hexValue, 0.05),
             color: 'var(--primary)',
-            borderColor: 'var(--border)',
+            borderColor: colorWithAlpha(currentTheme.border.hexValue, getOpacity(cfg.buttonOpacity)),
             ...getBorderWidthStyle(cfg.borderWidth),
             fontFamily: `"${cfg.headingFont}", sans-serif`,
+            ...glassStyle(cfg.buttonOpacity),
           }}
         >
           <Link size={16} />
@@ -237,16 +273,19 @@ export const WebPreview = (_props?: WebPreviewProps) => {
         </button>
       </div>
 
+
       {/* Card */}
       <div
-        className={`${getDensityPadding(cfg.density)} ${getRadiusClass(cfg.cardRadius)} border ${getShadowClass(cfg.shadow)}`}
+        className={`${getDensityPadding(cfg.density)} ${getRadiusClass(cfg.cardRadius)} border ${getShadowClass(cfg.shadow)} transition-all`}
         style={{
-          backgroundColor: 'var(--card)',
+          backgroundColor: colorWithAlpha(currentTheme.card.hexValue, getOpacity(cfg.cardOpacity)),
           color: 'var(--card-foreground)',
-          borderColor: 'var(--border)',
+          borderColor: colorWithAlpha(currentTheme.border.hexValue, 0.5),
           ...getBorderWidthStyle(cfg.borderWidth),
+          ...glassStyle(cfg.cardOpacity),
         }}
       >
+
         <h4
           className="font-semibold mb-2 flex items-center gap-2"
           style={headingStyle}
@@ -339,6 +378,7 @@ export const WebPreview = (_props?: WebPreviewProps) => {
               backgroundColor: badge.bg,
               color: badge.fg,
               border: badge.border ? '1px solid var(--border)' : 'none',
+              opacity: getOpacity(cfg.badgeOpacity),
             }}
           >
             <badge.icon size={10} />
@@ -389,11 +429,13 @@ export const WebPreview = (_props?: WebPreviewProps) => {
         <div
           className={`flex ${getDensityPadding('compact')} ${getRadiusClass(cfg.inputRadius)} border focus-within:ring-2 focus-within:ring-offset-1 transition-all items-center gap-2`}
           style={{
-            backgroundColor: 'var(--background)',
-            borderColor: 'var(--input)',
+            backgroundColor: colorWithAlpha(currentTheme.background.hexValue, getOpacity(cfg.inputOpacity)),
+            borderColor: colorWithAlpha(currentTheme.input.hexValue, 0.4),
             ...getBorderWidthStyle(cfg.borderWidth),
+            ...glassStyle(cfg.inputOpacity),
           }}
         >
+
           <Mail size={16} style={{ color: 'var(--muted-foreground)' }} />
           <input
             placeholder="name@example.com"
@@ -417,14 +459,16 @@ export const WebPreview = (_props?: WebPreviewProps) => {
           rows={3}
           className={`w-full bg-transparent outline-none ${getDensityPadding('compact')} ${getRadiusClass(cfg.inputRadius)} border focus:ring-2 focus:ring-offset-1 transition-all ${getFontSizeClass(cfg.fontSizeBody)} placeholder:opacity-40 resize-none`}
           style={{
-            backgroundColor: 'var(--background)',
-            borderColor: 'var(--input)',
+            backgroundColor: colorWithAlpha(currentTheme.background.hexValue, getOpacity(cfg.inputOpacity)),
+            borderColor: colorWithAlpha(currentTheme.input.hexValue, 0.4),
             color: 'var(--foreground)',
             fontFamily: `"${cfg.bodyFont}", sans-serif`,
             ...getBorderWidthStyle(cfg.borderWidth),
+            ...glassStyle(cfg.inputOpacity),
           }}
         />
       </div>
+
 
       {/* Avatar */}
       <div className="flex items-center gap-3">
@@ -474,11 +518,13 @@ export const WebPreview = (_props?: WebPreviewProps) => {
       <div
         className={`flex items-center justify-between p-4 border ${getRadiusClass(cfg.cardRadius)}`}
         style={{
-          backgroundColor: 'var(--card)',
-          borderColor: 'var(--border)',
+          backgroundColor: colorWithAlpha(currentTheme.card.hexValue, getOpacity(cfg.navbarOpacity)),
+          borderColor: colorWithAlpha(currentTheme.border.hexValue, 0.4),
           ...getBorderWidthStyle(cfg.borderWidth),
+          ...glassStyle(cfg.navbarOpacity),
         }}
       >
+
         <div className="flex items-center gap-3">
           {switchOn ? <Sun size={18} /> : <Moon size={18} />}
           <div>
@@ -534,11 +580,13 @@ export const WebPreview = (_props?: WebPreviewProps) => {
       <div
         className={`flex items-center gap-3 p-3 ${getRadiusClass(cfg.cardRadius)} ${getShadowClass('lg')} border`}
         style={{
-          backgroundColor: 'var(--card)',
-          borderColor: 'var(--border)',
+          backgroundColor: colorWithAlpha(currentTheme.card.hexValue, getOpacity(cfg.overlayOpacity)),
+          borderColor: colorWithAlpha(currentTheme.border.hexValue, 0.4),
           ...getBorderWidthStyle(cfg.borderWidth),
+          ...glassStyle(cfg.overlayOpacity),
         }}
       >
+
         <div
           className="w-8 h-8 flex items-center justify-center rounded-full flex-shrink-0"
           style={{ backgroundColor: '#22c55e20', color: '#22c55e' }}

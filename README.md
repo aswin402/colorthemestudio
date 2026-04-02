@@ -82,6 +82,8 @@ Full deps in [package.json](package.json).
 
 Recent: Enhanced Components export (semantic snippets), DaisyUI presets.
 
+### vibe coded by aswin
+
 ## 🤝 Contributing
 
 1. Fork & clone.

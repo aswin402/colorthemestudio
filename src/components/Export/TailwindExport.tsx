@@ -21,11 +21,11 @@ export const TailwindExport: React.FC = () => {
 
   const lightVars = Object.values(theme.light)
     .map((token) => `    ${token.cssVar}: ${token.oklchValue};`)
-    .join('\\n');
+    .join('\n');
 
   const darkVars = Object.values(theme.dark)
     .map((token) => `    ${token.cssVar}: ${token.oklchValue};`)
-    .join('\\n');
+    .join('\n');
 
   const headingFont = componentConfig.headingFont || 'Manrope';
   const bodyFont = componentConfig.bodyFont || 'Geist';

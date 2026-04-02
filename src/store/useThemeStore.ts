@@ -40,8 +40,16 @@ export const useThemeStore = create<ThemeState>()(
                 letterSpacing: 'normal',
                 shadow: 'md',
                 density: 'normal',
-                borderWidth: '1'
+                borderWidth: '1',
+                buttonOpacity: '100',
+                cardOpacity: '100',
+                navbarOpacity: '100',
+                inputOpacity: '100',
+                badgeOpacity: '100',
+                overlayOpacity: '75',
+                blurAmount: 'none',
             },
+
 
             setBaseColor: (color: string) =>
                 set((state) => ({
