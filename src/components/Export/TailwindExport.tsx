@@ -18,11 +18,6 @@ export const TailwindExport: React.FC = () => {
     full: '9999',
   };
 
-  const getFontWeights = (weight: string) => {
-    const baseWeights = ['400', '500', '600', '700'];
-    const index = baseWeights.indexOf(weight || '400');
-    return baseWeights.slice(index).join(';') || '400;500;600;700';
-  };
 
   const lightVars = Object.values(theme.light)
     .map((token) => `    ${token.cssVar}: ${token.oklchValue};`)
@@ -56,19 +51,19 @@ export const TailwindExport: React.FC = () => {
   --color-border: oklch(var(--border));
   --color-input: oklch(var(--input));
   --color-ring: oklch(var(--ring));
-  --radius-lg: \${radius}rem;
-  --radius-md: calc(\${radius}rem - 2px);
-  --radius-sm: calc(\${radius}rem - 4px);
-  --font-heading: '\${headingFont}', sans-serif;
-  --font-body: '\${bodyFont}', sans-serif;
+  --radius-lg: ${radius}rem;
+  --radius-md: calc(${radius}rem - 2px);
+  --radius-sm: calc(${radius}rem - 4px);
+  --font-heading: '${headingFont}', sans-serif;
+  --font-body: '${bodyFont}', sans-serif;
 }
 
 @layer base {
   :root {
-\${lightVars}
+${lightVars}
   }
   .dark {
-\${darkVars}
+${darkVars}
   }
 }
 

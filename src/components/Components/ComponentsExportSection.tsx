@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Monitor, Smartphone, Copy, Check, ChevronRight, FileCode2, BookOpen } from 'lucide-react';
+import { Monitor, Smartphone, Copy, Check, ChevronRight, FileCode2, BookOpen, Eye } from 'lucide-react';
+import { previewMap } from './ComponentPreviewRenderer';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Types
@@ -2451,10 +2452,7 @@ const frameworkMeta = {
     icon: Monitor,
     label: 'React',
     sublabel: 'TypeScript + Tailwind CSS',
-    accent: 'from-sky-500 to-blue-600',
     badge: 'bg-sky-500/10 text-sky-500 border-sky-500/20',
-    pillActive: 'bg-sky-500 text-white',
-    pillInactive: 'text-muted-foreground hover:text-foreground',
     codeLabel: 'Component Code',
     usageLabel: 'Usage Example',
   },
@@ -2462,52 +2460,38 @@ const frameworkMeta = {
     icon: Smartphone,
     label: 'Flutter',
     sublabel: 'Dart widgets',
-    accent: 'from-blue-500 to-cyan-500',
     badge: 'bg-cyan-500/10 text-cyan-500 border-cyan-500/20',
-    pillActive: 'bg-cyan-500 text-white',
-    pillInactive: 'text-muted-foreground hover:text-foreground',
     codeLabel: 'Widget Code',
     usageLabel: 'Usage Example',
   },
 };
+
+type CodeTab = 'preview' | 'code' | 'usage';
 
 interface CodeBlockProps {
   code: string;
   copyIndex: number;
   copiedIndex: number | null;
   onCopy: (index: number, code: string) => void;
-  label?: string;
-  dark?: boolean;
 }
 
-const CodeBlock = ({ code, copyIndex, copiedIndex, onCopy, label, dark = false }: CodeBlockProps) => (
+const CodeBlock = ({ code, copyIndex, copiedIndex, onCopy }: CodeBlockProps) => (
   <div className="relative group">
-    {label && (
-      <p className="text-[10px] uppercase tracking-widest text-muted-foreground mb-2 font-semibold">{label}</p>
-    )}
-    <div className="relative">
-      <pre className={`p-5 rounded-xl overflow-x-auto text-sm font-mono leading-relaxed border scrollbar-thin ${
-        dark
-          ? 'bg-zinc-950 text-zinc-200 border-zinc-800'
-          : 'bg-muted/60 text-foreground border-border'
-      }`}>
-        <code>{code}</code>
-      </pre>
-      <button
-        onClick={() => onCopy(copyIndex, code)}
-        className={`absolute top-3 right-3 flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all opacity-0 group-hover:opacity-100 ${
-          copiedIndex === copyIndex
-            ? 'bg-emerald-500 text-white'
-            : 'bg-background/90 backdrop-blur-sm border border-border hover:bg-muted text-foreground'
-        }`}
-      >
-        {copiedIndex === copyIndex ? (
-          <><Check className="w-3 h-3" /> Copied</>
-        ) : (
-          <><Copy className="w-3 h-3" /> Copy</>
-        )}
-      </button>
-    </div>
+    <pre className="p-5 rounded-xl overflow-x-auto text-sm font-mono leading-relaxed border scrollbar-thin bg-zinc-950 text-zinc-200 border-zinc-800">
+      <code>{code}</code>
+    </pre>
+    <button
+      onClick={() => onCopy(copyIndex, code)}
+      className={`absolute top-3 right-3 flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all opacity-0 group-hover:opacity-100 ${
+        copiedIndex === copyIndex
+          ? 'bg-emerald-500 text-white'
+          : 'bg-zinc-800 border border-zinc-700 hover:bg-zinc-700 text-zinc-300'
+      }`}
+    >
+      {copiedIndex === copyIndex
+        ? <><Check className="w-3 h-3" /> Copied</>
+        : <><Copy className="w-3 h-3" /> Copy</>}
+    </button>
   </div>
 );
 
@@ -2518,6 +2502,7 @@ const ComponentsExportSection = () => {
   const [framework, setFramework] = useState<Framework>('react');
   const [selectedComponent, setSelectedComponent] = useState<string>(components[0].name);
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
+  const [codeTab, setCodeTab] = useState<CodeTab>('preview');
 
   const copyCode = async (index: number, code: string) => {
     if (!code) return;
@@ -2534,12 +2519,15 @@ const ComponentsExportSection = () => {
   const FrameworkIcon = meta.icon;
   const activeComp = components.find((c) => c.name === selectedComponent) ?? components[0];
   const compIndex = components.indexOf(activeComp);
+  const PreviewComp = previewMap[activeComp.name];
+  const activeCode = framework === 'react' ? activeComp.react : activeComp.flutter;
+  const activeUsage = framework === 'react' ? activeComp.usageReact : activeComp.usageFlutter;
 
   return (
     <div className="flex h-full">
       {/* ── Sidebar ── */}
       <aside className="w-56 flex-shrink-0 border-r border-border flex flex-col h-full">
-        {/* Framework switcher at top of sidebar */}
+        {/* Framework switcher */}
         <div className="p-3 border-b border-border space-y-1">
           <p className="text-[10px] uppercase tracking-widest text-muted-foreground px-2 mb-2 font-semibold">Framework</p>
           {(['react', 'flutter'] as Framework[]).map((fw) => {
@@ -2574,7 +2562,7 @@ const ComponentsExportSection = () => {
             {components.map((comp) => (
               <button
                 key={comp.name}
-                onClick={() => setSelectedComponent(comp.name)}
+                onClick={() => { setSelectedComponent(comp.name); setCodeTab('preview'); }}
                 className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm transition-all group ${
                   selectedComponent === comp.name
                     ? 'bg-muted text-foreground font-semibold'
@@ -2617,9 +2605,8 @@ const ComponentsExportSection = () => {
               <p className="text-muted-foreground text-sm mt-0.5">{activeComp.description}</p>
             </div>
 
-            {/* Copy all button */}
             <button
-              onClick={() => copyCode(-1, framework === 'react' ? activeComp.react : activeComp.flutter)}
+              onClick={() => copyCode(-1, activeCode)}
               className={`flex-shrink-0 flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all ${
                 copiedIndex === -1
                   ? 'bg-emerald-500 text-white'
@@ -2632,50 +2619,89 @@ const ComponentsExportSection = () => {
           </div>
         </div>
 
-        {/* Code sections */}
+        {/* Tab bar — Preview / Code / Usage */}
+        <div className="flex items-center gap-0 border-b border-border px-8 flex-shrink-0">
+          {(
+            [
+              { key: 'preview', label: 'Preview', icon: Eye },
+              { key: 'code',    label: meta.codeLabel,  icon: FileCode2 },
+              { key: 'usage',   label: meta.usageLabel, icon: BookOpen },
+            ] as { key: CodeTab; label: string; icon: React.ElementType }[]
+          ).map(({ key, label, icon: Icon }) => (
+            <button
+              key={key}
+              onClick={() => setCodeTab(key)}
+              className={`flex items-center gap-2 px-4 py-3 text-sm font-medium border-b-2 transition-colors -mb-px ${
+                codeTab === key
+                  ? 'border-primary text-foreground'
+                  : 'border-transparent text-muted-foreground hover:text-foreground'
+              }`}
+            >
+              <Icon className="w-3.5 h-3.5" />
+              {label}
+            </button>
+          ))}
+        </div>
+
+        {/* Content area */}
         <div className="flex-1 overflow-y-auto scrollbar-thin">
-          <div className="p-8 space-y-8">
-            {/* Component Code */}
-            <section>
-              <div className="flex items-center gap-2 mb-4">
-                <div className="flex items-center gap-2">
+          <div className="p-8">
+
+            {/* ── Preview tab ── */}
+            {codeTab === 'preview' && (
+              <div className="rounded-xl border border-border overflow-hidden">
+                {PreviewComp ? (
+                  <PreviewComp />
+                ) : (
+                  <div className="flex items-center justify-center h-48 text-muted-foreground text-sm">
+                    {framework === 'flutter'
+                      ? '🚫 Live preview not available for Flutter/Dart widgets'
+                      : 'Preview not available for this component'}
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* ── Code tab ── */}
+            {codeTab === 'code' && (
+              <div className="flex flex-col gap-2">
+                <div className="flex items-center gap-2 mb-3">
                   <FileCode2 className="w-4 h-4 text-primary" />
                   <h3 className="font-semibold text-base">{meta.codeLabel}</h3>
+                  <div className="h-px flex-1 bg-border" />
                 </div>
-                <div className="h-px flex-1 bg-border" />
+                <CodeBlock
+                  code={activeCode}
+                  copyIndex={compIndex * 2}
+                  copiedIndex={copiedIndex}
+                  onCopy={copyCode}
+                />
               </div>
-              <CodeBlock
-                code={framework === 'react' ? activeComp.react : activeComp.flutter}
-                copyIndex={compIndex * 2}
-                copiedIndex={copiedIndex}
-                onCopy={copyCode}
-                dark
-              />
-            </section>
+            )}
 
-            {/* Usage */}
-            <section>
-              <div className="flex items-center gap-2 mb-4">
-                <div className="flex items-center gap-2">
+            {/* ── Usage tab ── */}
+            {codeTab === 'usage' && (
+              <div className="flex flex-col gap-2">
+                <div className="flex items-center gap-2 mb-3">
                   <BookOpen className="w-4 h-4 text-primary" />
                   <h3 className="font-semibold text-base">{meta.usageLabel}</h3>
+                  <div className="h-px flex-1 bg-border" />
                 </div>
-                <div className="h-px flex-1 bg-border" />
+                <CodeBlock
+                  code={activeUsage}
+                  copyIndex={compIndex * 2 + 1}
+                  copiedIndex={copiedIndex}
+                  onCopy={copyCode}
+                />
               </div>
-              <CodeBlock
-                code={framework === 'react' ? activeComp.usageReact : activeComp.usageFlutter}
-                copyIndex={compIndex * 2 + 1}
-                copiedIndex={copiedIndex}
-                onCopy={copyCode}
-              />
-            </section>
+            )}
 
-            {/* Navigator between components */}
-            <div className="flex items-center justify-between pt-4 border-t border-border">
+            {/* Navigator */}
+            <div className="flex items-center justify-between pt-6 mt-6 border-t border-border">
               <button
                 onClick={() => {
                   const prev = components[compIndex - 1];
-                  if (prev) setSelectedComponent(prev.name);
+                  if (prev) { setSelectedComponent(prev.name); setCodeTab('preview'); }
                 }}
                 disabled={compIndex === 0}
                 className="flex items-center gap-2 px-4 py-2 rounded-xl border border-border text-sm font-medium transition-all hover:bg-muted disabled:opacity-30 disabled:cursor-not-allowed"
@@ -2688,9 +2714,9 @@ const ComponentsExportSection = () => {
                 {components.map((c, i) => (
                   <button
                     key={c.name}
-                    onClick={() => setSelectedComponent(c.name)}
-                    className={`w-2 h-2 rounded-full transition-all ${
-                      i === compIndex ? 'bg-primary w-5' : 'bg-muted-foreground/30 hover:bg-muted-foreground/60'
+                    onClick={() => { setSelectedComponent(c.name); setCodeTab('preview'); }}
+                    className={`h-2 rounded-full transition-all ${
+                      i === compIndex ? 'bg-primary w-5' : 'bg-muted-foreground/30 hover:bg-muted-foreground/60 w-2'
                     }`}
                     title={c.name}
                   />
@@ -2700,7 +2726,7 @@ const ComponentsExportSection = () => {
               <button
                 onClick={() => {
                   const next = components[compIndex + 1];
-                  if (next) setSelectedComponent(next.name);
+                  if (next) { setSelectedComponent(next.name); setCodeTab('preview'); }
                 }}
                 disabled={compIndex === components.length - 1}
                 className="flex items-center gap-2 px-4 py-2 rounded-xl border border-border text-sm font-medium transition-all hover:bg-muted disabled:opacity-30 disabled:cursor-not-allowed"
@@ -2709,6 +2735,7 @@ const ComponentsExportSection = () => {
                 <ChevronRight className="w-4 h-4" />
               </button>
             </div>
+
           </div>
         </div>
       </div>
