@@ -1,0 +1,703 @@
+flutter:
+  fonts:
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter/Inter-Black.ttf
+          weight: 900
+        - asset: assets/fonts/Inter/Inter-BlackItalic.ttf
+          weight: 900
+          style: italic
+        - asset: assets/fonts/Inter/Inter-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Inter/Inter-BoldItalic.ttf
+          weight: 700
+          style: italic
+        - asset: assets/fonts/Inter/Inter-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/Inter/Inter-ExtraBoldItalic.ttf
+          weight: 800
+          style: italic
+        - asset: assets/fonts/Inter/Inter-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/Inter/Inter-ExtraLightItalic.ttf
+          weight: 200
+          style: italic
+        - asset: assets/fonts/Inter/Inter-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Inter/Inter-LightItalic.ttf
+          weight: 300
+          style: italic
+        - asset: assets/fonts/Inter/Inter-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Inter/Inter-MediumItalic.ttf
+          weight: 500
+          style: italic
+        - asset: assets/fonts/Inter/Inter-Regular.ttf
+        - asset: assets/fonts/Inter/Inter-RegularItalic.ttf
+          style: italic
+        - asset: assets/fonts/Inter/Inter-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Inter/Inter-SemiBoldItalic.ttf
+          weight: 600
+          style: italic
+        - asset: assets/fonts/Inter/Inter-Thin.ttf
+          weight: 100
+        - asset: assets/fonts/Inter/Inter-ThinItalic.ttf
+          weight: 100
+          style: italic
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins/Poppins-Black.ttf
+          weight: 900
+        - asset: assets/fonts/Poppins/Poppins-BlackItalic.ttf
+          weight: 900
+          style: italic
+        - asset: assets/fonts/Poppins/Poppins-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Poppins/Poppins-BoldItalic.ttf
+          weight: 700
+          style: italic
+        - asset: assets/fonts/Poppins/Poppins-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/Poppins/Poppins-ExtraBoldItalic.ttf
+          weight: 800
+          style: italic
+        - asset: assets/fonts/Poppins/Poppins-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/Poppins/Poppins-ExtraLightItalic.ttf
+          weight: 200
+          style: italic
+        - asset: assets/fonts/Poppins/Poppins-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Poppins/Poppins-LightItalic.ttf
+          weight: 300
+          style: italic
+        - asset: assets/fonts/Poppins/Poppins-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Poppins/Poppins-MediumItalic.ttf
+          weight: 500
+          style: italic
+        - asset: assets/fonts/Poppins/Poppins-Regular.ttf
+        - asset: assets/fonts/Poppins/Poppins-RegularItalic.ttf
+          style: italic
+        - asset: assets/fonts/Poppins/Poppins-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Poppins/Poppins-SemiBoldItalic.ttf
+          weight: 600
+          style: italic
+        - asset: assets/fonts/Poppins/Poppins-Thin.ttf
+          weight: 100
+        - asset: assets/fonts/Poppins/Poppins-ThinItalic.ttf
+          weight: 100
+          style: italic
+    - family: Montserrat
+      fonts:
+        - asset: assets/fonts/Montserrat/Montserrat-Black.ttf
+          weight: 900
+        - asset: assets/fonts/Montserrat/Montserrat-BlackItalic.ttf
+          weight: 900
+          style: italic
+        - asset: assets/fonts/Montserrat/Montserrat-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Montserrat/Montserrat-BoldItalic.ttf
+          weight: 700
+          style: italic
+        - asset: assets/fonts/Montserrat/Montserrat-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/Montserrat/Montserrat-ExtraBoldItalic.ttf
+          weight: 800
+          style: italic
+        - asset: assets/fonts/Montserrat/Montserrat-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/Montserrat/Montserrat-ExtraLightItalic.ttf
+          weight: 200
+          style: italic
+        - asset: assets/fonts/Montserrat/Montserrat-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Montserrat/Montserrat-LightItalic.ttf
+          weight: 300
+          style: italic
+        - asset: assets/fonts/Montserrat/Montserrat-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Montserrat/Montserrat-MediumItalic.ttf
+          weight: 500
+          style: italic
+        - asset: assets/fonts/Montserrat/Montserrat-Regular.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-RegularItalic.ttf
+          style: italic
+        - asset: assets/fonts/Montserrat/Montserrat-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Montserrat/Montserrat-SemiBoldItalic.ttf
+          weight: 600
+          style: italic
+        - asset: assets/fonts/Montserrat/Montserrat-Thin.ttf
+          weight: 100
+        - asset: assets/fonts/Montserrat/Montserrat-ThinItalic.ttf
+          weight: 100
+          style: italic
+    - family: Manrope
+      fonts:
+        - asset: assets/fonts/Manrope/Manrope-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Manrope/Manrope-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/Manrope/Manrope-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/Manrope/Manrope-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Manrope/Manrope-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Manrope/Manrope-Regular.ttf
+        - asset: assets/fonts/Manrope/Manrope-SemiBold.ttf
+          weight: 600
+    - family: Oswald
+      fonts:
+        - asset: assets/fonts/Oswald/Oswald-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Oswald/Oswald-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/Oswald/Oswald-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Oswald/Oswald-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Oswald/Oswald-Regular.ttf
+        - asset: assets/fonts/Oswald/Oswald-SemiBold.ttf
+          weight: 600
+    - family: Bebas Neue
+      fonts:
+        - asset: assets/fonts/Bebas Neue/BebasNeue-Regular.ttf
+    - family: Playfair Display
+      fonts:
+        - asset: assets/fonts/Playfair Display/PlayfairDisplay-Black.ttf
+          weight: 900
+        - asset: assets/fonts/Playfair Display/PlayfairDisplay-BlackItalic.ttf
+          weight: 900
+          style: italic
+        - asset: assets/fonts/Playfair Display/PlayfairDisplay-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Playfair Display/PlayfairDisplay-BoldItalic.ttf
+          weight: 700
+          style: italic
+        - asset: assets/fonts/Playfair Display/PlayfairDisplay-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/Playfair Display/PlayfairDisplay-ExtraBoldItalic.ttf
+          weight: 800
+          style: italic
+        - asset: assets/fonts/Playfair Display/PlayfairDisplay-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Playfair Display/PlayfairDisplay-MediumItalic.ttf
+          weight: 500
+          style: italic
+        - asset: assets/fonts/Playfair Display/PlayfairDisplay-Regular.ttf
+        - asset: assets/fonts/Playfair Display/PlayfairDisplay-RegularItalic.ttf
+          style: italic
+        - asset: assets/fonts/Playfair Display/PlayfairDisplay-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Playfair Display/PlayfairDisplay-SemiBoldItalic.ttf
+          weight: 600
+          style: italic
+    - family: Fraunces
+      fonts:
+        - asset: assets/fonts/Fraunces/Fraunces-Black.ttf
+          weight: 900
+        - asset: assets/fonts/Fraunces/Fraunces-BlackItalic.ttf
+          weight: 900
+          style: italic
+        - asset: assets/fonts/Fraunces/Fraunces-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Fraunces/Fraunces-BoldItalic.ttf
+          weight: 700
+          style: italic
+        - asset: assets/fonts/Fraunces/Fraunces-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/Fraunces/Fraunces-ExtraBoldItalic.ttf
+          weight: 800
+          style: italic
+        - asset: assets/fonts/Fraunces/Fraunces-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/Fraunces/Fraunces-ExtraLightItalic.ttf
+          weight: 200
+          style: italic
+        - asset: assets/fonts/Fraunces/Fraunces-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Fraunces/Fraunces-LightItalic.ttf
+          weight: 300
+          style: italic
+        - asset: assets/fonts/Fraunces/Fraunces-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Fraunces/Fraunces-MediumItalic.ttf
+          weight: 500
+          style: italic
+        - asset: assets/fonts/Fraunces/Fraunces-Regular.ttf
+        - asset: assets/fonts/Fraunces/Fraunces-RegularItalic.ttf
+          style: italic
+        - asset: assets/fonts/Fraunces/Fraunces-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Fraunces/Fraunces-SemiBoldItalic.ttf
+          weight: 600
+          style: italic
+        - asset: assets/fonts/Fraunces/Fraunces-Thin.ttf
+          weight: 100
+        - asset: assets/fonts/Fraunces/Fraunces-ThinItalic.ttf
+          weight: 100
+          style: italic
+    - family: DM Sans
+      fonts:
+        - asset: assets/fonts/DM Sans/DMSans-Black.ttf
+          weight: 900
+        - asset: assets/fonts/DM Sans/DMSans-BlackItalic.ttf
+          weight: 900
+          style: italic
+        - asset: assets/fonts/DM Sans/DMSans-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/DM Sans/DMSans-BoldItalic.ttf
+          weight: 700
+          style: italic
+        - asset: assets/fonts/DM Sans/DMSans-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/DM Sans/DMSans-ExtraBoldItalic.ttf
+          weight: 800
+          style: italic
+        - asset: assets/fonts/DM Sans/DMSans-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/DM Sans/DMSans-ExtraLightItalic.ttf
+          weight: 200
+          style: italic
+        - asset: assets/fonts/DM Sans/DMSans-Light.ttf
+          weight: 300
+        - asset: assets/fonts/DM Sans/DMSans-LightItalic.ttf
+          weight: 300
+          style: italic
+        - asset: assets/fonts/DM Sans/DMSans-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/DM Sans/DMSans-MediumItalic.ttf
+          weight: 500
+          style: italic
+        - asset: assets/fonts/DM Sans/DMSans-Regular.ttf
+        - asset: assets/fonts/DM Sans/DMSans-RegularItalic.ttf
+          style: italic
+        - asset: assets/fonts/DM Sans/DMSans-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/DM Sans/DMSans-SemiBoldItalic.ttf
+          weight: 600
+          style: italic
+        - asset: assets/fonts/DM Sans/DMSans-Thin.ttf
+          weight: 100
+        - asset: assets/fonts/DM Sans/DMSans-ThinItalic.ttf
+          weight: 100
+          style: italic
+    - family: Raleway
+      fonts:
+        - asset: assets/fonts/Raleway/Raleway-Black.ttf
+          weight: 900
+        - asset: assets/fonts/Raleway/Raleway-BlackItalic.ttf
+          weight: 900
+          style: italic
+        - asset: assets/fonts/Raleway/Raleway-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Raleway/Raleway-BoldItalic.ttf
+          weight: 700
+          style: italic
+        - asset: assets/fonts/Raleway/Raleway-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/Raleway/Raleway-ExtraBoldItalic.ttf
+          weight: 800
+          style: italic
+        - asset: assets/fonts/Raleway/Raleway-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/Raleway/Raleway-ExtraLightItalic.ttf
+          weight: 200
+          style: italic
+        - asset: assets/fonts/Raleway/Raleway-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Raleway/Raleway-LightItalic.ttf
+          weight: 300
+          style: italic
+        - asset: assets/fonts/Raleway/Raleway-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Raleway/Raleway-MediumItalic.ttf
+          weight: 500
+          style: italic
+        - asset: assets/fonts/Raleway/Raleway-Regular.ttf
+        - asset: assets/fonts/Raleway/Raleway-RegularItalic.ttf
+          style: italic
+        - asset: assets/fonts/Raleway/Raleway-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Raleway/Raleway-SemiBoldItalic.ttf
+          weight: 600
+          style: italic
+        - asset: assets/fonts/Raleway/Raleway-Thin.ttf
+          weight: 100
+        - asset: assets/fonts/Raleway/Raleway-ThinItalic.ttf
+          weight: 100
+          style: italic
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto/Roboto-Black.ttf
+          weight: 900
+        - asset: assets/fonts/Roboto/Roboto-BlackItalic.ttf
+          weight: 900
+          style: italic
+        - asset: assets/fonts/Roboto/Roboto-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Roboto/Roboto-BoldItalic.ttf
+          weight: 700
+          style: italic
+        - asset: assets/fonts/Roboto/Roboto-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/Roboto/Roboto-ExtraBoldItalic.ttf
+          weight: 800
+          style: italic
+        - asset: assets/fonts/Roboto/Roboto-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/Roboto/Roboto-ExtraLightItalic.ttf
+          weight: 200
+          style: italic
+        - asset: assets/fonts/Roboto/Roboto-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Roboto/Roboto-LightItalic.ttf
+          weight: 300
+          style: italic
+        - asset: assets/fonts/Roboto/Roboto-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Roboto/Roboto-MediumItalic.ttf
+          weight: 500
+          style: italic
+        - asset: assets/fonts/Roboto/Roboto-Regular.ttf
+        - asset: assets/fonts/Roboto/Roboto-RegularItalic.ttf
+          style: italic
+        - asset: assets/fonts/Roboto/Roboto-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Roboto/Roboto-SemiBoldItalic.ttf
+          weight: 600
+          style: italic
+        - asset: assets/fonts/Roboto/Roboto-Thin.ttf
+          weight: 100
+        - asset: assets/fonts/Roboto/Roboto-ThinItalic.ttf
+          weight: 100
+          style: italic
+    - family: Open Sans
+      fonts:
+        - asset: assets/fonts/Open Sans/OpenSans-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Open Sans/OpenSans-BoldItalic.ttf
+          weight: 700
+          style: italic
+        - asset: assets/fonts/Open Sans/OpenSans-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/Open Sans/OpenSans-ExtraBoldItalic.ttf
+          weight: 800
+          style: italic
+        - asset: assets/fonts/Open Sans/OpenSans-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Open Sans/OpenSans-LightItalic.ttf
+          weight: 300
+          style: italic
+        - asset: assets/fonts/Open Sans/OpenSans-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Open Sans/OpenSans-MediumItalic.ttf
+          weight: 500
+          style: italic
+        - asset: assets/fonts/Open Sans/OpenSans-Regular.ttf
+        - asset: assets/fonts/Open Sans/OpenSans-RegularItalic.ttf
+          style: italic
+        - asset: assets/fonts/Open Sans/OpenSans-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Open Sans/OpenSans-SemiBoldItalic.ttf
+          weight: 600
+          style: italic
+    - family: Lato
+      fonts:
+        - asset: assets/fonts/Lato/Lato-Black.ttf
+          weight: 900
+        - asset: assets/fonts/Lato/Lato-BlackItalic.ttf
+          weight: 900
+          style: italic
+        - asset: assets/fonts/Lato/Lato-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Lato/Lato-BoldItalic.ttf
+          weight: 700
+          style: italic
+        - asset: assets/fonts/Lato/Lato-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Lato/Lato-LightItalic.ttf
+          weight: 300
+          style: italic
+        - asset: assets/fonts/Lato/Lato-Regular.ttf
+        - asset: assets/fonts/Lato/Lato-RegularItalic.ttf
+          style: italic
+        - asset: assets/fonts/Lato/Lato-Thin.ttf
+          weight: 100
+        - asset: assets/fonts/Lato/Lato-ThinItalic.ttf
+          weight: 100
+          style: italic
+    - family: Nunito
+      fonts:
+        - asset: assets/fonts/Nunito/Nunito-Black.ttf
+          weight: 900
+        - asset: assets/fonts/Nunito/Nunito-BlackItalic.ttf
+          weight: 900
+          style: italic
+        - asset: assets/fonts/Nunito/Nunito-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Nunito/Nunito-BoldItalic.ttf
+          weight: 700
+          style: italic
+        - asset: assets/fonts/Nunito/Nunito-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/Nunito/Nunito-ExtraBoldItalic.ttf
+          weight: 800
+          style: italic
+        - asset: assets/fonts/Nunito/Nunito-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/Nunito/Nunito-ExtraLightItalic.ttf
+          weight: 200
+          style: italic
+        - asset: assets/fonts/Nunito/Nunito-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Nunito/Nunito-LightItalic.ttf
+          weight: 300
+          style: italic
+        - asset: assets/fonts/Nunito/Nunito-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Nunito/Nunito-MediumItalic.ttf
+          weight: 500
+          style: italic
+        - asset: assets/fonts/Nunito/Nunito-Regular.ttf
+        - asset: assets/fonts/Nunito/Nunito-RegularItalic.ttf
+          style: italic
+        - asset: assets/fonts/Nunito/Nunito-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Nunito/Nunito-SemiBoldItalic.ttf
+          weight: 600
+          style: italic
+    - family: Karla
+      fonts:
+        - asset: assets/fonts/Karla/Karla-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Karla/Karla-BoldItalic.ttf
+          weight: 700
+          style: italic
+        - asset: assets/fonts/Karla/Karla-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/Karla/Karla-ExtraBoldItalic.ttf
+          weight: 800
+          style: italic
+        - asset: assets/fonts/Karla/Karla-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/Karla/Karla-ExtraLightItalic.ttf
+          weight: 200
+          style: italic
+        - asset: assets/fonts/Karla/Karla-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Karla/Karla-LightItalic.ttf
+          weight: 300
+          style: italic
+        - asset: assets/fonts/Karla/Karla-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Karla/Karla-MediumItalic.ttf
+          weight: 500
+          style: italic
+        - asset: assets/fonts/Karla/Karla-Regular.ttf
+        - asset: assets/fonts/Karla/Karla-RegularItalic.ttf
+          style: italic
+        - asset: assets/fonts/Karla/Karla-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Karla/Karla-SemiBoldItalic.ttf
+          weight: 600
+          style: italic
+    - family: Rubik
+      fonts:
+        - asset: assets/fonts/Rubik/Rubik-Black.ttf
+          weight: 900
+        - asset: assets/fonts/Rubik/Rubik-BlackItalic.ttf
+          weight: 900
+          style: italic
+        - asset: assets/fonts/Rubik/Rubik-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Rubik/Rubik-BoldItalic.ttf
+          weight: 700
+          style: italic
+        - asset: assets/fonts/Rubik/Rubik-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/Rubik/Rubik-ExtraBoldItalic.ttf
+          weight: 800
+          style: italic
+        - asset: assets/fonts/Rubik/Rubik-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Rubik/Rubik-LightItalic.ttf
+          weight: 300
+          style: italic
+        - asset: assets/fonts/Rubik/Rubik-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Rubik/Rubik-MediumItalic.ttf
+          weight: 500
+          style: italic
+        - asset: assets/fonts/Rubik/Rubik-Regular.ttf
+        - asset: assets/fonts/Rubik/Rubik-RegularItalic.ttf
+          style: italic
+        - asset: assets/fonts/Rubik/Rubik-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Rubik/Rubik-SemiBoldItalic.ttf
+          weight: 600
+          style: italic
+    - family: Source Sans 3
+      fonts:
+        - asset: assets/fonts/Source Sans 3/SourceSans3-Black.ttf
+          weight: 900
+        - asset: assets/fonts/Source Sans 3/SourceSans3-BlackItalic.ttf
+          weight: 900
+          style: italic
+        - asset: assets/fonts/Source Sans 3/SourceSans3-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Source Sans 3/SourceSans3-BoldItalic.ttf
+          weight: 700
+          style: italic
+        - asset: assets/fonts/Source Sans 3/SourceSans3-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/Source Sans 3/SourceSans3-ExtraBoldItalic.ttf
+          weight: 800
+          style: italic
+        - asset: assets/fonts/Source Sans 3/SourceSans3-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/Source Sans 3/SourceSans3-ExtraLightItalic.ttf
+          weight: 200
+          style: italic
+        - asset: assets/fonts/Source Sans 3/SourceSans3-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Source Sans 3/SourceSans3-LightItalic.ttf
+          weight: 300
+          style: italic
+        - asset: assets/fonts/Source Sans 3/SourceSans3-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Source Sans 3/SourceSans3-MediumItalic.ttf
+          weight: 500
+          style: italic
+        - asset: assets/fonts/Source Sans 3/SourceSans3-Regular.ttf
+        - asset: assets/fonts/Source Sans 3/SourceSans3-RegularItalic.ttf
+          style: italic
+        - asset: assets/fonts/Source Sans 3/SourceSans3-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Source Sans 3/SourceSans3-SemiBoldItalic.ttf
+          weight: 600
+          style: italic
+    - family: Mulish
+      fonts:
+        - asset: assets/fonts/Mulish/Mulish-Black.ttf
+          weight: 900
+        - asset: assets/fonts/Mulish/Mulish-BlackItalic.ttf
+          weight: 900
+          style: italic
+        - asset: assets/fonts/Mulish/Mulish-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Mulish/Mulish-BoldItalic.ttf
+          weight: 700
+          style: italic
+        - asset: assets/fonts/Mulish/Mulish-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/Mulish/Mulish-ExtraBoldItalic.ttf
+          weight: 800
+          style: italic
+        - asset: assets/fonts/Mulish/Mulish-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/Mulish/Mulish-ExtraLightItalic.ttf
+          weight: 200
+          style: italic
+        - asset: assets/fonts/Mulish/Mulish-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Mulish/Mulish-LightItalic.ttf
+          weight: 300
+          style: italic
+        - asset: assets/fonts/Mulish/Mulish-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Mulish/Mulish-MediumItalic.ttf
+          weight: 500
+          style: italic
+        - asset: assets/fonts/Mulish/Mulish-Regular.ttf
+        - asset: assets/fonts/Mulish/Mulish-RegularItalic.ttf
+          style: italic
+        - asset: assets/fonts/Mulish/Mulish-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Mulish/Mulish-SemiBoldItalic.ttf
+          weight: 600
+          style: italic
+    - family: Noto Sans
+      fonts:
+        - asset: assets/fonts/Noto Sans/NotoSans-Black.ttf
+          weight: 900
+        - asset: assets/fonts/Noto Sans/NotoSans-BlackItalic.ttf
+          weight: 900
+          style: italic
+        - asset: assets/fonts/Noto Sans/NotoSans-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Noto Sans/NotoSans-BoldItalic.ttf
+          weight: 700
+          style: italic
+        - asset: assets/fonts/Noto Sans/NotoSans-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/Noto Sans/NotoSans-ExtraBoldItalic.ttf
+          weight: 800
+          style: italic
+        - asset: assets/fonts/Noto Sans/NotoSans-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/Noto Sans/NotoSans-ExtraLightItalic.ttf
+          weight: 200
+          style: italic
+        - asset: assets/fonts/Noto Sans/NotoSans-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Noto Sans/NotoSans-LightItalic.ttf
+          weight: 300
+          style: italic
+        - asset: assets/fonts/Noto Sans/NotoSans-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Noto Sans/NotoSans-MediumItalic.ttf
+          weight: 500
+          style: italic
+        - asset: assets/fonts/Noto Sans/NotoSans-Regular.ttf
+        - asset: assets/fonts/Noto Sans/NotoSans-RegularItalic.ttf
+          style: italic
+        - asset: assets/fonts/Noto Sans/NotoSans-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Noto Sans/NotoSans-SemiBoldItalic.ttf
+          weight: 600
+          style: italic
+        - asset: assets/fonts/Noto Sans/NotoSans-Thin.ttf
+          weight: 100
+        - asset: assets/fonts/Noto Sans/NotoSans-ThinItalic.ttf
+          weight: 100
+          style: italic
+    - family: IBM Plex Sans
+      fonts:
+        - asset: assets/fonts/IBM Plex Sans/IBMPlexSans-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/IBM Plex Sans/IBMPlexSans-BoldItalic.ttf
+          weight: 700
+          style: italic
+        - asset: assets/fonts/IBM Plex Sans/IBMPlexSans-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/IBM Plex Sans/IBMPlexSans-ExtraLightItalic.ttf
+          weight: 200
+          style: italic
+        - asset: assets/fonts/IBM Plex Sans/IBMPlexSans-Light.ttf
+          weight: 300
+        - asset: assets/fonts/IBM Plex Sans/IBMPlexSans-LightItalic.ttf
+          weight: 300
+          style: italic
+        - asset: assets/fonts/IBM Plex Sans/IBMPlexSans-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/IBM Plex Sans/IBMPlexSans-MediumItalic.ttf
+          weight: 500
+          style: italic
+        - asset: assets/fonts/IBM Plex Sans/IBMPlexSans-Regular.ttf
+        - asset: assets/fonts/IBM Plex Sans/IBMPlexSans-RegularItalic.ttf
+          style: italic
+        - asset: assets/fonts/IBM Plex Sans/IBMPlexSans-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/IBM Plex Sans/IBMPlexSans-SemiBoldItalic.ttf
+          weight: 600
+          style: italic
+        - asset: assets/fonts/IBM Plex Sans/IBMPlexSans-Thin.ttf
+          weight: 100
+        - asset: assets/fonts/IBM Plex Sans/IBMPlexSans-ThinItalic.ttf
+          weight: 100
+          style: italic

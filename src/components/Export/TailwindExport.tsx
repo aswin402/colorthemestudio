@@ -1,8 +1,9 @@
+import React from 'react';
 import { useThemeStore } from '../../store/useThemeStore';
 import { CodeSnippet } from './CodeSnippet';
 import type { BorderRadiusSize } from '../../types';
 
-export const TailwindExport = () => {
+export const TailwindExport: React.FC = () => {
   const { theme, componentConfig } = useThemeStore();
 
   const radiusMap: Record<BorderRadiusSize, string> = {
@@ -25,17 +26,18 @@ export const TailwindExport = () => {
 
   const lightVars = Object.values(theme.light)
     .map((token) => `    ${token.cssVar}: ${token.oklchValue};`)
-    .join('\n');
+    .join('\\n');
 
   const darkVars = Object.values(theme.dark)
     .map((token) => `    ${token.cssVar}: ${token.oklchValue};`)
-    .join('\n');
+    .join('\\n');
 
   const headingFont = componentConfig.headingFont || 'Manrope';
   const bodyFont = componentConfig.bodyFont || 'Geist';
   const radius = radiusMap[componentConfig.cardRadius || 'lg'];
 
-  const content = `@import url('https://fonts.googleapis.com/css2?family=${headingFont.replace(/ /g, '+')}:wght@${getFontWeights(componentConfig.headingWeight)}&family=${bodyFont.replace(/ /g, '+')}:wght@${getFontWeights(componentConfig.bodyWeight)}&display=swap');
+  const cssContent = `/* Local fonts - download from Fonts tab */
+/* @import './fonts.css'; */
 @import "tailwindcss";
 
 @theme {
@@ -54,19 +56,19 @@ export const TailwindExport = () => {
   --color-border: oklch(var(--border));
   --color-input: oklch(var(--input));
   --color-ring: oklch(var(--ring));
-  --radius-lg: ${radius}rem;
-  --radius-md: calc(${radius}rem - 2px);
-  --radius-sm: calc(${radius}rem - 4px);
-  --font-heading: '${headingFont}', sans-serif;
-  --font-body: '${bodyFont}', sans-serif;
+  --radius-lg: \${radius}rem;
+  --radius-md: calc(\${radius}rem - 2px);
+  --radius-sm: calc(\${radius}rem - 4px);
+  --font-heading: '\${headingFont}', sans-serif;
+  --font-body: '\${bodyFont}', sans-serif;
 }
 
 @layer base {
   :root {
-${lightVars}
+\${lightVars}
   }
   .dark {
-${darkVars}
+\${darkVars}
   }
 }
 
@@ -81,7 +83,8 @@ ${darkVars}
 
   return (
     <div className="flex flex-col gap-4 pb-12">
-      <CodeSnippet filename="src/styles/globals.css" code={content} />
+      <CodeSnippet filename="src/styles/globals.css" code={cssContent} />
     </div>
   );
 };
+

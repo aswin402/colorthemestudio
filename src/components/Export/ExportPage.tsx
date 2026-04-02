@@ -2,19 +2,21 @@ import { useState } from 'react';
 import { FlutterExport } from './FlutterExport';
 import { TailwindExport } from './TailwindExport';
 import { ShadcnExport } from './ShadcnExport';
-import { Smartphone, Code2, Layout } from 'lucide-react';
+import { FontsExport } from './FontsExport';
+import { Smartphone, Code2, Layout, DownloadCloud } from 'lucide-react';
 
 interface ExportPageProps {
   panelClass: string;
 }
 
 export const ExportPage = ({ panelClass }: ExportPageProps) => {
-  const [activeTab, setActiveTab] = useState<'flutter' | 'tailwind' | 'shadcn'>('flutter');
+const [activeTab, setActiveTab] = useState<'flutter' | 'tailwind' | 'shadcn' | 'fonts'>('flutter');
 
   const tabs: { key: typeof activeTab; label: string; icon: React.ReactNode }[] = [
     { key: 'flutter', label: 'Flutter', icon: <Smartphone className="w-4 h-4" /> },
     { key: 'tailwind', label: 'Tailwind', icon: <Code2 className="w-4 h-4" /> },
     { key: 'shadcn', label: 'shadcn/ui', icon: <Layout className="w-4 h-4" /> },
+    { key: 'fonts', label: 'Fonts', icon: <DownloadCloud className="w-4 h-4" /> },
   ];
 
   return (
@@ -47,6 +49,7 @@ export const ExportPage = ({ panelClass }: ExportPageProps) => {
           {activeTab === 'flutter' && <FlutterExport />}
           {activeTab === 'tailwind' && <TailwindExport />}
           {activeTab === 'shadcn' && <ShadcnExport />}
+          {activeTab === 'fonts' && <FontsExport />}
         </div>
       </div>
     </div>

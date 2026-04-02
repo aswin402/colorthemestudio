@@ -1,21 +1,25 @@
 {
   "name": "colorthemestudio",
   "private": true,
-  "version": "1.0.3",
+  "version": "1.0.4",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "fonts": "bun run scripts/download-fonts.ts"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.2.1",
+    "@types/jszip": "^3.4.1",
     "chroma-js": "^3.2.0",
     "clsx": "^2.1.1",
     "culori": "^4.0.2",
     "framer-motion": "^12.36.0",
+    "jszip": "^3.10.1",
     "lucide-react": "^1.7.0",
+    "node-fetch": "^3.3.2",
     "react": "^19.2.4",
     "react-colorful": "^5.6.1",
     "react-dom": "^19.2.4",
