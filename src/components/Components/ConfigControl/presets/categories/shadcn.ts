@@ -1,0 +1,198 @@
+import type { Preset } from '../../../../../types';
+
+export const shadcnPresets: Preset[] = [
+  // ==================== SHADCN UI INSPIRED ====================
+  {
+    name: 'Shadcn Default', baseColor: '#09090B', temperature: 'natural', category: 'shadcn',
+    description: 'The classic shadcn/ui aesthetic',
+    componentConfig: {
+      headingFont: 'Inter', bodyFont: 'Inter',
+      headingWeight: '600', bodyWeight: '400',
+      fontSizeHeading: '2xl', fontSizeBody: 'base', lineHeight: 'normal',
+      letterSpacing: 'normal',
+      buttonRadius: 'md', cardRadius: 'md', inputRadius: 'md',
+      shadow: 'sm', density: 'normal', borderWidth: '1',
+    },
+  },
+  {
+    name: 'Shadcn Slate', baseColor: '#020617', temperature: 'cooler', category: 'shadcn',
+    description: 'Clean slate background',
+    componentConfig: {
+      headingFont: 'Inter', bodyFont: 'Inter',
+      headingWeight: '500', bodyWeight: '400',
+      fontSizeHeading: '2xl', fontSizeBody: 'base', lineHeight: 'normal',
+      letterSpacing: 'normal',
+      buttonRadius: 'md', cardRadius: 'md', inputRadius: 'md',
+      shadow: 'sm', density: 'normal', borderWidth: '1',
+    },
+  },
+  {
+    name: 'Shadcn Zinc', baseColor: '#18181B', temperature: 'natural', category: 'shadcn',
+    description: 'Modern zinc gray',
+    componentConfig: {
+      headingFont: 'Inter', bodyFont: 'Inter',
+      headingWeight: '600', bodyWeight: '400',
+      fontSizeHeading: '2xl', fontSizeBody: 'base', lineHeight: 'normal',
+      letterSpacing: 'normal',
+      buttonRadius: 'md', cardRadius: 'md', inputRadius: 'md',
+      shadow: 'md', density: 'normal', borderWidth: '1',
+    },
+  },
+  {
+    name: 'Shadcn Neutral', baseColor: '#171717', temperature: 'natural', category: 'shadcn',
+    description: 'Balanced neutral tones',
+    componentConfig: {
+      headingFont: 'Inter', bodyFont: 'Inter',
+      headingWeight: '500', bodyWeight: '400',
+      fontSizeHeading: '2xl', fontSizeBody: 'base', lineHeight: 'normal',
+      letterSpacing: 'normal',
+      buttonRadius: 'md', cardRadius: 'md', inputRadius: 'md',
+      shadow: 'none', density: 'normal', borderWidth: '1',
+    },
+  },
+  {
+    name: 'Shadcn Stone', baseColor: '#1C1917', temperature: 'warmer', category: 'shadcn',
+    description: 'Warm stone texture',
+    componentConfig: {
+      headingFont: 'Inter', bodyFont: 'Inter',
+      headingWeight: '500', bodyWeight: '400',
+      fontSizeHeading: '2xl', fontSizeBody: 'base', lineHeight: 'normal',
+      letterSpacing: 'normal',
+      buttonRadius: 'md', cardRadius: 'md', inputRadius: 'md',
+      shadow: 'sm', density: 'spacious', borderWidth: '1',
+    },
+  },
+  {
+    name: 'Shadcn Rose', baseColor: '#881337', temperature: 'warmer', category: 'shadcn',
+    description: 'Elegant rose accent',
+    componentConfig: {
+      headingFont: 'Inter', bodyFont: 'Inter',
+      headingWeight: '600', bodyWeight: '400',
+      fontSizeHeading: '2xl', fontSizeBody: 'base', lineHeight: 'normal',
+      letterSpacing: 'normal',
+      buttonRadius: 'md', cardRadius: 'md', inputRadius: 'md',
+      shadow: 'md', density: 'normal', borderWidth: '1',
+    },
+  },
+  {
+    name: 'Shadcn Emerald', baseColor: '#022C22', temperature: 'cooler', category: 'shadcn',
+    description: 'Fresh emerald green',
+    componentConfig: {
+      headingFont: 'Inter', bodyFont: 'Inter',
+      headingWeight: '600', bodyWeight: '400',
+      fontSizeHeading: '2xl', fontSizeBody: 'base', lineHeight: 'normal',
+      letterSpacing: 'normal',
+      buttonRadius: 'md', cardRadius: 'md', inputRadius: 'md',
+      shadow: 'sm', density: 'normal', borderWidth: '1',
+    },
+  },
+  {
+    name: 'Shadcn Violet', baseColor: '#2E1065', temperature: 'cooler', category: 'shadcn',
+    description: 'Deep violet accent',
+    componentConfig: {
+      headingFont: 'Inter', bodyFont: 'Inter',
+      headingWeight: '600', bodyWeight: '400',
+      fontSizeHeading: '2xl', fontSizeBody: 'base', lineHeight: 'normal',
+      letterSpacing: 'normal',
+      buttonRadius: 'md', cardRadius: 'md', inputRadius: 'md',
+      shadow: 'lg', density: 'normal', borderWidth: '1',
+    },
+  },
+  {
+    name: 'Shadcn Orange', baseColor: '#431407', temperature: 'warmer', category: 'shadcn',
+    description: 'Warm orange tones',
+    componentConfig: {
+      headingFont: 'Inter', bodyFont: 'Inter',
+      headingWeight: '600', bodyWeight: '400',
+      fontSizeHeading: '2xl', fontSizeBody: 'base', lineHeight: 'normal',
+      letterSpacing: 'normal',
+      buttonRadius: 'md', cardRadius: 'lg', inputRadius: 'md',
+      shadow: 'sm', density: 'normal', borderWidth: '1',
+    },
+  },
+  {
+    name: 'Shadcn Cyan', baseColor: '#083344', temperature: 'cooler', category: 'shadcn',
+    description: 'Fresh cyan accent',
+    componentConfig: {
+      headingFont: 'Inter', bodyFont: 'Inter',
+      headingWeight: '600', bodyWeight: '400',
+      fontSizeHeading: '2xl', fontSizeBody: 'base', lineHeight: 'normal',
+      letterSpacing: 'normal',
+      buttonRadius: 'md', cardRadius: 'md', inputRadius: 'md',
+      shadow: 'md', density: 'normal', borderWidth: '1',
+    },
+  },
+  {
+    name: 'Shadcn Red', baseColor: '#7F1A1A', temperature: 'warmer', category: 'shadcn',
+    description: 'Bold red accent',
+    componentConfig: {
+      headingFont: 'Inter', bodyFont: 'Inter',
+      headingWeight: '600', bodyWeight: '400',
+      fontSizeHeading: '2xl', fontSizeBody: 'base', lineHeight: 'normal',
+      letterSpacing: 'normal',
+      buttonRadius: 'md', cardRadius: 'md', inputRadius: 'md',
+      shadow: 'md', density: 'normal', borderWidth: '1',
+    },
+  },
+  {
+    name: 'Shadcn Amber', baseColor: '#78350F', temperature: 'warmer', category: 'shadcn',
+    description: 'Warm amber tones',
+    componentConfig: {
+      headingFont: 'Inter', bodyFont: 'Inter',
+      headingWeight: '600', bodyWeight: '400',
+      fontSizeHeading: '2xl', fontSizeBody: 'base', lineHeight: 'normal',
+      letterSpacing: 'normal',
+      buttonRadius: 'md', cardRadius: 'md', inputRadius: 'md',
+      shadow: 'md', density: 'normal', borderWidth: '1',
+    },
+  },
+  {
+    name: 'Shadcn Lime', baseColor: '#1A2E05', temperature: 'cooler', category: 'shadcn',
+    description: 'Fresh lime accent',
+    componentConfig: {
+      headingFont: 'Inter', bodyFont: 'Inter',
+      headingWeight: '600', bodyWeight: '400',
+      fontSizeHeading: '2xl', fontSizeBody: 'base', lineHeight: 'normal',
+      letterSpacing: 'normal',
+      buttonRadius: 'md', cardRadius: 'md', inputRadius: 'md',
+      shadow: 'sm', density: 'normal', borderWidth: '1',
+    },
+  },
+  {
+    name: 'Shadcn Teal', baseColor: '#042F2E', temperature: 'cooler', category: 'shadcn',
+    description: 'Calming teal',
+    componentConfig: {
+      headingFont: 'Inter', bodyFont: 'Inter',
+      headingWeight: '600', bodyWeight: '400',
+      fontSizeHeading: '2xl', fontSizeBody: 'base', lineHeight: 'normal',
+      letterSpacing: 'normal',
+      buttonRadius: 'md', cardRadius: 'md', inputRadius: 'md',
+      shadow: 'md', density: 'normal', borderWidth: '1',
+    },
+  },
+  {
+    name: 'Shadcn Fuchsia', baseColor: '#4A044E', temperature: 'cooler', category: 'shadcn',
+    description: 'Vibrant fuchsia',
+    componentConfig: {
+      headingFont: 'Inter', bodyFont: 'Inter',
+      headingWeight: '600', bodyWeight: '400',
+      fontSizeHeading: '2xl', fontSizeBody: 'base', lineHeight: 'normal',
+      letterSpacing: 'normal',
+      buttonRadius: 'md', cardRadius: 'md', inputRadius: 'md',
+      shadow: 'lg', density: 'normal', borderWidth: '1',
+    },
+  },
+  {
+    name: 'Shadcn Green', baseColor: '#16A34A', temperature: 'natural', category: 'shadcn',
+    description: 'Fresh green primary',
+    componentConfig: {
+      headingFont: 'Inter', bodyFont: 'Inter',
+      headingWeight: '600', bodyWeight: '400',
+      fontSizeHeading: '2xl', fontSizeBody: 'base', lineHeight: 'normal',
+      letterSpacing: 'normal',
+      buttonRadius: 'md', cardRadius: 'md', inputRadius: 'md',
+      shadow: 'sm', density: 'normal', borderWidth: '1',
+    },
+  },
+
+];

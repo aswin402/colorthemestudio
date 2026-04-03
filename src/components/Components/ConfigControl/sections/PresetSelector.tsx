@@ -15,6 +15,7 @@ export const PresetSelector = ({ onApplyPreset }: PresetSelectorProps) => {
     'all', 'shadcn', 'daisy', 'modern', 'minimal', 'dark', 'neon', 'playful', 'pastel',
     'professional', 'nature', 'vintage', 'retro', 'editorial', 'brutalist',
     'futuristic', 'luxury', 'artistic', 'warm', 'cool', 'monochrome',
+    'gaming', 'glassmorphism', 'system', 'seasonal', 'brand', 'devtools',
   ];
 
   const filteredPresets = selectedCategory === 'all'

@@ -145,7 +145,13 @@ export type PresetCategory =
   | 'monochrome'
   | 'warm'
   | 'cool'
-  | 'neon';
+  | 'neon'
+  | 'gaming'
+  | 'glassmorphism'
+  | 'system'
+  | 'seasonal'
+  | 'brand'
+  | 'devtools';
 
 export interface Preset {
   name: string;
