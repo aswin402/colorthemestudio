@@ -1,12 +1,10 @@
 import { useState } from 'react';
-import { Monitor, Smartphone, ChevronRight, FileCode2, BookOpen, Eye } from 'lucide-react';
-import { Copy, Check } from 'lucide-react';
+import { Monitor, Smartphone, ChevronRight, ChevronLeft, FileCode2, BookOpen, Eye, Copy, Check, Code2, Layers } from 'lucide-react';
 import { previewMap } from './ComponentPreviewRenderer';
 import { components } from './componentData';
 import CodeBlock from './CodeBlock';
 import { useThemeStore } from '../../store/useThemeStore';
 import type { Framework, CodeTab } from './types';
-
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Framework metadata
@@ -16,7 +14,7 @@ const frameworkMeta = {
     icon: Monitor,
     label: 'React',
     sublabel: 'TypeScript + Tailwind CSS',
-    badge: 'bg-sky-500/10 text-sky-500 border-sky-500/20',
+    color: 'sky',
     codeLabel: 'Component Code',
     usageLabel: 'Usage Example',
   },
@@ -24,7 +22,7 @@ const frameworkMeta = {
     icon: Smartphone,
     label: 'Flutter',
     sublabel: 'Dart widgets',
-    badge: 'bg-cyan-500/10 text-cyan-500 border-cyan-500/20',
+    color: 'cyan',
     codeLabel: 'Widget Code',
     usageLabel: 'Usage Example',
   },
@@ -39,7 +37,6 @@ const ComponentsExportSection = () => {
   const [selectedComponent, setSelectedComponent] = useState<string>(components[0].name);
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
   const [codeTab, setCodeTab] = useState<CodeTab>('preview');
-
 
   const copyCode = async (index: number, code: string) => {
     if (!code) return;
@@ -57,163 +54,196 @@ const ComponentsExportSection = () => {
   const activeComp = components.find((c) => c.name === selectedComponent) ?? components[0];
   const compIndex = components.indexOf(activeComp);
   const PreviewComp = previewMap[activeComp.name];
-  
-  const activeCode = framework === 'react' 
-    ? activeComp.react(componentConfig) 
+
+  const activeCode = framework === 'react'
+    ? activeComp.react(componentConfig)
     : activeComp.flutter(componentConfig);
-    
-  const activeUsage = framework === 'react' 
-    ? activeComp.usageReact(componentConfig) 
+
+  const activeUsage = framework === 'react'
+    ? activeComp.usageReact(componentConfig)
     : activeComp.usageFlutter(componentConfig);
 
+  const navigateTo = (comp: typeof components[0]) => {
+    setSelectedComponent(comp.name);
+    setCodeTab('preview');
+  };
 
   return (
     <div className="flex h-full">
       {/* ── Sidebar ── */}
-      <aside className="w-56 flex-shrink-0 border-r border-border flex flex-col h-full">
+      <aside className="w-52 flex-shrink-0 border-r border-white/[0.06] flex flex-col h-full bg-black/20">
+
         {/* Framework switcher */}
-        <div className="p-3 border-b border-border space-y-1">
-          <p className="text-[10px] uppercase tracking-widest text-muted-foreground px-2 mb-2 font-semibold">Framework</p>
-          {(['react', 'flutter'] as Framework[]).map((fw) => {
-            const fwMeta = frameworkMeta[fw];
-            const FwIcon = fwMeta.icon;
-            return (
-              <button
-                key={fw}
-                onClick={() => setFramework(fw)}
-                className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${
-                  framework === fw
-                    ? 'bg-primary text-primary-foreground'
-                    : 'text-muted-foreground hover:text-foreground hover:bg-muted'
-                }`}
-              >
-                <FwIcon className="w-4 h-4 flex-shrink-0" />
-                <div className="text-left">
-                  <div className="font-semibold leading-none">{fwMeta.label}</div>
-                  <div className={`text-[10px] mt-0.5 ${framework === fw ? 'text-primary-foreground/70' : 'text-muted-foreground'}`}>
-                    {fwMeta.sublabel}
+        <div className="p-3 border-b border-white/[0.06]">
+          <p className="text-[9px] uppercase tracking-widest text-white/30 px-1.5 mb-2 font-bold">Framework</p>
+          <div className="flex flex-col gap-1">
+            {(['react', 'flutter'] as Framework[]).map((fw) => {
+              const fwMeta = frameworkMeta[fw];
+              const FwIcon = fwMeta.icon;
+              const isActive = framework === fw;
+              return (
+                <button
+                  key={fw}
+                  onClick={() => setFramework(fw)}
+                  className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                    isActive
+                      ? 'bg-white/10 text-white'
+                      : 'text-white/40 hover:text-white/70 hover:bg-white/5'
+                  }`}
+                >
+                  <div className={`w-6 h-6 rounded-md flex items-center justify-center flex-shrink-0 ${
+                    isActive ? 'bg-white/15' : 'bg-white/5'
+                  }`}>
+                    <FwIcon className="w-3.5 h-3.5" />
                   </div>
-                </div>
-              </button>
-            );
-          })}
+                  <div className="text-left min-w-0">
+                    <div className="font-semibold text-xs leading-none truncate">{fwMeta.label}</div>
+                    <div className="text-[9px] mt-0.5 truncate opacity-60">{fwMeta.sublabel}</div>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {/* Component list */}
-        <div className="flex-1 overflow-y-auto p-3 scrollbar-thin">
-          <p className="text-[10px] uppercase tracking-widest text-muted-foreground px-2 mb-2 font-semibold">Components</p>
-          <nav className="space-y-0.5">
-            {components.map((comp) => (
-              <button
-                key={comp.name}
-                onClick={() => { setSelectedComponent(comp.name); setCodeTab('preview'); }}
-                className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm transition-all group ${
-                  selectedComponent === comp.name
-                    ? 'bg-muted text-foreground font-semibold'
-                    : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
-                }`}
-              >
-                <span>{comp.name}</span>
-                <ChevronRight className={`w-3.5 h-3.5 flex-shrink-0 transition-transform ${
-                  selectedComponent === comp.name ? 'opacity-100' : 'opacity-0 group-hover:opacity-50'
-                }`} />
-              </button>
-            ))}
+        <div className="flex-1 overflow-y-auto py-3 scrollbar-thin">
+          <p className="text-[9px] uppercase tracking-widest text-white/30 px-4 mb-2 font-bold">Components</p>
+          <nav className="flex flex-col px-2 gap-0.5">
+            {components.map((comp) => {
+              const isActive = selectedComponent === comp.name;
+              return (
+                <button
+                  key={comp.name}
+                  onClick={() => navigateTo(comp)}
+                  className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs transition-all duration-150 ${
+                    isActive
+                      ? 'bg-white/10 text-white font-semibold'
+                      : 'text-white/40 hover:text-white/70 hover:bg-white/5 font-medium'
+                  }`}
+                >
+                  <span className="truncate">{comp.name}</span>
+                  {isActive && <ChevronRight className="w-3 h-3 flex-shrink-0 opacity-60" />}
+                </button>
+              );
+            })}
           </nav>
         </div>
 
-        {/* Footer */}
-        <div className="p-3 border-t border-border">
-          <div className={`flex items-center gap-2 px-3 py-2 rounded-lg text-xs border ${meta.badge}`}>
-            <FrameworkIcon className="w-3.5 h-3.5 flex-shrink-0" />
-            <span className="font-semibold">{meta.label}</span>
-            <span className="text-muted-foreground ml-auto">{components.length} components</span>
+        {/* Footer stats */}
+        <div className="p-3 border-t border-white/[0.06]">
+          <div className="flex items-center gap-2 px-2.5 py-2 rounded-lg bg-white/5 text-xs">
+            <Layers className="w-3 h-3 text-white/40 flex-shrink-0" />
+            <span className="text-white/40">{components.length} components</span>
+            <div className="ml-auto flex items-center gap-1">
+              <FrameworkIcon className="w-3 h-3 text-white/30" />
+            </div>
           </div>
         </div>
       </aside>
 
       {/* ── Main content ── */}
-      <div className="flex-1 flex flex-col overflow-hidden">
+      <div className="flex-1 flex flex-col overflow-hidden min-w-0">
+
         {/* Header */}
-        <div className="px-8 py-5 border-b border-border flex-shrink-0">
-          <div className="flex items-start justify-between gap-4">
-            <div>
-              <div className="flex items-center gap-2 mb-1">
-                <span className={`inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full border ${meta.badge}`}>
-                  <FrameworkIcon className="w-3 h-3" />
+        <div className="px-6 py-4 border-b border-white/[0.06] flex-shrink-0">
+          <div className="flex items-center justify-between gap-4">
+            <div className="min-w-0">
+              <div className="flex items-center gap-2 mb-1.5">
+                <span className={`inline-flex items-center gap-1.5 text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                  framework === 'react'
+                    ? 'bg-sky-500/15 text-sky-400 border border-sky-500/20'
+                    : 'bg-cyan-500/15 text-cyan-400 border border-cyan-500/20'
+                }`}>
+                  <FrameworkIcon className="w-2.5 h-2.5" />
                   {meta.label}
                 </span>
-                <span className="text-muted-foreground text-xs">{meta.sublabel}</span>
+                <span className="text-white/25 text-xs">{meta.sublabel}</span>
               </div>
-              <h2 className="text-2xl font-bold tracking-tight">{activeComp.name}</h2>
-              <p className="text-muted-foreground text-sm mt-0.5">{activeComp.description}</p>
+              <h2 className="text-xl font-bold tracking-tight text-white truncate">{activeComp.name}</h2>
+              <p className="text-white/40 text-xs mt-0.5 truncate">{activeComp.description}</p>
             </div>
 
             <button
               onClick={() => copyCode(-1, activeCode)}
-              className={`flex-shrink-0 flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all ${
+              className={`flex-shrink-0 flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-semibold transition-all duration-200 ${
                 copiedIndex === -1
-                  ? 'bg-emerald-500 text-white'
-                  : 'bg-primary text-primary-foreground hover:bg-primary/90'
+                  ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
+                  : 'bg-white/8 hover:bg-white/12 text-white/70 hover:text-white border border-white/10'
               }`}
             >
-              {copiedIndex === -1 ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-              {copiedIndex === -1 ? 'Copied!' : `Copy ${meta.label} Code`}
+              {copiedIndex === -1 ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+              {copiedIndex === -1 ? 'Copied!' : 'Copy Code'}
             </button>
           </div>
         </div>
 
-        {/* Tab bar — Preview / Code / Usage */}
-        <div className="flex items-center gap-0 border-b border-border px-8 flex-shrink-0">
+        {/* Tab bar — pill style */}
+        <div className="flex items-center gap-1 px-6 py-2.5 border-b border-white/[0.06] flex-shrink-0 bg-black/10">
           {(
             [
               { key: 'preview', label: 'Preview', icon: Eye },
-              { key: 'code',    label: meta.codeLabel,  icon: FileCode2 },
+              { key: 'code',    label: meta.codeLabel,  icon: Code2 },
               { key: 'usage',   label: meta.usageLabel, icon: BookOpen },
             ] as { key: CodeTab; label: string; icon: React.ElementType }[]
           ).map(({ key, label, icon: Icon }) => (
             <button
               key={key}
               onClick={() => setCodeTab(key)}
-              className={`flex items-center gap-2 px-4 py-3 text-sm font-medium border-b-2 transition-colors -mb-px ${
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200 ${
                 codeTab === key
-                  ? 'border-primary text-foreground'
-                  : 'border-transparent text-muted-foreground hover:text-foreground'
+                  ? 'bg-white/10 text-white'
+                  : 'text-white/35 hover:text-white/60 hover:bg-white/5'
               }`}
             >
-              <Icon className="w-3.5 h-3.5" />
+              <Icon className="w-3 h-3" />
               {label}
             </button>
           ))}
+
+          {/* right-side progress indicator */}
+          <div className="ml-auto flex items-center gap-1">
+            {components.map((c, i) => (
+              <button
+                key={c.name}
+                onClick={() => navigateTo(c)}
+                title={c.name}
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  i === compIndex
+                    ? 'bg-white/60 w-4'
+                    : 'bg-white/15 hover:bg-white/30 w-1.5'
+                }`}
+              />
+            ))}
+          </div>
         </div>
 
         {/* Content area */}
         <div className="flex-1 overflow-y-auto scrollbar-thin">
-          <div className="p-8">
+          <div className="p-6">
 
             {/* ── Preview tab ── */}
             {codeTab === 'preview' && (
-              <div className="rounded-xl border border-border overflow-hidden relative min-h-[400px] flex items-center justify-center bg-white dark:bg-zinc-950">
-                {/* Checkered background pattern for transparency visibility */}
-                <div 
-                  className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none"
-                  style={{ 
-                    backgroundImage: `radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)`,
-                    backgroundSize: '24px 24px'
+              <div className="rounded-xl border border-white/[0.07] overflow-hidden bg-white/[0.02] min-h-[380px] flex items-center justify-center relative">
+                {/* subtle dot grid */}
+                <div
+                  className="absolute inset-0 pointer-events-none opacity-[0.04]"
+                  style={{
+                    backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
+                    backgroundSize: '20px 20px'
                   }}
                 />
-                
                 <div className="relative z-10 w-full">
                   {PreviewComp ? (
                     <PreviewComp />
                   ) : (
-                    <div className="flex flex-col items-center justify-center h-48 text-muted-foreground text-sm gap-3">
-                      <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center">
-                        <Eye className="w-6 h-6 opacity-20" />
+                    <div className="flex flex-col items-center justify-center h-48 text-white/25 text-xs gap-3">
+                      <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
+                        <Eye className="w-5 h-5" />
                       </div>
                       <p>
                         {framework === 'flutter'
-                          ? 'Live preview is currently only available for React'
+                          ? 'Live preview available for React only'
                           : 'Preview not available for this component'}
                       </p>
                     </div>
@@ -224,11 +254,11 @@ const ComponentsExportSection = () => {
 
             {/* ── Code tab ── */}
             {codeTab === 'code' && (
-              <div className="flex flex-col gap-2">
-                <div className="flex items-center gap-2 mb-3">
-                  <FileCode2 className="w-4 h-4 text-primary" />
-                  <h3 className="font-semibold text-base">{meta.codeLabel}</h3>
-                  <div className="h-px flex-1 bg-border" />
+              <div className="flex flex-col gap-3">
+                <div className="flex items-center gap-2">
+                  <FileCode2 className="w-3.5 h-3.5 text-white/30" />
+                  <span className="text-xs font-semibold text-white/50 uppercase tracking-wider">{meta.codeLabel}</span>
+                  <div className="h-px flex-1 bg-white/[0.06]" />
                 </div>
                 <CodeBlock
                   code={activeCode}
@@ -241,11 +271,11 @@ const ComponentsExportSection = () => {
 
             {/* ── Usage tab ── */}
             {codeTab === 'usage' && (
-              <div className="flex flex-col gap-2">
-                <div className="flex items-center gap-2 mb-3">
-                  <BookOpen className="w-4 h-4 text-primary" />
-                  <h3 className="font-semibold text-base">{meta.usageLabel}</h3>
-                  <div className="h-px flex-1 bg-border" />
+              <div className="flex flex-col gap-3">
+                <div className="flex items-center gap-2">
+                  <BookOpen className="w-3.5 h-3.5 text-white/30" />
+                  <span className="text-xs font-semibold text-white/50 uppercase tracking-wider">{meta.usageLabel}</span>
+                  <div className="h-px flex-1 bg-white/[0.06]" />
                 </div>
                 <CodeBlock
                   code={activeUsage}
@@ -256,46 +286,36 @@ const ComponentsExportSection = () => {
               </div>
             )}
 
-            {/* Navigator */}
-            <div className="flex items-center justify-between pt-6 mt-6 border-t border-border">
+            {/* ── Navigator ── */}
+            <div className="flex items-center justify-between pt-5 mt-5 border-t border-white/[0.06]">
               <button
                 onClick={() => {
                   const prev = components[compIndex - 1];
-                  if (prev) { setSelectedComponent(prev.name); setCodeTab('preview'); }
+                  if (prev) navigateTo(prev);
                 }}
                 disabled={compIndex === 0}
-                className="flex items-center gap-2 px-4 py-2 rounded-xl border border-border text-sm font-medium transition-all hover:bg-muted disabled:opacity-30 disabled:cursor-not-allowed"
+                className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-white/[0.08] text-xs font-medium transition-all hover:bg-white/5 text-white/50 hover:text-white/80 disabled:opacity-25 disabled:cursor-not-allowed"
               >
-                <ChevronRight className="w-4 h-4 rotate-180" />
+                <ChevronLeft className="w-3.5 h-3.5" />
                 {compIndex > 0 ? components[compIndex - 1].name : 'Previous'}
               </button>
 
-              <div className="flex items-center gap-1.5">
-                {components.map((c, i) => (
-                  <button
-                    key={c.name}
-                    onClick={() => { setSelectedComponent(c.name); setCodeTab('preview'); }}
-                    className={`h-2 rounded-full transition-all ${
-                      i === compIndex ? 'bg-primary w-5' : 'bg-muted-foreground/30 hover:bg-muted-foreground/60 w-2'
-                    }`}
-                    title={c.name}
-                  />
-                ))}
-              </div>
+              <span className="text-[10px] text-white/25 font-medium">
+                {compIndex + 1} / {components.length}
+              </span>
 
               <button
                 onClick={() => {
                   const next = components[compIndex + 1];
-                  if (next) { setSelectedComponent(next.name); setCodeTab('preview'); }
+                  if (next) navigateTo(next);
                 }}
                 disabled={compIndex === components.length - 1}
-                className="flex items-center gap-2 px-4 py-2 rounded-xl border border-border text-sm font-medium transition-all hover:bg-muted disabled:opacity-30 disabled:cursor-not-allowed"
+                className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-white/[0.08] text-xs font-medium transition-all hover:bg-white/5 text-white/50 hover:text-white/80 disabled:opacity-25 disabled:cursor-not-allowed"
               >
                 {compIndex < components.length - 1 ? components[compIndex + 1].name : 'Next'}
-                <ChevronRight className="w-4 h-4" />
+                <ChevronRight className="w-3.5 h-3.5" />
               </button>
             </div>
-
           </div>
         </div>
       </div>
